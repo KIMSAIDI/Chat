@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from "axios";
 
 function Logout(props) {
-  const handleLogout = (user) => {
+  const handleLogout = (user) => { 
     axios
       .post('/api/user/logout/', { user })
       .then((res) => {

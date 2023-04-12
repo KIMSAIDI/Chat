@@ -13,7 +13,7 @@ function TimeLine(props){
             <input id="search"/>
             <button type="submit">Rechercher</button>
             <nav id = "liste_message"> 
-                <ListeMessages/>  
+                <ListeMessages user = {props.user} />  
             </nav>
         </div>
     );
