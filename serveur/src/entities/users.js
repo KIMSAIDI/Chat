@@ -69,8 +69,8 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
-
 const userSchema = new mongoose.Schema({
+  
   login : {
     type : String,
     required: true,
@@ -95,3 +95,4 @@ userSchema.pre('save',async function(){
 });
 const User = mongoose.model('User',userSchema);
 module.exports = User
+
