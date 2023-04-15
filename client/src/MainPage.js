@@ -18,6 +18,8 @@ function MainPage(props){
         localStorage.setItem("isConnected", true);
         localStorage.setItem("user", JSON.stringify(user));
     };
+
+   
     const setLogout = () => {
         setConnect(false);
         setUser(null);

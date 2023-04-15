@@ -27,14 +27,32 @@ export default ListeMessages;
 import React from 'react';
 import Message from './Message';
 
-const ListeMessages = ({ messages }) => {
+
+const ListeMessages = (props) => {
   return (
     <div>
-      {messages.map((message) => (
-        <Message key={message._id} message={message} />
-      ))}
+      <nav id="page">
+        {props.messages.map((message) => (
+          <Message key={message._id} message={message} setPage={props.setPage} setSelectedUser = {props.setSelectedUser} handleUserClick = {props.handleUserClick} />
+        ))}
+      </nav>
     </div>
   );
 };
+
+// const ListeMessages = (props) => {
+//   return (
+//     <div>
+//       <nav id="page">
+      
+//       {props.messages.map((message) => (
+//         <Message key={message._id} message={message} setPage={props.setPage}/>
+//       ))} 
+     
+    
+//       </nav>
+//     </div>
+//   );
+// };
 
 export default ListeMessages;

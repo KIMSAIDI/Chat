@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import ListeMessages from './ListeMessages';
+import Profile from './Profile';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -8,6 +9,13 @@ function TimeLine(props){
     //états
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [page, setPage] = useState("ListeMessage");
+    const [etat, setEtat] = useState(false);
+
+    const [selectedUser, setSelectedUser] = useState(props.user);
+
+
+
     useEffect(() => {
 
       axios.get('/api/messageBD')
@@ -33,6 +41,18 @@ function TimeLine(props){
           .catch(err => console.log(err));
       };
 
+      const handleUserClick = async (author) => {
+        try {
+          const response = await axios.get(`/api/user/${author}/getUser`);
+          setSelectedUser(response.data);
+          setPage("PageProfile");
+
+        }
+        catch (error) {
+          console.error(error); 
+        } 
+      };
+
 
      return (
         <div>
@@ -44,7 +64,21 @@ function TimeLine(props){
             </label>
             <button type="submit">Poster</button>
           </form>
-          <ListeMessages messages={messages} />
+
+          <nav id = "nav">
+          <button onClick={() => {
+              setPage("PageProfile");
+              setSelectedUser(props.user);
+            }}>PageProfile</button>
+
+            <button onClick={() => setPage("ListeMessage")}>ListeMessage</button>
+          </nav>
+          <div id = "page">
+            {page === "ListeMessage" && <ListeMessages messages={messages} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser}/>}
+            {page === "PageProfile" && <Profile user={selectedUser}  />}
+            
+          </div>
+        
         </div>
       );
 }

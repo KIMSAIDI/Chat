@@ -7,6 +7,7 @@ async function createMessage(req, res, next) {
     if (!content || !author) {
       return res.status(400).json({ message: 'Le format du message est incorrect.' });
     }
+
   
     const message = new Message({
       content,
@@ -15,7 +16,7 @@ async function createMessage(req, res, next) {
       like: 0,
       dislike: 0
     });
-  
+   
     try {
       const savedMessage = await message.save();
       console.log(`Nouveau message de: ${savedMessage.author}`);
