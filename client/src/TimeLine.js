@@ -10,14 +10,13 @@ function TimeLine(props){
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [page, setPage] = useState("ListeMessage");
-    const [etat, setEtat] = useState(false);
+   
 
     const [selectedUser, setSelectedUser] = useState(props.user);
 
 
 
     useEffect(() => {
-
       axios.get('/api/messageBD')
         .then(res => setMessages(res.data))
         .catch(err => console.log(err));
@@ -74,7 +73,7 @@ function TimeLine(props){
             <button onClick={() => setPage("ListeMessage")}>ListeMessage</button>
           </nav>
           <div id = "page">
-            {page === "ListeMessage" && <ListeMessages messages={messages} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser}/>}
+            {page === "ListeMessage" && <ListeMessages messages={messages} handleUserClick={handleUserClick} />}
             {page === "PageProfile" && <Profile user={selectedUser}  />}
             
           </div>

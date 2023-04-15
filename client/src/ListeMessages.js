@@ -33,7 +33,7 @@ const ListeMessages = (props) => {
     <div>
       <nav id="page">
         {props.messages.map((message) => (
-          <Message key={message._id} message={message} setPage={props.setPage} setSelectedUser = {props.setSelectedUser} handleUserClick = {props.handleUserClick} />
+          <Message key={message._id} message={message} handleUserClick = {props.handleUserClick} />
         ))}
       </nav>
     </div>
