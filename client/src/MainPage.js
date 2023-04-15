@@ -2,6 +2,10 @@ import { useState } from 'react';
 import NavigationPanel from "./NavigationPanel";
 import Signin from "./Signin"
 import TimeLine from './TimeLine';
+import Profile from './Profile';
+
+import axios from 'axios';
+axios.defaults.baseURL = "http://localhost:3000";
 
 
 function MainPage(props){
@@ -9,6 +13,9 @@ function MainPage(props){
     const [isConnected, setConnect] = useState(false);
     const [page, setPage] = useState("signin_page");
     const [user, setUser] = useState(null);
+
+    const [selectedUser, setSelectedUser] = useState(props.user);
+
     
 
     //comportement 
@@ -26,6 +33,32 @@ function MainPage(props){
         setPage("signin_page");
     }
 
+    const handleUserClick = async (author) => {
+        try {
+          const response = await axios.get(`/api/user/${author}/getUser`);
+          setSelectedUser(response.data);
+          setPage("PageProfile");
+
+        }
+        catch (error) {
+          console.error(error); 
+        } 
+      };
+
+      const boutton_page = () => {
+        return (
+          <div>
+            <button onClick={() => {
+              setPage("PageProfile");
+              setSelectedUser(user);
+            }}>Ma PageProfile</button>
+      
+            <button onClick={() => setPage("TimeLine")}>TimeLine</button>
+          </div>
+        );
+      };
+
+
     return(
         <div>
             <nav id = "navigation"> 
@@ -33,8 +66,9 @@ function MainPage(props){
             </nav>
 
             <div id = "page"> 
-                {page === "TimeLine" && <TimeLine user = {user} setUser={setUser} />}
-                {page === "signin_page" && <Signin/>}   
+                {page === "TimeLine" && <TimeLine user = {user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
+                {page === "signin_page" && <Signin/>} 
+                {page === "PageProfile" && <Profile user={selectedUser} boutton_page={boutton_page} />}  
             </div>
         </div>    
     );
