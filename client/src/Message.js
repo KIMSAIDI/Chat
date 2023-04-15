@@ -1,42 +1,58 @@
-import { useState } from 'react';
-import './css/Message.css';
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:3000";
+import './css/Message.css';
+
+
 
 const Message = (props) => {
-    const [message, setMessage] = useState("");
-    const [author, setAuthor] = useState(props.user.login);
+  const { _id, author, content, createdAt, like, dislike } = props.message;
+  const [likeCount, setLikeCount] = useState(like);
+  const [dislikeCount, setDislikeCount] = useState(dislike);
+  
 
-
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.post('/api/message/',{
-            message: message,
-            author : author
-        })      
+  const handleLike = async () => {
+    try {
+      const response = await axios.patch(`/api/message/${_id}/like`);
+      setLikeCount(response.data.like);
+    } catch (error) {
+      console.error(error);
     }
-    return(
-        <form>
+  };
 
-            <button type="button">Like</button>
-            <button type="button">Dislike</button>
+  const handleDislike = async () => {
+    try {
+      const response = await axios.patch(`/api/message/${_id}/dislike`);
+      setDislikeCount(response.data.dislike);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-            <br />
-            <label>
-                Message :  
-                <input type="text" placeholder='Ajouter un commentaire' value={message} onChange={(e) => setMessage(e.target.value)} name = "message" />
-            </label>
-            <button type="button" onClick={handleSubmit}>Send</button>
-            
+ 
+  const handleProfileClick = () => {
+    props.handleUserClick(author);
+  };
+  
+  return (
+    <div>
+      <h3>Nom d'utilisateur : <span class="texte-cliquable" onClick={handleProfileClick}> {author}</span></h3>
+      
+      <p>Message : {content}</p>
+      <p>Date : {new Date(createdAt).toLocaleString()}</p>
+      <div>
+        <button onClick={handleLike}>Like</button>
+        <span>{likeCount} likes</span>
+      </div>
+      <div>
+        <button onClick={handleDislike}>Dislike</button>
+        <span>{dislikeCount} dislikes</span>
+      </div>
 
-           
-           
 
-        </form>
-    )
-}
-
+    </div>
+  );
+};
 
 export default Message;
+

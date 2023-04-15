@@ -55,13 +55,12 @@ console.log("LE SERVEUR MARCHE NO BLATA")
 app.use(express.static(path.join(basedir, 'public')));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Cache-Control');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 app.use(express.json());
 app.use('/api', routerUsers);
-app.use('/api', routerMessages);
-
+app.use('/api',  routerMessages);
 module.exports = app;

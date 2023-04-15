@@ -1,23 +1,26 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
-
 const messageSchema = new mongoose.Schema({
-    message: {
-        type: String,
-        required: true,
-    },
-    author: {
-      type: String,
-      required: true,
-    }
-  });
+  content: {
+    type: String,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  like: {
+    type: Number,
+    default: 0,
+  },
+  dislike: {
+    type: Number,
+    default: 0,
+  },
+});
 
-
-
-  const Message = mongoose.model('Message', messageSchema);
-  module.exports = Message;
-
-  
-      
-  
+const Message = mongoose.model('Message', messageSchema);
+module.exports = Message;

@@ -23,7 +23,7 @@ const Signup = () => {
                 password: pass1,
                 lastname: lastname,
                 firstname: firstname
-            })
+            }) 
             .then((response) => {
                 console.log(response);
             })

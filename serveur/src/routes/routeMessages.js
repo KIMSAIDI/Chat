@@ -1,10 +1,15 @@
 const express = require('express');
 const routerMessages = new express.Router();
-const apiMessages = require('../apiDossier/apiMessages');
+const apiMessage = require('../apiDossier/apiMessage');
 
+// Route pour créer un nouveau message
+routerMessages.post('/message/', apiMessage.createMessage);
 
-routerMessages.post('/message/', apiMessages.createMessage);
+// Route pour récupérer tous les messages de la base de données
+routerMessages.get('/messageBD/', apiMessage.getBD);
 
+routerMessages.patch('/message/:messageId/like', apiMessage.likeMessage);
 
-module.exports = {routerMessages };
+routerMessages.patch('/message/:messageId/dislike', apiMessage.dislikeMessage);
 
+module.exports = { routerMessages };

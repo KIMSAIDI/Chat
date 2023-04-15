@@ -49,4 +49,23 @@ async function logout(req,res,next){
     res.status(200).send({ message: 'Déconnexion réussie.' });
 }
 
-module.exports = {createUsers, login ,logout};
+async function getUser(req, res, next) {
+  const username = req.params.username;
+  
+  console.log(`Recherche de l'utilisateur ${username}`);
+  try {
+    const user = await User.findOne({login: username});
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
+
+
+
+module.exports = {createUsers, login ,logout, getUser};
