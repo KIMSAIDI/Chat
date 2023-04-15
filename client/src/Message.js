@@ -16,36 +16,43 @@ const Message = ({ message }) => {
 
 export default Message;
 */
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Message = ({ message }) => {
+const Message = ({ message, userLogin }) => {
   const { _id, author, content, createdAt, like, dislike } = message;
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
 
   const handleLike = async () => {
     try {
-      const response = await axios.patch(`/api/message/${_id}/like`);
+      const response = await axios.patch(`/api/message/${_id}/like`, { login: userLogin });
       setLikeCount(response.data.like);
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà aimé ce message.') {
+        alert('Vous avez déjà aimé ce message.');
+      } else {
+        console.error(error);
+      }
     }
   };
 
   const handleDislike = async () => {
     try {
-      const response = await axios.patch(`/api/message/${_id}/dislike`);
+      const response = await axios.patch(`/api/message/${_id}/dislike`, { login: userLogin });
       setDislikeCount(response.data.dislike);
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà disliké ce message.') {
+        alert('Vous avez déjà disliké ce message.');
+      } else {
+        console.error(error);
+      }
     }
   };
 
   return (
     <div>
-      <p>Nom d'utilisateur : {author}</p>
+      <h3>Nom d'utilisateur : {author}</h3>
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>
       <div>
@@ -61,4 +68,3 @@ const Message = ({ message }) => {
 };
 
 export default Message;
-

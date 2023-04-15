@@ -44,7 +44,7 @@ function TimeLine(props){
             </label>
             <button type="submit">Poster</button>
           </form>
-          <ListeMessages messages={messages} />
+          <ListeMessages messages={messages} userLogin= {props.user.login} />
         </div>
       );
 }

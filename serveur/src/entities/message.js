@@ -20,6 +20,14 @@ const messageSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  likedBy: {
+    type: [String],
+    default: [],
+  },
+  dislikeBy: {
+    type: [String],
+    default: [],
+  }
 });
 
 const Message = mongoose.model('Message', messageSchema);
