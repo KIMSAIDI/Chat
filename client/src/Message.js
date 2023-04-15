@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import Profile from './Profile';
 import axios from 'axios';
+
+import './css/Message.css';
+
 
 
 const Message = (props) => {
@@ -34,7 +36,7 @@ const Message = (props) => {
   
   return (
     <div>
-      <h3>Nom d'utilisateur : <span onClick={handleProfileClick}> {author}</span></h3>
+      <h3>Nom d'utilisateur : <span class="texte-cliquable" onClick={handleProfileClick}> {author}</span></h3>
       
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>

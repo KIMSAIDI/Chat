@@ -68,7 +68,7 @@ function TimeLine(props){
           <button onClick={() => {
               setPage("PageProfile");
               setSelectedUser(props.user);
-            }}>PageProfile</button>
+            }}>Ma PageProfile</button>
 
             <button onClick={() => setPage("ListeMessage")}>ListeMessage</button>
           </nav>

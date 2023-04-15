@@ -1,0 +1,8 @@
+.texte-cliquable{
+    cursor: pointer;
+}
+
+.texte-cliquable:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
