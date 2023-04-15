@@ -36,17 +36,6 @@ const Message = (props) => {
     <div>
       <h3>Nom d'utilisateur : <span onClick={handleProfileClick}> {author}</span></h3>
       
-      
-  
-      {/* <nav id="selectUser">
-        {selectedUser}
-      </nav> */}
-      {/* <nav id = "selectUser">
-      
-        {selectedUser && <Profile user={selectedUser} /> }
-        
-      </nav>  */}
-            
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>
       <div>
