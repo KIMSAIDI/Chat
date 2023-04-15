@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import ListeMessages from './ListeMessages';
+
+
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -8,8 +10,13 @@ function TimeLine(props){
     //états
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    useEffect(() => {
+    //const [page, setPage] = useState("ListeMessage");
+   
 
+    
+
+
+    useEffect(() => {
       axios.get('/api/messageBD')
         .then(res => setMessages(res.data))
         .catch(err => console.log(err));
@@ -33,6 +40,8 @@ function TimeLine(props){
           .catch(err => console.log(err));
       };
 
+      
+
 
      return (
         <div>
@@ -44,7 +53,17 @@ function TimeLine(props){
             </label>
             <button type="submit">Poster</button>
           </form>
-          <ListeMessages messages={messages} userLogin= {props.user.login} />
+
+          <nav id = "nav">
+            {props.boutton_page()}
+          </nav>
+          
+          <div id = "page">
+            <ListeMessages messages={messages} handleUserClick={props.handleUserClick} />
+           
+            
+          </div>
+        
         </div>
       );
 }

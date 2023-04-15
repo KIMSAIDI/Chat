@@ -23,6 +23,7 @@ function Login (props){
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {
+                    
                     props.setUser(res.data.user);  // Mettre à jour l'état user dans MainPage
                     props.connect();
                     console.log("Utilisateur " + res.data.user.login + " connecté avec succès !");
