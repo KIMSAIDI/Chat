@@ -13,7 +13,7 @@ const Message = (props) => {
 
   const handleLike = async () => {
     try {
-      const response = await axios.patch(`/api/message/${_id}/like`, { login: userLogin });
+      const response = await axios.patch(`/api/message/${_id}/like`, { login: props.userLogin });
       setLikeCount(response.data.like);
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà aimé ce message.') {
@@ -26,7 +26,7 @@ const Message = (props) => {
 
   const handleDislike = async () => {
     try {
-      const response = await axios.patch(`/api/message/${_id}/dislike`, { login: userLogin });
+      const response = await axios.patch(`/api/message/${_id}/dislike`, { login: props.userLogin });
       setDislikeCount(response.data.dislike);
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà disliké ce message.') {
@@ -41,11 +41,26 @@ const Message = (props) => {
   const handleProfileClick = () => {
     props.handleUserClick(author);
   };
+
+  const handleAjoutAmis = async () => {
+    try {
+      const response = await axios.patch(`/api/user/${author}/ajout`, { friend: author });
+      console.log(response.data)
+    } catch (error) {
+      if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà ajouté cet utilisateur en ami.') {
+        alert('Vous avez déjà ajouté cet utilisateur en ami.');
+      } else {
+        console.error(error);
+      }
+    }
+};
+  
   
   return (
     <div>
       <h3>Nom d'utilisateur : <span class="texte-cliquable" onClick={handleProfileClick}> {author}</span></h3>
-      
+      <button onClick={handleAjoutAmis}>Ajout ami</button>
+
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>
       <div>

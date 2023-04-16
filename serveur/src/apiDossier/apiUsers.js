@@ -64,8 +64,27 @@ async function getUser(req, res, next) {
   }
 }
 
+async function addFriend(req, res, next) {
+  console.log("addFriend")
+  const username = req.params.username;
+  const friend = req.body.friend;
+  console.log(`Ajout de l'utilisateur ${friend} à la liste d'amis de ${username}`);
+  try {
+    const user = await User.findOne({ login: username });
+    if (!user) {
+      return res.status(404).json({ error: "L'utilisateur n'a pas été trouvé." });
+    }
+    if (user.listAmis.includes(friend)) {
+      return res.status(400).json({ error: 'Vous avez déjà ajouté cet utilisateur en ami.' });
+    }
+    user.listAmis.push(friend);
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 
 
-
-module.exports = {createUsers, login ,logout, getUser};
+module.exports = {createUsers, login ,logout, getUser, addFriend};

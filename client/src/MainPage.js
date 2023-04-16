@@ -3,6 +3,7 @@ import NavigationPanel from "./NavigationPanel";
 import Signin from "./Signin"
 import TimeLine from './TimeLine';
 import Profile from './Profile';
+import NotreProfile from './NotreProfile';
 
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:3000";
@@ -68,7 +69,10 @@ function MainPage(props){
             <div id = "page"> 
                 {page === "TimeLine" && <TimeLine user = {user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
                 {page === "signin_page" && <Signin/>} 
-                {page === "PageProfile" && <Profile user={selectedUser} boutton_page={boutton_page} />}  
+                
+                {page === "PageProfile" && selectedUser.login === user.login  && <NotreProfile user={user} boutton_page={boutton_page} />}
+                
+                {page === "PageProfile" && selectedUser.login !== user.login &&  <Profile user={selectedUser} boutton_page={boutton_page} />}
             </div>
         </div>    
     );
