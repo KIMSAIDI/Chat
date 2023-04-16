@@ -10,11 +10,7 @@ function TimeLine(props){
     //états
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    //const [page, setPage] = useState("ListeMessage");
    
-
-    
-
 
     useEffect(() => {
       axios.get('/api/messageBD')
@@ -40,9 +36,6 @@ function TimeLine(props){
           .catch(err => console.log(err));
       };
 
-      
-
-
      return (
         <div>
           <p>Timeline de l'utilisateur : {props.user.login}</p>
@@ -59,7 +52,8 @@ function TimeLine(props){
           </nav>
           
           <div id = "page">
-            <ListeMessages messages={messages} handleUserClick={props.handleUserClick} />
+            
+            <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} />
            
             
           </div>
