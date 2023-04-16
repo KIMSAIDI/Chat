@@ -50,11 +50,12 @@ const Message = (props) => {
       });
       
       console.log(response.data)
+      
     } catch (error) {
-      if (error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {
+      if (error.response && error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {
         alert('Vous avez déjà ajouté cet utilisateur en ami.');
       }
-      if (error.response.status === 409 && error.response.data.message === 'Vous ne pouvez pas vous ajouter en ami') {
+      if (error.response && error.response.status === 409 && error.response.data.message === 'Vous ne pouvez pas vous ajouter en ami') {
         alert('Vous ne pouvez pas vous ajouter en ami.');
       } else {
         console.log("Erreur d'ajout d'ami")

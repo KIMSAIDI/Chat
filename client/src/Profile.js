@@ -12,11 +12,15 @@ const Profile = (props) => {
                 friend: friend
             });
             console.log(response.data)
+            
+            
+            localStorage.setItem("user", JSON.stringify(props.user))
             window.location.reload();
+      
         }
         catch (error) {
-            if (error.response.status === 409 && error.response.data.message === 'Cet utilisateur n\'est pas votre ami') {
-                alert('Vous avez déjà ajouté cet utilisateur en ami.');
+            if (error.response && error.response.status === 409 && error.response.data.message === 'Cet utilisateur n\'est pas votre ami') {
+                alert('Vous avez déjà supprimé cet utilisateur en ami.');
             
             }else {
                 console.error(error);
@@ -40,8 +44,9 @@ const Profile = (props) => {
                     <ul> Liste Amis : 
                         {props.user.listAmis.map((friend) => (
                             <li key={friend}>
-                                {friend}
+                                 {friend}
                                 <button onClick={() => handleDeleteFriend(friend)}>Supprimer</button>
+                               
                             </li>
                             ))}
                     </ul>

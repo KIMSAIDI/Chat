@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NavigationPanel from "./NavigationPanel";
 import Signin from "./Signin"
 import TimeLine from './TimeLine';
@@ -19,15 +19,16 @@ function MainPage(props){
     
     const [isMyProfile, setIsMyProfile] = useState(false);
     
+    
 
 
     //comportement 
     const getConnected = () => {
         setConnect(true);
         setPage("TimeLine");
-        
         localStorage.setItem("isConnected", true);
         localStorage.setItem("user", JSON.stringify(user));
+        
     };
 
    
@@ -35,7 +36,11 @@ function MainPage(props){
         setConnect(false);
         setUser(null);
         setPage("signin_page");
+        localStorage.removeItem("isConnected");
+        localStorage.removeItem("user");
+        
     }
+        
 
     const handleUserClick = async (author) => {
         try {
@@ -68,6 +73,19 @@ function MainPage(props){
         );
       };
 
+      useEffect(() => {
+        const isConnected = localStorage.getItem("isConnected");
+        const user = JSON.parse(localStorage.getItem("user"));
+         if (isConnected && user) {
+            setConnect(true);
+            setUser(user);
+            setPage("TimeLine");
+        }
+    }, []);
+
+      
+    
+
     return(
         <div>
             <nav id = "navigation"> 
@@ -76,10 +94,12 @@ function MainPage(props){
 
             <div id = "page"> 
 
-                {page === "TimeLine" && <TimeLine user={user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
                 {page === "signin_page" && <Signin/>} 
-                
                 {page === "PageProfile" && <Profile user={selectedUser} boutton_page={boutton_page} isMyProfile={isMyProfile}/>}
+                
+                {page === "TimeLine" && {user} && <TimeLine user={user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
+                
+                
                 
             </div>
         </div>    
