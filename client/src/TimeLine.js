@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+
 import ListeMessages from './ListeMessages';
 
 
@@ -10,12 +11,9 @@ function TimeLine(props){
     //états
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    //const [page, setPage] = useState("ListeMessage");
    
-
     
-
-
+  
     useEffect(() => {
       axios.get('/api/messageBD')
         .then(res => setMessages(res.data))
@@ -24,6 +22,7 @@ function TimeLine(props){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         axios.post('/api/message', { 
             content: newMessage,
             author : props.user.login
@@ -31,7 +30,6 @@ function TimeLine(props){
           .then(res => {
             setMessages([...messages, res.data]);
             setNewMessage('');
-      
             // Mettre à jour la liste des messages immédiatement après l'envoi d'un nouveau message
             axios.get('/api/messageBD')
               .then(res => setMessages(res.data))
@@ -39,12 +37,13 @@ function TimeLine(props){
           })
           .catch(err => console.log(err));
       };
-
-      
-
+    
 
      return (
         <div>
+          
+          
+
           <p>Timeline de l'utilisateur : {props.user.login}</p>
           <form onSubmit={handleSubmit}>
             <label>
@@ -59,7 +58,8 @@ function TimeLine(props){
           </nav>
           
           <div id = "page">
-            <ListeMessages messages={messages} handleUserClick={props.handleUserClick} />
+            
+          <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} />
            
             
           </div>
@@ -70,5 +70,4 @@ function TimeLine(props){
 
 
 export default TimeLine;
-
 

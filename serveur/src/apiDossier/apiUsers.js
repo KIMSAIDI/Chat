@@ -64,8 +64,57 @@ async function getUser(req, res, next) {
   }
 }
 
+async function addFriend(req, res, next) {
+  const friend = req.body.friend;  
+  const me = req.body.me;
+  
+  try {
+    const user = await User.findOne({login: me});
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+    if (user.login === friend) {
+
+      return res.status(409).json({ message: 'Vous ne pouvez pas vous ajouter en ami' });
+    }
+    if (user.listAmis.includes(friend)) {
+      return res.status(409).json({ message: 'Cet utilisateur est déjà votre ami' });
+    }
+    user.listAmis.push(friend);
+    const saveUser = await user.save();
+    res.status(201).send({
+      message: 'Utilisateur ajouté en ami avec succès.',
+      user: saveUser
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function deleteFriend(req, res, next) {
+  const me = req.body.me;
+  const friend = req.body.friend;
+
+  try {
+    const user = await User.findOne({login :me})
+    if (!user) {
+      return res.status(404).json({message : 'Utilisateur non trouvé'});
+    }
+    if (!user.listAmis.includes(friend)) {
+      return res.status(409).json({message : 'Cet utilisateur n\'est pas votre ami'});
+    }
+    user.listAmis.splice(user.listAmis.indexOf(friend), 1);
+    const saveUser = await user.save();
+    res.status(201).send({
+      message: 'Utilisateur supprimé de vos amis avec succès.',
+      user: saveUser
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+   
+  
 
 
-
-
-module.exports = {createUsers, login ,logout, getUser};
+module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend};
