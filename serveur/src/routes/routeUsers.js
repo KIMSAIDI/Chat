@@ -14,8 +14,12 @@ routerUsers.post('/user/logout/', apiUsers.logout);
 // Route pour récupérer un utilisateur de la base de données
 routerUsers.get('/user/:username/getUser', apiUsers.getUser);
 
-// Route pour ajouter un amis à un utilisateur
+// Route pour ajouter un ami à un utilisateur
 routerUsers.patch('/user/:username/ajout', apiUsers.addFriend);
+
+// Route pour effacer un ami à un utilisateur
+routerUsers.patch('/user/:username/delete', apiUsers.deleteFriend);
+
 
 module.exports = {routerUsers };
 

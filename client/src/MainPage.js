@@ -5,7 +5,6 @@ import TimeLine from './TimeLine';
 import Profile from './Profile';
 
 
-
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -21,10 +20,12 @@ function MainPage(props){
     const [isMyProfile, setIsMyProfile] = useState(false);
     
 
+
     //comportement 
     const getConnected = () => {
         setConnect(true);
         setPage("TimeLine");
+        
         localStorage.setItem("isConnected", true);
         localStorage.setItem("user", JSON.stringify(user));
     };
