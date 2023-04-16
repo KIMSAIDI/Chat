@@ -4,7 +4,6 @@ import axios from 'axios';
 import './css/Message.css';
 
 
-
 const Message = (props) => {
   const { _id, author, content, createdAt, like, dislike } = props.message;
   const [likeCount, setLikeCount] = useState(like);
@@ -13,7 +12,7 @@ const Message = (props) => {
 
   const handleLike = async () => {
     try {
-      const response = await axios.patch(`/api/message/${_id}/like`, { login: userLogin });
+      const response = await axios.patch(`/api/message/${_id}/like`, { login: props.userLogin });
       setLikeCount(response.data.like);
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà aimé ce message.') {
@@ -26,7 +25,7 @@ const Message = (props) => {
 
   const handleDislike = async () => {
     try {
-      const response = await axios.patch(`/api/message/${_id}/dislike`, { login: userLogin });
+      const response = await axios.patch(`/api/message/${_id}/dislike`, { login: props.userLogin });
       setDislikeCount(response.data.dislike);
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà disliké ce message.') {
