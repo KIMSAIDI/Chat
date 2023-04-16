@@ -42,10 +42,13 @@ const Message = (props) => {
 
   const handleAjoutAmis = async () => {
     try {
+      console.log("me", props.userLogin)
+      console.log("friend", author)
       const response = await axios.patch(`/api/user/${author}/ajout/`, {
         me: props.userLogin,
         friend: author
       });
+      
       console.log(response.data)
     } catch (error) {
       if (error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {

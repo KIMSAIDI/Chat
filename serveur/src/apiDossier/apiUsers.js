@@ -73,14 +73,14 @@ async function addFriend(req, res, next) {
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
-    if (user.listAmis.includes(friend)) {
-      
-      return res.status(409).json({ message: 'Cet utilisateur est déjà votre ami' });
-    }
     if (user.login === friend) {
-     
+
       return res.status(409).json({ message: 'Vous ne pouvez pas vous ajouter en ami' });
     }
+    if (user.listAmis.includes(friend)) {
+      return res.status(409).json({ message: 'Cet utilisateur est déjà votre ami' });
+    }
+    
 
     user.listAmis.push(friend);
     const saveUser = await user.save();

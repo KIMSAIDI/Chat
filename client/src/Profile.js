@@ -15,6 +15,11 @@ const Profile = (props) => {
                 {props.isMyProfile ? <p>On est sur NOTRE page</p> : <p>On est sur la page de quelqu'un d'autre</p>}
             </div>
 
+            <ul> Liste Amis : 
+            {props.user.listAmis.map((friend) => (
+                <li key={friend}>{friend}</li>
+            ))}
+            </ul>
 
 
             {/* <nav id="msg">

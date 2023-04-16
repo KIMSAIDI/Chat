@@ -75,7 +75,7 @@ function MainPage(props){
 
             <div id = "page"> 
 
-                {page === "TimeLine" && <TimeLine user = {user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
+                {page === "TimeLine" && <TimeLine user={user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
                 {page === "signin_page" && <Signin/>} 
                 
                 {page === "PageProfile" && <Profile user={selectedUser} boutton_page={boutton_page} isMyProfile={isMyProfile}/>}
