@@ -3,7 +3,8 @@ import NavigationPanel from "./NavigationPanel";
 import Signin from "./Signin"
 import TimeLine from './TimeLine';
 import Profile from './Profile';
-import NotreProfile from './NotreProfile';
+
+
 
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:3000";
@@ -16,7 +17,8 @@ function MainPage(props){
     const [user, setUser] = useState(null);
 
     const [selectedUser, setSelectedUser] = useState(props.user);
-
+    
+    const [isMyProfile, setIsMyProfile] = useState(false);
     
 
     //comportement 
@@ -39,7 +41,9 @@ function MainPage(props){
           const response = await axios.get(`/api/user/${author}/getUser`);
           setSelectedUser(response.data);
           setPage("PageProfile");
-
+          if (response.data.login === user.login) {
+            setIsMyProfile(true);
+          }
         }
         catch (error) {
           console.error(error); 
@@ -52,13 +56,16 @@ function MainPage(props){
             <button onClick={() => {
               setPage("PageProfile");
               setSelectedUser(user);
+              setIsMyProfile(true);
             }}>Ma PageProfile</button>
       
-            <button onClick={() => setPage("TimeLine")}>TimeLine</button>
+            <button onClick={() => { 
+              setPage("TimeLine");
+              setIsMyProfile(false);
+            }}>TimeLine</button>
           </div>
         );
       };
-
 
     return(
         <div>
@@ -67,12 +74,12 @@ function MainPage(props){
             </nav>
 
             <div id = "page"> 
+
                 {page === "TimeLine" && <TimeLine user = {user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page}/>}
                 {page === "signin_page" && <Signin/>} 
                 
-                {page === "PageProfile" && selectedUser.login === user.login  && <NotreProfile user={user} boutton_page={boutton_page} />}
+                {page === "PageProfile" && <Profile user={selectedUser} boutton_page={boutton_page} isMyProfile={isMyProfile}/>}
                 
-                {page === "PageProfile" && selectedUser.login !== user.login &&  <Profile user={selectedUser} boutton_page={boutton_page} />}
             </div>
         </div>    
     );

@@ -27,7 +27,7 @@ const Message = (props) => {
       const response = await axios.patch(`/api/message/${_id}/dislike`, { login: props.userLogin });
       setDislikeCount(response.data.dislike);
     } catch (error) {
-      if (error.response.status === 400 && error.response.data.error === 'Vous avez déjà disliké ce message.') {
+      if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà disliké ce message.') {
         alert('Vous avez déjà disliké ce message.');
       } else {
         console.log("Erreur de dislike")
@@ -36,7 +36,6 @@ const Message = (props) => {
     }
   };
 
- 
   const handleProfileClick = () => {
     props.handleUserClick(author);
   };
@@ -65,8 +64,8 @@ const Message = (props) => {
   
   return (
     <div>
-      <h3>Nom d'utilisateur : <span className="texte-cliquable" onClick={handleProfileClick}> {author}</span></h3>
-      <button onClick={handleAjoutAmis}>Ajout ami</button>
+      <h3><span className="texte-cliquable" onClick={handleProfileClick}> {author}</span></h3>
+      <button onClick={handleAjoutAmis}>Follow</button>
 
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>

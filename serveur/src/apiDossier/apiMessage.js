@@ -15,7 +15,7 @@ async function createMessage(req, res, next) {
     like: 0,
     dislike: 0,
     likedBy: [],
-    dislikedBy: [],
+    dislikeBy: [],
   });
 
   try {
@@ -65,8 +65,6 @@ async function likeMessage(req, res, next) {
 async function dislikeMessage(req, res, next) {
   const { messageId } = req.params; // Récupère l'ID du message à partir de l'URL
   const { login } = req.body; // Récupère le login de l'utilisateur à partir de la requête
-  console.log(login)
-  console.log(messageId)
   try {
     const message = await Message.findById(messageId); // Trouve le message correspondant dans la base de données à partir de l'ID
    
