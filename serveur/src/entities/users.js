@@ -92,7 +92,6 @@ const userSchema = new mongoose.Schema({
     default : []
   },
   
-
 })
 
 userSchema.pre('save',async function(){

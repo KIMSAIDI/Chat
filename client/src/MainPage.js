@@ -83,16 +83,13 @@ function MainPage(props){
         }
     }, []);
 
-      
-    
-
     return(
         <div>
-            <nav id = "navigation"> 
+            <nav id="navigation"> 
                 <NavigationPanel login={getConnected} logout={setLogout} isConnected={isConnected} user={user} setUser={setUser}/>  
             </nav>
 
-            <div id = "page"> 
+            <div id="page"> 
 
                 {page === "signin_page" && <Signin/>} 
                 {page === "PageProfile" && <Profile user={selectedUser} boutton_page={boutton_page} isMyProfile={isMyProfile}/>}

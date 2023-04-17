@@ -20,6 +20,8 @@ routerUsers.patch('/user/:username/ajout', apiUsers.addFriend);
 // Route pour effacer un ami à un utilisateur
 routerUsers.patch('/user/:username/delete', apiUsers.deleteFriend);
 
+// Route pour avoir la liste d'amis d'un utilisateur
+routerUsers.get('/user/getFriends', apiUsers.getFriends);
 
 module.exports = {routerUsers };
 

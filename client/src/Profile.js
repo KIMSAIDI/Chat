@@ -1,11 +1,24 @@
+import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from 'axios';
 
 const Profile = (props) => {
+    const [listeAmis, setListeAmis] = useState(props.user.listAmis);
+
+
+    useEffect(() => {
+        axios.get('/api/user/getFriends', {
+            params: {
+                login: props.user.login
+            }
+        })
+          .then(res => setListeAmis(res.data))
+          .catch(err => console.log(err));
+      }, []);
   
 
     const handleDeleteFriend = async (friend) => {
-
+    
         try {
             const response = await axios.patch(`/api/user/${friend}/delete/`, {
                 me: props.user.login,
@@ -13,9 +26,9 @@ const Profile = (props) => {
             });
             console.log(response.data)
             
-            
             localStorage.setItem("user", JSON.stringify(props.user))
             window.location.reload();
+
       
         }
         catch (error) {
@@ -42,7 +55,7 @@ const Profile = (props) => {
             <div id="delete">
                 {props.isMyProfile ? (
                     <ul> Liste Amis : 
-                        {props.user.listAmis.map((friend) => (
+                        {listeAmis.map((friend) => (
                             <li key={friend}>
                                  {friend}
                                 <button onClick={() => handleDeleteFriend(friend)}>Supprimer</button>
