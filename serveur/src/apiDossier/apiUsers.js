@@ -114,7 +114,19 @@ async function deleteFriend(req, res, next) {
   }
 }
    
-  
+
+async function getFriends(req, res, next) {
+  const login = req.body.login;
+  try {
+    const user = await User.findOne({login: login});
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+    res.json(user.listAmis);
+  } catch (error) {
+    next(error);
+  }
+}
 
 
-module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend};
+module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends};
