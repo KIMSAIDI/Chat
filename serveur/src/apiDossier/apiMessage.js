@@ -7,7 +7,7 @@ async function createMessage(req, res, next) {
   if (!content || !author) {
     return res.status(400).json({ message: 'Le format du message est incorrect.' });
   }
-
+  
   const message = new Message({
     content,
     author,
@@ -37,53 +37,51 @@ async function getBD(req,res,next){
 }
 
 async function likeMessage(req, res, next) {
-  const { messageId } = req.params; // Récupère l'ID du message à partir de l'URL
-  const { login } = req.body; // Récupère le login de l'utilisateur à partir de la requête
+  const { messageId } = req.params; 
+  const { login } = req.body;
 
   try {
-      const message = await Message.findById(messageId); // Trouve le message correspondant dans la base de données à partir de l'ID
+      const message = await Message.findById(messageId); 
 
-      if (!message) { // Si le message n'est pas trouvé, renvoie une réponse d'erreur 404
+      if (!message) { 
           return res.status(404).json({ error: 'Le message n\'a pas été trouvé.' });
       }
 
-      if (message.likedBy.includes(login)) { // Vérifie si l'utilisateur a déjà aimé ce message
+      if (message.likedBy.includes(login)) { 
           return res.status(400).json({ error: 'Vous avez déjà aimé ce message.' });
       }
 
-      message.like += 1; // Augmente le nombre de likes du message de 1
-      message.likedBy.push(login); // Ajoute le nom de l'utilisateur à la liste des utilisateurs ayant aimé le message
+      message.like += 1; 
+      message.likedBy.push(login); 
 
-      const updatedMessage = await message.save(); // Enregistre le message mis à jour dans la base de données
+      const updatedMessage = await message.save(); 
 
-      res.json(updatedMessage); // Renvoie le message mis à jour avec le nouveau nombre de likes dans la réponse
-  } catch (error) { // Gère les erreurs qui pourraient survenir lors de la recherche ou de la mise à jour du message
+      res.json(updatedMessage); 
+  } catch (error) {
       res.status(400).json({ error: 'Une erreur s\'est produite.' });
   }
 }
 
 async function dislikeMessage(req, res, next) {
-  const { messageId } = req.params; // Récupère l'ID du message à partir de l'URL
-  const { login } = req.body; // Récupère le login de l'utilisateur à partir de la requête
+  const { messageId } = req.params; 
+  const { login } = req.body; 
   try {
-    const message = await Message.findById(messageId); // Trouve le message correspondant dans la base de données à partir de l'ID
+    const message = await Message.findById(messageId); 
    
-    if (!message) { // Si le message n'est pas trouvé, renvoie une réponse d'erreur 404
+    if (!message) { 
       return res.status(404).json({ error: 'Le message n\'a pas été trouvé.' });
     }
-    if (message.dislikeBy.includes(login)) { // Vérifie si l'utilisateur a déjà disliké ce message
+    if (message.dislikeBy.includes(login)) { 
       return res.status(400).json({ error: 'Vous avez déjà disliké ce message.' });
     }
   
-    message.dislike += 1; // Augmente le nombre de dislikes du message de 1
-    message.dislikeBy.push(login); // Ajoute le nom de l'utilisateur à la liste des utilisateurs ayant disliké le message
+    message.dislike += 1; 
+    message.dislikeBy.push(login); 
 
-    const updatedMessage = await message.save(); // Enregistre le message mis à jour dans la base de données
-    res.json(updatedMessage); // Renvoie le message mis à jour avec le nouveau nombre de dislikes dans la réponse
-  } catch (error) { // Gère les erreurs qui pourraient survenir lors de la recherche ou de la mise à jour du message
+    const updatedMessage = await message.save();
+    res.json(updatedMessage);
+  } catch (error) { 
     res.status(400).json({ error: 'Une erreur s\'est produite.' });
   }
 }
-
 module.exports = {createMessage,getBD, likeMessage,dislikeMessage};
-
