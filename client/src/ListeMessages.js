@@ -9,7 +9,7 @@ const ListeMessages = (props) => {
     <div>
       <nav id="page">
         {props.messages.reverse().map((message) => (
-          <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} /> 
+          <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser}/> 
         ))}
       </nav>
     </div>

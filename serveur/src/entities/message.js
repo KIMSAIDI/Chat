@@ -28,6 +28,7 @@ const messageSchema = new mongoose.Schema({
     type: [String],
     default: [],
   }
+
 });
 
 const Message = mongoose.model('Message', messageSchema);

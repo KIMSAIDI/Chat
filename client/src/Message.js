@@ -8,7 +8,6 @@ const Message = (props) => {
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
   
-
   const handleLike = async () => {
     try {
       const response = await axios.patch(`/api/message/${_id}/like`, { login: props.userLogin });
@@ -48,9 +47,12 @@ const Message = (props) => {
         me: props.userLogin,
         friend: author
       });
-      
+    
       console.log(response.data)
       
+      // Mise à jour de l'utilisateur avec ses nouveaux amis
+      props.setUser(response.data.user);
+  
     } catch (error) {
       if (error.response && error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {
         alert('Vous avez déjà ajouté cet utilisateur en ami.');
@@ -63,7 +65,7 @@ const Message = (props) => {
       }
       
     }
-};
+  };
   
   
   return (

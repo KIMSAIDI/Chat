@@ -116,7 +116,7 @@ async function deleteFriend(req, res, next) {
    
 
 async function getFriends(req, res, next) {
-  const login = req.body.login;
+  const login = req.query.login;
   try {
     const user = await User.findOne({login: login});
     if (!user) {
