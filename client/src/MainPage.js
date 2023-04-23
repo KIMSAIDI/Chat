@@ -121,9 +121,7 @@ function MainPage(props){
                 {page === "signin_page" && <Signin/>} 
                 {page === "PageProfile" && <Profile setUser = {setUser} user={selectedUser} boutton_page={boutton_page} isMyProfile={isMyProfile} friendsList = {friendsList} setFriendsList = {setFriendsList} />}
                 {page === "TimeLine" && {user} && <TimeLine user={user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page} />}
-                
-                
-                
+            
             </div>
         </div>    
     );
