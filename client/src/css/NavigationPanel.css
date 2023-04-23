@@ -1,13 +1,13 @@
-.navigation_pan{
-    background-color: #6d65e0;
+.navigation_pan {
+    background-image: url("fondMood.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     border: 1px solid #1d1212;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    /* changer la police*/
     font-family: 'Open Sans', sans-serif;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 20px;
     padding: 19px;
-}
-
+  }
