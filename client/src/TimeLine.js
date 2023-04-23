@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-
 import ListeMessages from './ListeMessages';
+import './css/TimeLine.css';
 
 
 import axios from 'axios';
@@ -43,20 +43,22 @@ function TimeLine(props){
      return (
         <div>
           
-          
+          <br></br>
+          <p className="p">Timeline de l'utilisateur : {props.user.login}</p>
+          <nav className="PageProfile" id = "nav">
+            {props.boutton_page()} 
+            {/* { <button onClick={() => props.boutton_page()}>pageprofil</button> */}
 
-          <p>Timeline de l'utilisateur : {props.user.login}</p>
-          <form onSubmit={handleSubmit}>
-            <label>
+          </nav>
+          <form onSubmit={handleSubmit}>            
+            <label className="nouveau-message">
               Nouveau message:
               <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
             </label>
             <button type="submit">Poster</button>
           </form>
 
-          <nav id = "nav">
-            {props.boutton_page()}
-          </nav>
+          
           
           <div id = "page">
             

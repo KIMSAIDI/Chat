@@ -16,6 +16,9 @@ function MainPage(props){
     const [friendsList, setFriendsList] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [isMyProfile, setIsMyProfile] = useState(false);
+    const [messages_by_login, setMessages_by_login] = useState([]);
+
+    
     //comportement 
 
     //se connecter
@@ -42,43 +45,63 @@ function MainPage(props){
         try {
           const response = await axios.get(`/api/user/${author}/getUser`);
           setSelectedUser(response.data);
-          setPage("PageProfile");
           if (response.data.login === user.login) {
             setIsMyProfile(true);
           }
+          setPage("PageProfile");
+          getmessage(response.data.login);
+          
         }
         catch (error) {
           console.error(error); 
         } 
+        
       };
+
+
+      const getmessage = (auteur) => {
+        axios.get(`/api/messagebyLogin/`, {
+          params: {
+              login: auteur
+              }
+          })
+        .then(res => setMessages_by_login(res.data))
+        .catch(err => console.log(err));
+        console.log({messages_by_login})
+      }
+
+       //Bouton pou switch entre la TL et les pages de profils
+     const boutton_page = () => {  
       
-      //Bouton pou switch entre la TL et les pages de profils
-      const boutton_page = () => {
-        return (
-          <div>
-            {page === "PageProfile" ? (
-              <button
-                onClick={() => {
-                  setPage("TimeLine");
-                  setIsMyProfile(false);
-                }}
-              >
-                TimeLine
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setPage("PageProfile");
-                  setSelectedUser(user);
-                  setIsMyProfile(true);
-                }}
-              >
-                Ma PageProfile
-              </button>
-            )}
-          </div>
-        );
+      return (
+        <div>
+          {page === "PageProfile" ? (
+            <button
+              onClick={() => {
+                setPage("TimeLine");
+                setIsMyProfile(false);
+                
+              }}
+            >
+              TimeLine
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setSelectedUser(user);
+                getmessage(user.login);
+                setPage("PageProfile");
+                setIsMyProfile(true);
+                
+              }}
+            >
+              Ma PageProfile
+            </button>
+          )}
+        </div>
+      );
       };
+    
 
       // ??
       useEffect(() => {
@@ -110,17 +133,19 @@ function MainPage(props){
       }
     }, [user]);
 
+
+    
     return(
         <div>
             <nav id = "navigation"> 
-                <NavigationPanel login={getConnected} logout={setLogout} isConnected={isConnected} user={user} setUser={setUser}/>  
+              <NavigationPanel login={getConnected} logout={setLogout} isConnected={isConnected} user={user} setUser={setUser} />
             </nav>
 
             <div id = "page"> 
 
                 {page === "signin_page" && <Signin/>} 
-                {page === "PageProfile" && <Profile setUser = {setUser} user={selectedUser} boutton_page={boutton_page} isMyProfile={isMyProfile} friendsList = {friendsList} setFriendsList = {setFriendsList} />}
-                {page === "TimeLine" && {user} && <TimeLine user={user} setUser={setUser} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page} />}
+                {page === "PageProfile" && <Profile message = {messages_by_login} setUser = {setUser} user={selectedUser} handleUserClick={handleUserClick} boutton_page={boutton_page} isMyProfile={isMyProfile} friendsList = {friendsList} setFriendsList = {setFriendsList} />}
+                {page === "TimeLine" && {user} && <TimeLine setUser={setUser} user={user} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page} />}
                 
                 
                 

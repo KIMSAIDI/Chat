@@ -1,21 +1,11 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from 'axios';
+import Message from './Message';
 
 const Profile = (props) => {
     const [ListeUserAmis, setListeUserAmis] = useState(props.friendsList);  
-    console.log(ListeUserAmis)
-    /*
-    useEffect(() =>{
-        axios.get('/api/user/getFriends', {
-            params: {
-                login: props.user.login
-            }
-        })
-          .then(res => setListeUserAmis(res.data))
-          .catch(err => console.log(err));
-    },[ListeUserAmis]);
-    */
+    
 
     const handleDeleteFriend = async (friend) => {
         try {
@@ -49,6 +39,7 @@ const Profile = (props) => {
                 {props.isMyProfile ? <p>On est sur NOTRE page</p> : <p>On est sur la page de quelqu'un d'autre</p>}
             </div>
 
+           
             <div id="delete">
                 {props.isMyProfile ? (
                     <ul> Liste Amis : 
@@ -70,11 +61,15 @@ const Profile = (props) => {
                 )}
             </div>
 
+            {/* pour afficher les messages de l'utilisateur sélectionné */}
+            <div>
+                <nav id="page">
+                    {props.message.map((message) => (
+                        <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser}/> 
+                    ))}
+                </nav>
+            </div>
 
-
-            {/* <nav id="msg">
-                <TimeLine user = {props.user} setUser={props.setUser} handleUserClick={props.handleUserClick} setPage={props.setPage} setSelectedUser={props.setSelectedUser} boutton_page={props.boutton_page}/>
-            </nav> */}
         </div>
     )
 }

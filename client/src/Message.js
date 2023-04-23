@@ -69,22 +69,25 @@ const Message = (props) => {
   
   
   return (
-    <div>
-      <h3><span className="texte-cliquable" onClick={handleProfileClick}> {author}</span></h3>
-      <button onClick={handleAjoutAmis}>Follow</button>
+    <div className='Message'>
+      <div className="titre-et-bouton">
+        <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
+        <button onClick={handleAjoutAmis}>Follow</button>
+      </div>
 
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>
-      <div>
-        <button onClick={handleLike}>Like</button>
-        <span>{likeCount} likes</span>
+      
+      <div className="boutons-like-dislike">
+        <div>
+          <button onClick={handleLike}>Like</button>
+          <span>{likeCount} likes</span>
+        </div>
+        <div>
+          <button onClick={handleDislike}>Dislike</button>
+          <span>{dislikeCount} dislikes</span>
+        </div>
       </div>
-      <div>
-        <button onClick={handleDislike}>Dislike</button>
-        <span>{dislikeCount} dislikes</span>
-      </div>
-
-
     </div>
   );
 };

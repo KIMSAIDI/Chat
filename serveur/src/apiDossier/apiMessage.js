@@ -36,6 +36,16 @@ async function getBD(req,res,next){
     .catch(err => res.status(500).json({ error: err }));
 }
 
+
+async function getBDbyLogin(req, res, next) {
+  const { login } = req.query; 
+  Message.find({ author: login })
+    .then(messages => {
+      res.json(messages);
+    })
+    .catch(err => res.status(500).json({ error: err }));
+}
+
 async function likeMessage(req, res, next) {
   const { messageId } = req.params; 
   const { login } = req.body;
@@ -84,4 +94,4 @@ async function dislikeMessage(req, res, next) {
     res.status(400).json({ error: 'Une erreur s\'est produite.' });
   }
 }
-module.exports = {createMessage,getBD, likeMessage,dislikeMessage};
+module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin};
