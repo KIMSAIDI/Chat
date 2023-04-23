@@ -67,7 +67,6 @@ function MainPage(props){
           })
         .then(res => setMessages_by_login(res.data))
         .catch(err => console.log(err));
-        console.log({messages_by_login})
       }
 
        //Bouton pou switch entre la TL et les pages de profils
@@ -92,7 +91,6 @@ function MainPage(props){
                 getmessage(user.login);
                 setPage("PageProfile");
                 setIsMyProfile(true);
-                
               }}
             >
               Ma PageProfile

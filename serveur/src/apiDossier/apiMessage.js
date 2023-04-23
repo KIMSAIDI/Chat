@@ -94,4 +94,21 @@ async function dislikeMessage(req, res, next) {
     res.status(400).json({ error: 'Une erreur s\'est produite.' });
   }
 }
-module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin};
+
+  async function deleteMessage(req, res, next){
+   
+    const { messageId } = req.params;
+    try{
+      
+      const message = await Message.findByIdAndDelete(messageId);
+      console.log(message)
+      if(!message){
+        return res.status(404).json({error: 'Le message n\'a pas été trouvé.'});
+      }
+    }catch(error){
+      console.log(error);
+      res.status(400).json({error: 'Une erreur s\'est produite.'});
+    }
+  }
+
+module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage};

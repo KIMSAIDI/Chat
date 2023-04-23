@@ -15,5 +15,6 @@ routerMessages.patch('/message/:messageId/like', apiMessage.likeMessage);
 
 routerMessages.patch('/message/:messageId/dislike', apiMessage.dislikeMessage);
 
+routerMessages.delete('/message/:messageId/deleteMessage', apiMessage.deleteMessage);
 
 module.exports = { routerMessages };

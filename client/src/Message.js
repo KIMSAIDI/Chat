@@ -67,12 +67,30 @@ const Message = (props) => {
     }
   };
   
+  const handleDeleteMessage = async () => {
+    try {
+      const response = await axios.delete(`/api/message/${_id}/deleteMessage`);
+      console.log("ok")
+      props.setMessages(props.messages.filter(message => message._id !== _id));
+    } catch (error) {
+      if (error.response && error.response.status === 400 && error.response.data.error === 'Vous n\'êtes pas autorisé à supprimer ce message.') {
+        alert('Vous n\'êtes pas autorisé à supprimer ce message.');
+      } else {
+        console.log("Erreur de suppression de message")
+        console.error(error);
+      }
+    }
+  };
   
   return (
     <div className='Message'>
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
         <button onClick={handleAjoutAmis}>Follow</button>
+      </div>
+
+      <div>
+        { props.isMyProfile && props.isMyProfile ? ( <button onClick={handleDeleteMessage}>Delete</button> ) : ( <div></div> ) }
       </div>
 
       <p>Message : {content}</p>

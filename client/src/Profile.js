@@ -35,9 +35,7 @@ const Profile = (props) => {
             </nav>
             <h1>Profile {props.user.login} </h1>
 
-            <div id="page">
-                {props.isMyProfile ? <p>On est sur NOTRE page</p> : <p>On est sur la page de quelqu'un d'autre</p>}
-            </div>
+            
 
            
             <div id="delete">
@@ -65,7 +63,7 @@ const Profile = (props) => {
             <div>
                 <nav id="page">
                     {props.message.map((message) => (
-                        <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser}/> 
+                        <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser} isMyProfile = {props.isMyProfile}/> 
                     ))}
                 </nav>
             </div>
