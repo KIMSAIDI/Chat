@@ -70,11 +70,12 @@ const Message = (props) => {
   const handleDeleteMessage = async () => {
     try {
       const response = await axios.delete(`/api/message/${_id}/deleteMessage`);
-      console.log("ok")
       props.setMessages(props.messages.filter(message => message._id !== _id));
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous n\'êtes pas autorisé à supprimer ce message.') {
         alert('Vous n\'êtes pas autorisé à supprimer ce message.');
+      } if (error.response && error.response.status === 404 && error.response.data.error === 'Le message n\'a pas été trouvé.') {
+        alert('Message déja supprimé.');
       } else {
         console.log("Erreur de suppression de message")
         console.error(error);
@@ -106,6 +107,10 @@ const Message = (props) => {
           <span>{dislikeCount} dislikes</span>
         </div>
       </div>
+
+      <br></br>
+
+      <button>Répondre</button>
     </div>
   );
 };

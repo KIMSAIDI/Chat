@@ -5,6 +5,8 @@ import Message from './Message';
 
 const Profile = (props) => {
     const [ListeUserAmis, setListeUserAmis] = useState(props.friendsList);  
+
+    
     
 
     const handleDeleteFriend = async (friend) => {
@@ -35,9 +37,6 @@ const Profile = (props) => {
             </nav>
             <h1>Profile {props.user.login} </h1>
 
-            
-
-           
             <div id="delete">
                 {props.isMyProfile ? (
                     <ul> Liste Amis : 

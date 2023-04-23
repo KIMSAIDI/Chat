@@ -69,9 +69,10 @@ function MainPage(props){
         .catch(err => console.log(err));
       }
 
+      
+
        //Bouton pou switch entre la TL et les pages de profils
      const boutton_page = () => {  
-      
       return (
         <div>
           {page === "PageProfile" ? (
