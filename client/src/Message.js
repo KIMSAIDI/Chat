@@ -7,6 +7,8 @@ const Message = (props) => {
   const { _id, author, content, createdAt, like, dislike } = props.message;
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
+  const [showReply, setShowReply] = useState(false);
+
   
   const handleLike = async () => {
     try {
@@ -82,6 +84,14 @@ const Message = (props) => {
       }
     }
   };
+
+  const handleReply = () => {
+    if (showReply) {
+      setShowReply(false);
+    }else {
+    setShowReply(true);
+    }
+  };
   
   return (
     <div className='Message'>
@@ -110,7 +120,13 @@ const Message = (props) => {
 
       <br></br>
 
-      <button>Répondre</button>
+      <button onClick={handleReply}>Répondre</button>
+      {showReply ? (
+        <div className="reply-wall">
+          <p>haha</p>
+          {/* Ajoutez ici le contenu de votre mur de réponse */}
+        </div>
+      ) : null}
     </div>
   );
 };
