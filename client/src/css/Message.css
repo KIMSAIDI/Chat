@@ -39,16 +39,18 @@
 .boutons-like-dislike > div {
     margin-right: 10px; /* ou la valeur que vous souhaitez */
 }
-  
+
+
 
 .reply-wall{
   position: fixed;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 100%;
+  overflow-y: scroll;
   width: 300px;
   background-color: white;
   border-left: 1px solid #ccc;
   padding: 20px;
-    
 }
+

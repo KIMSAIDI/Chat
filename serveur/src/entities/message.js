@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const messageSchema = new mongoose.Schema({
   content: {
     type: String,
@@ -32,10 +33,23 @@ const messageSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  replies: {
+  replies_content: {
     type: [String],
     default: [],
-  }
+  },
+  replies_to: {
+    type: [String],
+    default: [],
+  },
+  replies_auth: {
+    type: [String],
+    default: [],
+  },
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: () => new mongoose.Types.ObjectId(),
+  },
+
 
 });
 

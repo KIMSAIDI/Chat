@@ -4,14 +4,19 @@ import axios from 'axios';
 import './css/Message.css';
 
 const Message = (props) => {
-  const { _id, author, content, createdAt, like, dislike } = props.message;
+  const { content, author, createdAt, like, dislike, replyto, replies_content, replies_to, replies_auth, _id } = props.message;
+ 
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
   const [showReply, setShowReply] = useState(false);
-
-  const [replies, setReplies] = useState([]); // définir l'état local pour stocker les réponses
+  
   const [reply, setReply] = useState(""); // définir l'état local pour stocker la réponse à poster
+  const [autre_reply, setAutreReply] = useState("");
+  
+  
+  const [autresReplies, setAutresReplies] = useState([]);
 
+  
   
   const handleLike = async () => {
     try {
@@ -82,7 +87,7 @@ const Message = (props) => {
       } if (error.response && error.response.status === 404 && error.response.data.error === 'Le message n\'a pas été trouvé.') {
         alert('Message déja supprimé.');
       } else {
-        console.log("Erreur de suppression de message")
+        
         console.error(error);
       }
     }
@@ -96,14 +101,21 @@ const Message = (props) => {
     }
   };
 
-  const handleReplySubmit = async () => {
+  const handleReplySubmit = (index) => {
+    
+    // const autre_reply = autresReplies[index];
+    // setReply(autresReplies[index]);
+   
+    
+    
     axios.post(`/api/message/reply`, {
       content : reply,
       author : props.userLogin,
-      replyTo : author
+      replyTo : author,
+      id : _id
     })
     .then(function (response) {
-      setReplies([...replies, response.data.message]);
+      setAutreReply("");
       setReply("");
       
     })
@@ -111,6 +123,14 @@ const Message = (props) => {
       console.log(error);
     });
     }
+
+      const handleInputChange = (e, index) => {
+        const value = e.target.value;
+        const newReplies = [...autresReplies]; // on copie le tableau actuel pour le modifier
+        newReplies[index] = value;
+        setAutresReplies(newReplies);
+      }
+
 
 
   return (
@@ -141,23 +161,30 @@ const Message = (props) => {
       <br></br>
 
       <button onClick={handleReply}>Réponses</button>
+
       {showReply ? (
+       
         <div className="reply-wall">
           <label>
             <input type="text" value={reply} onChange={(e) => setReply(e.target.value)}></input>
           </label>
+          
           <button onClick={handleReplySubmit}>Poster</button>
           
-          {replies.map(reply => (
-            <div key={reply._id}>
-              <p>Réponse de {reply.author} à {reply.replyTo}</p>
-              <p>Message : {reply.content}</p>
-              <p>Date : {new Date(reply.createdAt).toLocaleString()}</p>
-              <p>-------------------------------------------</p>
+          {replies_content.map((rep, index) => (
+            <div key={index}>
+              <p>Réponse de {replies_auth[index]} à {replies_to[index]}</p>
+              <p>Message : {rep}</p>
+              <input type="text" value={autresReplies[index]} onChange={(e) => handleInputChange(e, index)}></input>
+              <button onClick={() => {
+               
+                handleReplySubmit(index);
+              }}>Répondre</button>
+              <p>------------------</p>
             </div>
           ))}
-          
-                  
+
+        
         </div>
       ) : null}
     </div>
