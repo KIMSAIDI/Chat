@@ -4,7 +4,6 @@ import Message from './Message';
 
 const ListeMessages = (props) => {
   
-
   return (
     <div>
       <nav id="page">
@@ -16,19 +15,6 @@ const ListeMessages = (props) => {
   );
 };
 
-// const ListeMessages = (props) => {
-//   return (
-//     <div>
-//       <nav id="page">
-      
-//       {props.messages.map((message) => (
-//         <Message key={message._id} message={message} setPage={props.setPage}/>
-//       ))} 
-     
-    
-//       </nav>
-//     </div>
-//   );
-// };
+
 
 export default ListeMessages;

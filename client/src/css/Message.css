@@ -6,3 +6,37 @@
     text-decoration: underline;
     cursor: pointer;
   }
+
+.Message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    
+}
+
+.titre-et-bouton h3,
+.titre-et-bouton button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.titre-et-bouton button {
+  margin-left: 10px; 
+}
+
+.boutons-like-dislike {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+.boutons-like-dislike > div {
+    margin-right: 10px; /* ou la valeur que vous souhaitez */
+}
+  

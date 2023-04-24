@@ -54,6 +54,7 @@ const Signup = () => {
 
 
     return (
+        <div className="signup">
         <form>
         <label>
             Login:
@@ -79,6 +80,7 @@ const Signup = () => {
             <button type="reset" onClick={handleReset}>Reset</button>
         {error && <p>{error}</p>}
         </form>
+        </div>
     );
 };
 export default Signup;

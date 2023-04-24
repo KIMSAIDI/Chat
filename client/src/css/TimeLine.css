@@ -1,0 +1,22 @@
+/* css pour une timeline d'un réseau social */
+/* css for a timeline of a social network */
+.p{
+    
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.PageProfile {
+    text-align: center;
+    padding: 30px;
+    margin-bottom: 5px
+  }
+  
+  .nouveau-message {
+    margin-top: 10px; /* ou la valeur que vous souhaitez */
+  }
