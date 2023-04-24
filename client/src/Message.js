@@ -9,6 +9,9 @@ const Message = (props) => {
   const [dislikeCount, setDislikeCount] = useState(dislike);
   const [showReply, setShowReply] = useState(false);
 
+  const [replies, setReplies] = useState([]); // définir l'état local pour stocker les réponses
+  const [reply, setReply] = useState(""); // définir l'état local pour stocker la réponse à poster
+
   
   const handleLike = async () => {
     try {
@@ -92,7 +95,24 @@ const Message = (props) => {
     setShowReply(true);
     }
   };
-  
+
+  const handleReplySubmit = async () => {
+    axios.post(`/api/message/reply`, {
+      content : reply,
+      author : props.userLogin,
+      replyTo : author
+    })
+    .then(function (response) {
+      setReplies([...replies, response.data.message]);
+      setReply("");
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    }
+
+
   return (
     <div className='Message'>
       <div className="titre-et-bouton">
@@ -120,11 +140,24 @@ const Message = (props) => {
 
       <br></br>
 
-      <button onClick={handleReply}>Répondre</button>
+      <button onClick={handleReply}>Réponses</button>
       {showReply ? (
         <div className="reply-wall">
-          <p>haha</p>
-          {/* Ajoutez ici le contenu de votre mur de réponse */}
+          <label>
+            <input type="text" value={reply} onChange={(e) => setReply(e.target.value)}></input>
+          </label>
+          <button onClick={handleReplySubmit}>Poster</button>
+          
+          {replies.map(reply => (
+            <div key={reply._id}>
+              <p>Réponse de {reply.author} à {reply.replyTo}</p>
+              <p>Message : {reply.content}</p>
+              <p>Date : {new Date(reply.createdAt).toLocaleString()}</p>
+              <p>-------------------------------------------</p>
+            </div>
+          ))}
+          
+                  
         </div>
       ) : null}
     </div>

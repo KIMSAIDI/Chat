@@ -27,6 +27,14 @@ const messageSchema = new mongoose.Schema({
   dislikeBy: {
     type: [String],
     default: [],
+  },
+  replyTo: {
+    type: String,
+    default: null,
+  },
+  replies: {
+    type: [String],
+    default: [],
   }
 
 });

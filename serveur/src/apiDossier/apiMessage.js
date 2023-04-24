@@ -16,6 +16,8 @@ async function createMessage(req, res, next) {
     dislike: 0,
     likedBy: [],
     dislikeBy: [],
+    replyTo: null,
+    reply: []
   });
 
   try {
@@ -29,6 +31,33 @@ async function createMessage(req, res, next) {
     res.status(400).json({ error: 'Une erreur s\'est produite.' });
   }
 }
+
+async function replyMessage(req, res, next) {
+  const { content, author, replyTo } = req.body;
+  if (!content || !author || !replyTo) {
+    return res.status(400).json({ message: 'Le format du message est incorrect.' });
+  }
+  const message = new Message({
+    content,
+    author,
+    createdAt: new Date(),
+    like: 0,
+    dislike: 0,
+    likedBy: [],
+    dislikeBy: [],
+    replyTo,
+    reply: []
+  });
+
+  try {
+    const savedMessage = await message.save();
+    console.log(`Nouvelle réponse de: ${savedMessage.author}`);
+    res.json({message})
+  } catch (error) {
+    res.status(400).json({ error: 'Une erreur s\'est produite.' });
+  }
+}
+
 
 async function getBD(req,res,next){
     Message.find()
@@ -99,9 +128,7 @@ async function dislikeMessage(req, res, next) {
    
     const { messageId } = req.params;
     try{
-      
       const message = await Message.findByIdAndDelete(messageId);
-      console.log(message)
       if(!message){
         return res.status(404).json({error: 'Le message n\'a pas été trouvé.'});
       }
@@ -111,4 +138,4 @@ async function dislikeMessage(req, res, next) {
     }
   }
 
-module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage};
+module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage, replyMessage};
