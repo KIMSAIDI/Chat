@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import axios from 'axios';
 import Message from './Message';
 
 const Profile = (props) => {
     const [ListeUserAmis, setListeUserAmis] = useState(props.friendsList);  
+
+    
     
 
     const handleDeleteFriend = async (friend) => {
@@ -35,9 +37,6 @@ const Profile = (props) => {
             </nav>
             <h1>Profile {props.user.login} </h1>
 
-            
-
-           
             <div id="delete">
                 {props.isMyProfile ? (
                     <ul> Liste Amis : 

@@ -71,6 +71,7 @@ const Signup = (props) => {
         <label>
             Confirm Password:
             <input type="password" value={pass2} onChange={(e) => setPass2(e.target.value)} name = "pass2" />
+            {pass2 !== pass1 ? <p>Les mots de passe ne correspondent pas</p> : null}
         </label>
         <label>
             Lastname:
@@ -80,9 +81,13 @@ const Signup = (props) => {
             Firstname:
             <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} name = "firstname" />
         </label>
-        <button type="submit" onClick={handleSubmit}>Sign up</button>
-            <button type="reset" onClick={handleReset}>Reset</button>
-            <button type="button" onClick={handleLogin}>se connecter</button>
+        
+        <button type="submit" onClick={handleSubmit}>
+            Sign up
+        </button>
+       
+        
+        <button type="reset" onClick={handleReset}>Reset</button>
         {error && <p>{error}</p>}
         </form>
         </div>

@@ -17,4 +17,7 @@ routerMessages.patch('/message/:messageId/dislike', apiMessage.dislikeMessage);
 
 routerMessages.delete('/message/:messageId/deleteMessage', apiMessage.deleteMessage);
 
+routerMessages.post('/message/reply', apiMessage.replyMessage);
+
+
 module.exports = { routerMessages };
