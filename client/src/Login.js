@@ -85,7 +85,7 @@ function Login (props){
     );
     */
     return (
-        <div>
+        <div className="login-form"> 
             <div className = "blob"></div>
             <div className="wrapper">
             <form>

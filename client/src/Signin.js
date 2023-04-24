@@ -85,9 +85,10 @@ const Signup = (props) => {
         <button type="submit" onClick={handleSubmit}>
             Sign up
         </button>
-       
-        
+    
         <button type="reset" onClick={handleReset}>Reset</button>
+        <button onClick={handleLogin}>Se connecter</button>
+        <a onClick={handleLogin}>Se connecter</a>
         {error && <p>{error}</p>}
         </form>
         </div>

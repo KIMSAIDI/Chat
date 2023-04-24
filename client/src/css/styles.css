@@ -1,22 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-*{
+.login-form *{
     margin : 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins',sans-serif;
 }
 
-body{
+.login-form {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh; /* modification ici */
     background: #1f1f47;
     overflow: hidden;
+    position: relative; /* modification ici */
 }
-
-.wrapper{
+.login-form .wrapper{
     position: relative;
+    z-index: 1; /* modification ici */
     width: 400px;
     height: 450px;
     background: rgba(255,255,255,.15);
@@ -28,20 +29,20 @@ body{
     align-items: center;
 }
 
-h2{
+.login-form h2{
     font-size: 2em;
     color: #fff;
     text-align: center;
 }
 
-.input-box {
+.login-form .input-box {
     position: relative;
     width: 320px;
     margin: 30px 0;
     border-bottom: 2px solid #fff;
 }
 
-.input-box label {
+.login-form .input-box label {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -52,18 +53,18 @@ h2{
     transition: .5s;
 }
 
-.input-box input:focus + label,
+.login-form .input-box input:focus + label,
 .input-box input:valid + label {
     top: 5px;
     color: #fff;
 }
 
-.input-box label.filled {
+.login-form .input-box label.filled {
     top: 5px;
     color: #fff;
 }
 
-.input-box input {
+.login-form .input-box input {
     width: 100%;
     height: 50px;
     background:transparent;
@@ -75,7 +76,7 @@ h2{
 }
 
 
-.input-box .icon {
+.login-form .input-box .icon {
     position: absolute;
     right: 8px;
     color: #fff;
@@ -83,7 +84,7 @@ h2{
     line-height: 57px;
 }
 
-button{
+.login-form button{
     width: 100%;
     height: 45px;
     background: #fa709a;
@@ -96,26 +97,26 @@ button{
     font-weight: 500;
 }
 
-.register-link{
+.login-form .register-link{
     font-size: .9em;
     text-align: center;
     color:#fff;
     margin: 25px 0 10px;
 }
 
-.register-link p a {
+.login-form .register-link p a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
 }
 
-.register-link p a:hover{
+.login-form .register-link p a:hover{
     text-decoration: underline;
 }
 
 
   
-  .blob{
+.login-form .blob{
     position: absolute;
     width: 500px;
     height: 500px;
@@ -126,7 +127,7 @@ button{
     animation: animateBlob 20s infinite alternate;
 }
 
-.blob:hover{
+.login-form .blob:hover{
     width: 520px;
     height: 520px;
     filter:blur(30px);
