@@ -3,7 +3,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
-const Signup = () => {
+const Signup = (props) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [lastname, setLastname] = useState("");
@@ -52,6 +52,10 @@ const Signup = () => {
         setError("");
     };
 
+    const handleLogin = () => {
+        props.setPage('login_page');
+    };
+
 
     return (
         <div className="signup">
@@ -78,6 +82,7 @@ const Signup = () => {
         </label>
         <button type="submit" onClick={handleSubmit}>Sign up</button>
             <button type="reset" onClick={handleReset}>Reset</button>
+            <button type="button" onClick={handleLogin}>se connecter</button>
         {error && <p>{error}</p>}
         </form>
         </div>

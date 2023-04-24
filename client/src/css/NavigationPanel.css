@@ -1,3 +1,5 @@
+
+/*
 .login {
     float: left;
     width: 50%;
@@ -5,6 +7,8 @@
     padding: 30px;
     
   }
+*/
+
 
 .logout {
     float: right;
@@ -16,6 +20,7 @@
 /* Styles pour la page d'inscription */
 
 /* Centrer le contenu */
+/*
 .container {
   display: flex;
   flex-direction: column;
@@ -23,8 +28,11 @@
   justify-content: center;
   height: 100vh;
 }
+*/
 
 /* Formulaire */
+
+/*
 form {
   margin-left: auto;
   margin-right: auto;
@@ -39,16 +47,20 @@ form {
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+*/
 
 /* Titre */
+/*
 h1 {
   margin-bottom: 20px;
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
 }
+*/
 
 /* Champ de saisie */
+/*
 input {
   width: 100%;
   padding: 10px;
@@ -57,8 +69,10 @@ input {
   border-radius: 5px;
   box-shadow: 0 0 5px #ccc;
 }
+/*
 
 /* Bouton d'inscription */
+/*
 button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -67,7 +81,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
-
+*/
 /* Message d'erreur */
 .error-message {
   color: red;

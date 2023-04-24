@@ -3,6 +3,7 @@ import NavigationPanel from "./NavigationPanel";
 import Signin from "./Signin";
 import TimeLine from './TimeLine';
 import Profile from './Profile';
+import Login from './Login';
 import axios from 'axios';
 
 axios.defaults.baseURL = "http://localhost:3000";
@@ -11,7 +12,7 @@ axios.defaults.baseURL = "http://localhost:3000";
 function MainPage(props){
     //etats
     const [isConnected, setConnect] = useState(false);
-    const [page, setPage] = useState("signin_page");
+    const [page, setPage] = useState("login_page");
     const [user, setUser] = useState(null);
     const [friendsList, setFriendsList] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
@@ -23,18 +24,19 @@ function MainPage(props){
 
     //se connecter
     const getConnected = () =>{
-        setConnect(true);
-        setPage("TimeLine");
-        localStorage.setItem("isConnected", true);
-        localStorage.setItem("user", JSON.stringify(user));
-        
-    };
+      setConnect(true);
+      setPage("TimeLine");
+      localStorage.removeItem("isConnected"); // Supprimer les données stockées localement
+      localStorage.removeItem("user"); // Supprimer les données stockées localement
+      localStorage.setItem("isConnected", true);
+      localStorage.setItem("user", JSON.stringify(user));
+  };
 
    //se deconnecter
     const setLogout = () => {
         setConnect(false);
         setUser(null);
-        setPage("signin_page");
+        setPage("login_page");
         localStorage.removeItem("isConnected");
         localStorage.removeItem("user");
         
@@ -102,6 +104,7 @@ function MainPage(props){
     
 
       // ??
+      
       useEffect(() => {
         const isConnected = localStorage.getItem("isConnected");
         const user = JSON.parse(localStorage.getItem("user"));
@@ -112,6 +115,7 @@ function MainPage(props){
             setPage("TimeLine");
         }
     }, []);
+    
 
     // met a jour la liste d'amis de  l'utilisateur a chaque fois qu'il est modifié 
     useEffect(() => {
@@ -130,26 +134,44 @@ function MainPage(props){
         majfriendsList();
       }
     }, [user]);
-
-
-    
-    return(
-        <div>
-            <nav id = "navigation"> 
-              <NavigationPanel login={getConnected} logout={setLogout} isConnected={isConnected} user={user} setUser={setUser} />
-            </nav>
-
-            <div id = "page"> 
-
-                {page === "signin_page" && <Signin/>} 
-                {page === "PageProfile" && <Profile message = {messages_by_login} setUser = {setUser} user={selectedUser} handleUserClick={handleUserClick} boutton_page={boutton_page} isMyProfile={isMyProfile} friendsList = {friendsList} setFriendsList = {setFriendsList} />}
-                {page === "TimeLine" && {user} && <TimeLine setUser={setUser} user={user} handleUserClick={handleUserClick} setPage={setPage} setSelectedUser={setSelectedUser} boutton_page={boutton_page} />}
-                
-                
-                
-            </div>
-        </div>    
+       
+    return (
+      <div>
+        {isConnected && <NavigationPanel logout={setLogout} user={user} setUser={setUser} />}
+        <div id="page">
+          {!isConnected && page === "signin_page" && <Signin setPage = {setPage} />}
+          {!isConnected && page === "login_page" &&  <Login connect={getConnected} user = {user} setUser={setUser} setPage = {setPage} />}
+          {isConnected && (
+            <>
+              {page === "PageProfile" && (
+                <Profile
+                  setUser={setUser}
+                  user={selectedUser}
+                  boutton_page={boutton_page}
+                  isMyProfile={isMyProfile}
+                  friendsList={friendsList}
+                  setFriendsList={setFriendsList}
+                  message = {messages_by_login}
+                />
+              )}
+              {page === "TimeLine" && user && (
+                <TimeLine
+                  user={user}
+                  setUser={setUser}
+                  handleUserClick={handleUserClick}
+                  setPage={setPage}
+                  setSelectedUser={setSelectedUser}
+                  boutton_page={boutton_page}
+                />
+              )}
+            </>
+          )}
+        </div>
+      </div>
     );
+
+
+
  }
 
  export default MainPage;

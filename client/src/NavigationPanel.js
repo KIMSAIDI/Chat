@@ -7,7 +7,7 @@ import './css/NavigationPanel.css';
 function NavigationPanel(props){
 
    
-
+    /*
     return(
         <div className="navigation_pan">
             {(props.isConnected) ? 
@@ -23,7 +23,16 @@ function NavigationPanel(props){
         
     </div>   
     );
+    */
 
+    return(
+        <div className="navigation_pan"> 
+            <nav className="logout">
+                <Logout logout={props.logout} user ={props.user}/>
+            </nav>
+        
+         </div> 
+    );
 }
 export default NavigationPanel;
 
