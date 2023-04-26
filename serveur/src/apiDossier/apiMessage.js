@@ -17,7 +17,9 @@ async function createMessage(req, res, next) {
     likedBy: [],
     dislikeBy: [],
     replyTo: null,
-    reply: []
+    replies_content: [],
+    replies_to: [],
+    replies_auth: []
   });
 
   try {
@@ -33,7 +35,7 @@ async function createMessage(req, res, next) {
 }
 
 async function replyMessage(req, res, next) {
-  const { content, author, replyTo } = req.body;
+  const { content, author, replyTo, id } = req.body;
   if (!content || !author || !replyTo) {
     return res.status(400).json({ message: 'Le format du message est incorrect.' });
   }
@@ -46,13 +48,29 @@ async function replyMessage(req, res, next) {
     likedBy: [],
     dislikeBy: [],
     replyTo,
-    reply: []
+    replies_content: [],
+    replies_auth: [],
+    replies_to: []
   });
 
   try {
+    
     const savedMessage = await message.save();
-    console.log(`Nouvelle réponse de: ${savedMessage.author}`);
-    res.json({message})
+    console.log(`Nouvelle réponse de: ${savedMessage.author} à ${savedMessage.replyTo}`);
+    const messageAQuiOnRepond = await Message.findById(id);
+    
+    if (!messageAQuiOnRepond) {
+      return res.status(404).json({ error: 'Le message n\'a pas été trouvé.' });
+    }  
+    messageAQuiOnRepond.replies_content.push(savedMessage.content);
+    messageAQuiOnRepond.replies_auth.push(author);
+    messageAQuiOnRepond.replies_to.push(replyTo);
+  
+  
+    const updatedMessage = await messageAQuiOnRepond.save();
+    res.status(201).json({
+      message: savedMessage
+    });
   } catch (error) {
     res.status(400).json({ error: 'Une erreur s\'est produite.' });
   }
@@ -129,9 +147,17 @@ async function dislikeMessage(req, res, next) {
     const { messageId } = req.params;
     try{
       const message = await Message.findByIdAndDelete(messageId);
+   
       if(!message){
         return res.status(404).json({error: 'Le message n\'a pas été trouvé.'});
       }
+       // Supprimer le message supprimé de toutes les réponses
+      await Message.updateMany({ replies_content: message.content }, { $pull: { replies_content: message.content } });
+      
+      await Message.updateMany({ replies_auth: message.auth }, { $pull: { replies_auth: message.auth } });
+     
+      await Message.updateMany({ replies_to: message.replyTo }, { $pull: { replies_to: message.replyTo } });
+     
     }catch(error){
       console.log(error);
       res.status(400).json({error: 'Une erreur s\'est produite.'});

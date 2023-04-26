@@ -62,7 +62,7 @@ function TimeLine(props){
           
           <div id = "page">
             
-          <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser= {props.setUser} />
+        { <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser= {props.setUser} /> }
            
             
           </div>
