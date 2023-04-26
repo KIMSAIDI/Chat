@@ -135,24 +135,23 @@ const Message = (props) => {
 
   return (
     <div className='Message'>
-      <div className="titre-et-bouton">
-        <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
-        <button onClick={handleAjoutAmis}>Follow</button>
-      </div>
 
+      <div className="titre-et-bouton">
+        <p><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></p>
+        <button onClick={handleAjoutAmis}>Follow</button>
+        </div>
       <div>
         { props.isMyProfile && props.isMyProfile ? ( <button onClick={handleDeleteMessage}>Delete</button> ) : ( <div></div> ) }
       </div>
 
-      <p>Message : {content}</p>
-      <p>Date : {new Date(createdAt).toLocaleString()}</p>
+      <p className='message-content'>{content}</p>
       
       <div className="boutons-like-dislike">
-        <div>
+        <div className='like'>
           <button onClick={handleLike}>Like</button>
           <span>{likeCount} likes</span>
         </div>
-        <div>
+        <div className='dislike'>
           <button onClick={handleDislike}>Dislike</button>
           <span>{dislikeCount} dislikes</span>
         </div>
@@ -160,7 +159,12 @@ const Message = (props) => {
 
       <br></br>
 
+      <div className="show-reply">
       <button onClick={handleReply}>Réponses</button>
+      </div>
+
+      <p>Date : {new Date(createdAt).toLocaleString()}</p>
+      
 
       {showReply ? (
        
@@ -175,11 +179,11 @@ const Message = (props) => {
             <div key={index}>
               <p>Réponse de {replies_auth[index]} à {replies_to[index]}</p>
               <p>Message : {rep}</p>
-              <input type="text" value={autresReplies[index]} onChange={(e) => handleInputChange(e, index)}></input>
+              {/* <input type="text" value={autresReplies[index]} onChange={(e) => handleInputChange(e, index)}></input>
               <button onClick={() => {
                
                 handleReplySubmit(index);
-              }}>Répondre</button>
+              }}>Répondre</button> */}
               <p>------------------</p>
             </div>
           ))}

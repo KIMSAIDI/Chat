@@ -44,7 +44,7 @@ function TimeLine(props){
         <div>
           
           <br></br>
-          <p className="p">Timeline de l'utilisateur : {props.user.login}</p>
+          <p className="p">Home</p>
           <nav className="PageProfile" id = "nav">
             {props.boutton_page()} 
             {/* { <button onClick={() => props.boutton_page()}>pageprofil</button> */}
@@ -52,10 +52,11 @@ function TimeLine(props){
           </nav>
           <form onSubmit={handleSubmit}>            
             <label className="nouveau-message">
-              Nouveau message:
+              
               <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+              <button type="submit">Poster</button>
             </label>
-            <button type="submit">Poster</button>
+           
           </form>
 
           
