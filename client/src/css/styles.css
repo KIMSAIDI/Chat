@@ -108,6 +108,7 @@
     color: #fff;
     text-decoration: none;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .login-form .register-link p a:hover{
@@ -145,3 +146,216 @@
     }
     
 }
+
+
+/* ======================================================================================================*/
+
+.accueil * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+.accueil {
+    background-image: url('../../public/background.png');
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+
+.header{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background:transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.logo{
+    font-size: 32px;
+    color: #fff;
+    text-decoration:none ;
+    font-weight: 700;
+    pointer-events:none ;
+}
+
+.navbar a {
+    font-size: 18px;
+    color: #fff;
+    text-decoration:none ;
+    font-weight: 500;
+    margin-left: 50px; /* Ajout de la marge à droite */
+    cursor: pointer;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+  }
+
+.navbar a:not(:last-child) {
+    margin-right: 20px;
+}
+
+.signin-form *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signin-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:transparent;
+    overflow: hidden;
+    position: relative;
+}
+
+.signin-form .wrapper {
+    position: relative;
+    z-index: 1;
+    width: 480px;
+    height: 620px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 800px;
+    margin-top: 15px;
+}
+
+.signin-form h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.signin-form .input-box {
+    position: relative;
+    width: 320px;
+    margin: 30px 0;
+    border-bottom: 2px solid #fff;
+}
+
+.signin-form .input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    pointer-events: none;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.signin-form .input-box input:focus + label,
+.signin-form .input-box input:valid + label {
+    top: 5px;
+    color: #fff;
+}
+
+.signin-form .input-box label.filled {
+    top: 5px;
+    color: #fff;
+}
+
+.signin-form .input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    padding-top: 20px;
+}
+
+.signin-form .input-box .icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 57px;
+}
+
+.signin-form button {
+    width: 100%;
+    height: 45px;
+    background: #fa709a;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+.signin-form .login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signin-form .login-link a {
+    color: #fa709a;
+    cursor: pointer;
+}
+
+.signin-form p {
+    color: #fff;
+    text-align: center;
+}
+
+
+.signin-form p.error {
+    color: #ff6060;
+    }
+    
+    .signin-form p.success {
+    color: #5cb85c;
+    }
+    
+    @media only screen and (max-width: 480px) {
+    .signin-form .wrapper {
+    width: 80%;
+    }
+    }
+    
+    @media only screen and (max-width: 320px) {
+    .signin-form .input-box {
+    width: 280px;
+    }
+    }
+    
+    @media only screen and (max-width: 280px) {
+    .signin-form .input-box {
+    width: 100%;
+    }
+}
+
+.signin-form .icon-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.signin-form .icon-close ion-icon {
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+  }
+

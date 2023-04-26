@@ -12,7 +12,7 @@ axios.defaults.baseURL = "http://localhost:3000";
 function MainPage(props){
     //etats
     const [isConnected, setConnect] = useState(false);
-    const [page, setPage] = useState("login_page");
+    const [page, setPage] = useState("signin_page");
     const [user, setUser] = useState(null);
     const [friendsList, setFriendsList] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);

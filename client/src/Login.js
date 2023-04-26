@@ -56,34 +56,6 @@ function Login (props){
         props.setPage('signin_page');
     };
 
-    /*
-    return(
-        <div className="wrapper">
-            <form >
-                <h2>Login </h2>
-                <div className="input-box">
-                    <span className="icon"><ion-icon name="person-outline"></ion-icon></span>
-                    <input type="email" value={login} onChange={(e) => setLogin(e.target.value)} name="login" />
-                    <label> pseudo </label> 
-                </div>
-
-                <div className="input-box">
-                    <span className="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" />
-                    <label> password </label>
-                </div>
-
-
-                <button type="submit" onClick={handleSubmit}>connexion</button>
-                <div className="register-link">
-                <p>Pas encore de compte? <a onClick={handleSignin}>S'inscrire</a></p>
-                </div>
-                {error && <p>{error}</p>}
-
-            </form>
-         </div>
-    );
-    */
     return (
         <div className="login-form"> 
             <div className = "blob"></div>
