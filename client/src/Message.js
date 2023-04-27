@@ -84,8 +84,6 @@ const Message = (props) => {
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous n\'êtes pas autorisé à supprimer ce message.') {
         alert('Vous n\'êtes pas autorisé à supprimer ce message.');
-      } if (error.response && error.response.status === 404 && error.response.data.error === 'Le message n\'a pas été trouvé.') {
-        alert('Message déja supprimé.');
       } else {
         
         console.error(error);

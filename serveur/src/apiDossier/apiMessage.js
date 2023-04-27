@@ -86,8 +86,10 @@ async function getBD(req,res,next){
 
 async function getBDbyLogin(req, res, next) {
   const { login } = req.query; 
+  console.log(login)
   Message.find({ author: login })
     .then(messages => {
+      console.log(messages)
       res.json(messages);
     })
     .catch(err => res.status(500).json({ error: err }));

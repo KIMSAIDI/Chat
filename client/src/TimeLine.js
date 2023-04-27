@@ -43,17 +43,21 @@ function TimeLine(props){
 
     
       const handleRecherche = () => {
-          axios.get(`api/message/messagebyLogin/`, {
+        axios.get(`api/messagebyLogin/`, {
             params: {
-              login : recherche
-          }
+                login: recherche
+            }
         })
-         
-          .then(res =>  setMessages(res.data))
-          .catch(err => console.log(err))
+        .then(res => {
+          console.log(res.data);
+            setMessages(res.data);
+            
+        })
+        .catch(err => console.log(err))
+    }
+    
 
-      }
-
+      
 
      return (
         <div>
