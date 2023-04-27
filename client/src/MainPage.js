@@ -147,7 +147,7 @@ function MainPage(props){
           console.error(error);
         }
       };
-      if (messages_by_login) { 
+      if (messages_by_login && user == selectedUser) { 
         majmessages_by_login();
       }
     }, [messages_by_login]);

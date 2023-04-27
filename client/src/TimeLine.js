@@ -48,14 +48,41 @@ function TimeLine(props){
                 login: recherche
             }
         })
+        
         .then(res => {
           console.log(res.data);
-            setMessages(res.data);
+          setMessages(res.data);
             
         })
         .catch(err => console.log(err))
-    }
+      }
     
+  
+  // const handleRecherche = () => {
+  //   axios.get(`api/messagebyLogin/`, {
+  //     params: {
+  //       login: recherche
+  //     }
+  //   })
+  //   .then(res => {
+  //     if (res.data.length === 0) {
+  //       axios.get(`api/messagebyContent/`, {
+  //         params: {
+  //           contenu: recherche
+  //         }
+  //       })
+  //       .then(res => {
+  //         console.log(res.data);
+  //         setMessages(res.data);
+  //       })
+  //       .catch(err => console.log(err))
+  //     } else {
+  //       setMessages(res.data);
+  //     }
+  //   })
+  //   .catch(err => console.log(err))
+  // }
+  
 
       
 

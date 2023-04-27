@@ -86,14 +86,26 @@ async function getBD(req,res,next){
 
 async function getBDbyLogin(req, res, next) {
   const { login } = req.query; 
-  console.log(login)
-  Message.find({ author: login })
+ 
+  Message.find({ author: login})
     .then(messages => {
-      console.log(messages)
+   
       res.json(messages);
     })
     .catch(err => res.status(500).json({ error: err }));
 }
+
+async function getBDbyContent(req, res, next) {
+  const { contenu } = req.query; 
+ 
+  Message.find({ content: contenu, options : 'i'})
+    .then(messages => {
+   
+      res.json(messages);
+    })
+    .catch(err => res.status(500).json({ error: err }));
+}
+
 
 async function likeMessage(req, res, next) {
   const { messageId } = req.params; 
@@ -166,4 +178,4 @@ async function dislikeMessage(req, res, next) {
     }
   }
 
-module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage, replyMessage};
+module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage, replyMessage, getBDbyContent};
