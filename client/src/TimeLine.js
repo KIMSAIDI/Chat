@@ -11,7 +11,7 @@ function TimeLine(props){
     //états
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-   
+    const [recherche, setRecherche] = useState('');
     
 
     useEffect(() => {
@@ -19,6 +19,7 @@ function TimeLine(props){
         .then(res => setMessages(res.data))
         .catch(err => console.log(err));
     }, []);
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,6 +41,20 @@ function TimeLine(props){
       };
     
 
+    
+      const handleRecherche = () => {
+          axios.get(`api/message/messagebyLogin/`, {
+            params: {
+              login : recherche
+          }
+        })
+         
+          .then(res =>  setMessages(res.data))
+          .catch(err => console.log(err))
+
+      }
+
+
      return (
         <div>
           
@@ -59,7 +74,10 @@ function TimeLine(props){
            
           </form>
 
-          
+          <div className='barre-recherche'>
+            <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
+            <boutton type="submit" onClick={handleRecherche} >Recherche</boutton>
+          </div>
           
           <div id = "page">
             
