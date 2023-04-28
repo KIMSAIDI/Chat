@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import ListeMessages from './ListeMessages';
-import './css/TimeLine.css';
+import ListeMessages from './ListeMessages';import './css/TimeLine.css';
 
 
 import axios from 'axios';
@@ -48,42 +47,14 @@ function TimeLine(props){
                 login: recherche
             }
         })
-        
         .then(res => {
           console.log(res.data);
-          setMessages(res.data);
-            
+          setMessages(res.data);    
         })
         .catch(err => console.log(err))
       }
     
   
-  // const handleRecherche = () => {
-  //   axios.get(`api/messagebyLogin/`, {
-  //     params: {
-  //       login: recherche
-  //     }
-  //   })
-  //   .then(res => {
-  //     if (res.data.length === 0) {
-  //       axios.get(`api/messagebyContent/`, {
-  //         params: {
-  //           contenu: recherche
-  //         }
-  //       })
-  //       .then(res => {
-  //         console.log(res.data);
-  //         setMessages(res.data);
-  //       })
-  //       .catch(err => console.log(err))
-  //     } else {
-  //       setMessages(res.data);
-  //     }
-  //   })
-  //   .catch(err => console.log(err))
-  // }
-  
-
       
 
      return (
@@ -99,7 +70,9 @@ function TimeLine(props){
           <form onSubmit={handleSubmit}>            
             <label className="nouveau-message">
               
-              <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+              {/* <input type="textarea" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} /> */}
+              <textarea value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+
               <button type="submit">Poster</button>
             </label>
            
@@ -112,9 +85,11 @@ function TimeLine(props){
           
           <div id = "page">
             
-        { <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser= {props.setUser} /> }
-           
-            
+        {/* { <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser= {props.setUser} /> }
+            */}
+
+        <ListeMessages messages={messages} setMessages = {setMessages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser= {props.setUser} />
+
           </div>
         
         </div>

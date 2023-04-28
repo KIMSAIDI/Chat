@@ -11,7 +11,7 @@ routerMessages.get('/messageBD/', apiMessage.getBD);
 // Route pour récupérer tous les messages d'un utilisateur 
 routerMessages.get('/messagebyLogin/', apiMessage.getBDbyLogin);
 
-routerMessages.get('/messagebyContent/', apiMessage.getBDbyContent);
+// routerMessages.get('/messagebyContent/', apiMessage.getBDbyContent);
 
 routerMessages.patch('/message/:messageId/like', apiMessage.likeMessage);
 

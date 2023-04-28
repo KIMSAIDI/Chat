@@ -127,6 +127,11 @@ const Signup = (props) => {
               </div>
 
               <button type="submit" onClick={handleSubmit}>Inscription</button>
+             
+              <div className='error'>
+                <span> {error && <div className="error">{error}</div>}   <ion-icon name="alert-circle-outline"></ion-icon>  </span>  
+              
+              </div>
               <div className="login-link">
                 <p>Déjà un compte? <a onClick={handleLogin}>Connectez-vous ici</a></p>
               </div>
