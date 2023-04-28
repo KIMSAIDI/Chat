@@ -9,14 +9,12 @@ const Message = (props) => {
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
   const [showReply, setShowReply] = useState(false);
-  
   const [reply, setReply] = useState(""); // définir l'état local pour stocker la réponse à poster
   const [autre_reply, setAutreReply] = useState("");
-  
-  
   const [autresReplies, setAutresReplies] = useState([]);
 
   
+
   
   const handleLike = async () => {
     try {
@@ -77,6 +75,7 @@ const Message = (props) => {
     }
   };
   
+  
   const handleDeleteMessage = async () => {
     try {
       const response = await axios.delete(`/api/message/${_id}/deleteMessage`);
@@ -106,8 +105,6 @@ const Message = (props) => {
     // const autre_reply = autresReplies[index];
     // setReply(autresReplies[index]);
    
-    
-    
     axios.post(`/api/message/reply`, {
       content : reply,
       author : props.userLogin,

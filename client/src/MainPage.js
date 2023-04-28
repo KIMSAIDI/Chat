@@ -68,10 +68,9 @@ function MainPage(props){
               }
           })
         .then(res => setMessages_by_login(res.data))
+
         .catch(err => console.log(err));
       }
-
-      
 
        //Bouton pou switch entre la TL et les pages de profils
      const boutton_page = () => {  
