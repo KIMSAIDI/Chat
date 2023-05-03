@@ -13,8 +13,7 @@ const Profile = (props) => {
     const [selectedTab, setSelectedTab] = useState('Actualités');
     const [bio, setBio] = useState('');
     const [Biographie_utilisateur, setBiographie_utilisateur] = useState('');
-    const [cmpt, setCmpt] = useState(0);
-
+    
     const handleClickActu = () => {
         setSelectedTab('Actualités');
        
@@ -75,7 +74,7 @@ const Profile = (props) => {
     }
     
     const afficheBio = () => {
-        setCmpt(0)
+        
         try {
             const res = axios.get(`/api/user/getBio`,{
                 login : props.user.login
@@ -103,9 +102,6 @@ const Profile = (props) => {
                         <li className={selectedTab === 'Bio' ? 'active' : ''} onClick={handleClickBio}>Bio</li>
                         <li className={selectedTab === 'Amis' ? 'active' : ''} onClick={handleClickAmis}>Amis</li> 
                         {/* boutton pour revenir a la timeline */}
-                        
-                        
-                        
                     </ul>
                     <br />
                     
