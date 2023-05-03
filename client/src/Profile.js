@@ -3,10 +3,27 @@ import React from 'react';
 import axios from 'axios';
 import Message from './Message';
 
+import './css/Profile.css';
+
 const Profile = (props) => {
     const [ListeUserAmis, setListeUserAmis] = useState(props.friendsList);  
     
-    
+    const [selectedTab, setSelectedTab] = useState('Actualités');
+
+    const handleClickActu = () => {
+        setSelectedTab('Actualités');
+       
+    }
+
+    const handleClickBio = () => {
+        setSelectedTab('Bio');
+       
+    }
+
+    const handleClickAmis = () => {
+        setSelectedTab('Amis');
+    }
+        
     // useEffect(() => {
     //     axios.get(`/api/messagebyLogin/`, {
     //         params: {
@@ -38,44 +55,117 @@ const Profile = (props) => {
         }
     }
 
+    
+
     return (
-        <div>
-            <nav id = "nav">
-                {props.boutton_page()}
-            </nav>
-            <h1>Profile {props.user.login} </h1>
-
-            <div id="delete">
-                {props.isMyProfile ? (
-                    <ul> Liste Amis : 
-                        {ListeUserAmis.map((friend) => (
-                            <li key={friend}>
-                                 {friend}
-                                <button onClick={() => handleDeleteFriend(friend)}>Supprimer</button>
-                               
-                            </li>
-                            ))}
-                    </ul>
-                ) : (
-                    <ul>
-                        Liste Amis :
-                        {props.user.listAmis.map((friend) => (
-                            <li key={friend}>{friend}</li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
-            {/* pour afficher les messages de l'utilisateur sélectionné */}
-            <div>
-                <nav id="page">
-                    {props.message.map((message) => (
-                        <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser} isMyProfile = {props.isMyProfile}/> 
-                    ))}
+        <div className='pageprofile'>
+            
+            <div className='container'>
+                {/* <nav id = "nav">
+                    {props.boutton_page()}
                 </nav>
-            </div>
+                <h1>Profile {props.user.login} </h1>
 
+                <div id="delete">
+                    {props.isMyProfile ? (
+                        <ul> Liste Amis : 
+                            {ListeUserAmis.map((friend) => (
+                                <li key={friend}>
+                                    {friend}
+                                    <button onClick={() => handleDeleteFriend(friend)}>Supprimer</button>
+                                
+                                </li>
+                                ))}
+                        </ul>
+                    ) : (
+                        <ul>
+                            Liste Amis :
+                            {props.user.listAmis.map((friend) => (
+                                <li key={friend}>{friend}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+
+            
+                <div>
+                    <nav id="page">
+                        {props.message.map((message) => (
+                            <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser} isMyProfile = {props.isMyProfile}/> 
+                        ))}
+                    </nav>
+                </div> */}
+                
+                
+                    <div className='informations-bar'>
+                        <ul>
+                            
+                            <li className={selectedTab === 'Actualités' ? 'active' : ''} onClick={handleClickActu}>Actualités</li>
+                            <li className={selectedTab === 'Bio' ? 'active' : ''} onClick={handleClickBio}>Bio</li>
+                            <li className={selectedTab === 'Amis' ? 'active' : ''} onClick={handleClickAmis}>Amis</li>
+                            
+                        </ul>
+
+                        <div className='profile'>
+                            <img src="https://institutcommotions.com/wp-content/uploads/2018/05/blank-profile-picture-973460_960_720-1.png" alt="Photo de profil" /> 
+                            <p className='name'>{props.user.login}</p>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                
+                <div className="content">
+                <nav id = "nav">
+                    {props.boutton_page()}
+                </nav> 
+                    {selectedTab === 'Actualités' && (<div className="ListeDeNosMessages">
+                        <div>
+                             
+                            <nav id="page">
+                                {props.message.map((message) => (
+                                    <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser} isMyProfile = {props.isMyProfile}/> 
+                            ))}
+                            </nav>
+                        </div>
+                    </div>)}
+                        
+                    {selectedTab === 'Bio' && (
+                    <div>
+                        <h2>Bio</h2>
+                            <p>Coucou, voici la section Bio.</p>
+                    </div>
+                    )}
+                    
+                    {selectedTab === 'Amis' && (
+                        <div id="delete">
+                        {props.isMyProfile ? (
+                            <ul> Liste Amis : 
+                                {ListeUserAmis.map((friend) => (
+                                    <li key={friend}>
+                                        {friend}
+                                        <button onClick={() => handleDeleteFriend(friend)}>Supprimer</button>
+                                    
+                                    </li>
+                                    ))}
+                            </ul>
+                        ) : (
+                            <ul>
+                                Liste Amis :
+                                {props.user.listAmis.map((friend) => (
+                                    <li key={friend}>{friend}</li>
+                                    
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    )}
+                
+                </div>
+                
         </div>
+       
+
     )
 }
 

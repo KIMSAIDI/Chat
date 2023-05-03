@@ -1,0 +1,76 @@
+.body {
+    font-family: Poppins;
+    
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    margin : auto;
+    width : 100%; 
+    height: 250px;
+    background-image: url('https://i.pinimg.com/originals/f5/28/b8/f528b8aba5444331781f6746174c963a.jpg');
+    background-size: cover;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.informations-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #151728;
+   
+    
+    
+}
+
+.profile {
+    position : absolute;
+    display: flex;
+    align-items: center;
+    bottom: 20px;
+    left: 25px;
+}
+
+.profile img {
+    width : 150px;
+    height : 150px;
+    border-radius: 50%;
+    border: 3px solid #151728;
+}
+
+ul {
+    position: relative;
+    width: 100%;
+    display: flex;
+    padding-left: 200px;
+    height: 100%;	
+    margin: 0;
+}
+
+li {
+    list-style: none;
+    cursor: pointer;
+    color : #5c5e6e;
+    font-size: 1.1em;
+    padding: 1.5em 1em;
+}
+
+li:hover, active {
+    color : white;
+    border-bottom: 3px solid #1488fa;
+}
+
+.name {
+    color : paleturquoise;
+    margin-left : 1.5em;
+    font-size: 1.5em;
+}
+
+.content {
+    position: relative;
+    color : white;
+    bottom: 10px;
+}

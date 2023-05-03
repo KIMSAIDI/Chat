@@ -187,7 +187,7 @@ body {
 
 */
 body {
-  background-color: #232121;
+  background-color: #151728;
 
 }
 
@@ -291,8 +291,8 @@ body {
   .barre-recherche {
   margin: 0;
   }
-  }
 
+  
   .new-message-box {
     position: fixed;
     top: 50%;
@@ -396,3 +396,5 @@ body {
   .submit-button:active {
     background-color: #005cbf;
   }
+
+}
