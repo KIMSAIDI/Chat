@@ -77,28 +77,29 @@ function TimeLine(props){
         
             {/* bouton afficher/masquer formulaire */}
             <button onClick={handleDisplayForm}>Nouveau message</button>
-       
-            {/* formulaire poster un new message */}
-            {displayForm && (<div className="blur-bg">
-                <div className="new-message-box">
-                  <button className="close-btn" onClick={handleDisplayForm}>
-                    <ion-icon name="close-outline"></ion-icon>
-                  </button>
-                  <form onSubmit={handleSubmit}>
-                    <label className="nouveau-message">
-                        <textarea 
-                          value={newMessage} 
-                          onChange={(e) => setNewMessage(e.target.value)}
-                          placeholder="Quoi de neuf ?"
-                        />
-                        <button type="submit" className="submit-button">
-                          Poster
-                        </button>
-                    </label>
-                  </form>
-                </div>
+            
+          {/* formulaire poster un new message */}
+          {displayForm && (
+            <div className="blur-bg">
+              <div className="new-message-box">
+                <button className="close-btn" onClick={handleDisplayForm}>
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+                <form onSubmit={handleSubmit}>
+                  <label className="nouveau-message">
+                      <textarea 
+                        value={newMessage} 
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        placeholder="Quoi de neuf ?"
+                      />
+                       <button type="submit" className="submit-button">
+                        Poster
+                       </button>
+                   </label>
+                </form>
               </div>
-          )}
+             </div>
+        )}
         </div>
       
           {/* filtre */}
