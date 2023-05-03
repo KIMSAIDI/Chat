@@ -134,6 +134,22 @@ function MainPage(props){
         majfriendsList();
       }
     }, [user]);
+
+    useEffect(() => {
+      const majmessages_by_login = async () => {
+        try {
+          const response = await axios.get('/api/messagebyLogin', {
+          params: { login: user.login }
+          });
+          setMessages_by_login(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      if (messages_by_login && user == selectedUser) { 
+        majmessages_by_login();
+      }
+    }, [messages_by_login]);
        
     return (
       <div>
@@ -152,6 +168,7 @@ function MainPage(props){
                   friendsList={friendsList}
                   setFriendsList={setFriendsList}
                   message = {messages_by_login}
+                  setMessage = {setMessages_by_login}
                 />
               )}
               {page === "TimeLine" && user && (

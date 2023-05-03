@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from 'axios';
 import Message from './Message';
 
 const Profile = (props) => {
     const [ListeUserAmis, setListeUserAmis] = useState(props.friendsList);  
-
     
     
-
+    // useEffect(() => {
+    //     axios.get(`/api/messagebyLogin/`, {
+    //         params: {
+    //             login : props.userLogin
+    //         }
+    //     })
+    //       .then(res => props.setMessage(res.data))
+    //       .catch(err => console.log(err));
+    //   }, []);
+    
     const handleDeleteFriend = async (friend) => {
         try {
           const response = await axios.patch(`/api/user/${friend}/delete/`, {

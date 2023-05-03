@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 
+import React, { useState } from 'react';
+import Reply from './Reply';
+import axios from 'axios';
 import './css/Message.css';
 
-const Message = (props) => {
-  const { content, author, createdAt, like, dislike, replyto, replies_content, replies_to, replies_auth, _id } = props.message;
- 
+const Message = (props) =>{
+  const { _id, author, content, createdAt, like, dislike } = props.message;
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
   const [showReply, setShowReply] = useState(false);
+  const [replies, setReplies] = useState(props.replies); // définir l'état local pour stocker les réponses
   const [reply, setReply] = useState(""); // définir l'état local pour stocker la réponse à poster
-  const [autre_reply, setAutreReply] = useState("");
-  const [autresReplies, setAutresReplies] = useState([]);
 
-  
-
-  
   const handleLike = async () => {
     try {
       const response = await axios.patch(`/api/message/${_id}/like`, { login: props.userLogin });
@@ -75,7 +71,6 @@ const Message = (props) => {
     }
   };
   
-  
   const handleDeleteMessage = async () => {
     try {
       const response = await axios.delete(`/api/message/${_id}/deleteMessage`);
@@ -86,7 +81,7 @@ const Message = (props) => {
       } if (error.response && error.response.status === 404 && error.response.data.error === 'Le message n\'a pas été trouvé.') {
         alert('Message déja supprimé.');
       } else {
-        
+        console.log("Erreur de suppression de message")
         console.error(error);
       }
     }
@@ -100,88 +95,78 @@ const Message = (props) => {
     }
   };
 
-  const handleReplySubmit = (index) => {
-    
-    // const autre_reply = autresReplies[index];
-    // setReply(autresReplies[index]);
-   
+  const handleReplySubmit = async () => {
     axios.post(`/api/message/reply`, {
       content : reply,
       author : props.userLogin,
-      replyTo : author,
-      id : _id
+      replyTo : _id
     })
     .then(function (response) {
-      setAutreReply("");
+      setReplies([...replies, response.data.message]);
+      props.setMessages([...props.messages,response.data.message])
       setReply("");
-      
     })
     .catch(function (error) {
       console.log(error);
     });
-    }
-
-      const handleInputChange = (e, index) => {
-        const value = e.target.value;
-        const newReplies = [...autresReplies]; // on copie le tableau actuel pour le modifier
-        newReplies[index] = value;
-        setAutresReplies(newReplies);
-      }
-
-
+  }
 
   return (
     <div className='Message'>
+
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
-        <button onClick={handleAjoutAmis}>Follow</button>
+        <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>
       </div>
 
-      <div>
+      <div className='Delete'>
         { props.isMyProfile && props.isMyProfile ? ( <button onClick={handleDeleteMessage}>Delete</button> ) : ( <div></div> ) }
       </div>
 
+      <div className=' Content'>
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>
+      </div>
       
       <div className="boutons-like-dislike">
-        <div>
-          <button onClick={handleLike}>Like</button>
-          <span>{likeCount} likes</span>
-        </div>
-        <div>
-          <button onClick={handleDislike}>Dislike</button>
-          <span>{dislikeCount} dislikes</span>
-        </div>
+
+          <div className="Like">
+              <button onClick={handleLike}>
+                <ion-icon name="heart-outline"></ion-icon>
+              </button>
+              <span>{likeCount} </span>
+          </div>
+
+          <div className="Dislike">
+              <button onClick={handleDislike}>
+                <ion-icon name="heart-dislike-outline"></ion-icon>
+              </button>
+              <span>{dislikeCount} </span>
+          </div>
       </div>
-
-      <br></br>
-
-      <button onClick={handleReply}>Réponses</button>
-
-      {showReply ? (
-       
-        <div className="reply-wall">
+      
+      <div className="comment-input">
           <label>
-            <input type="text" value={reply} onChange={(e) => setReply(e.target.value)}></input>
+          <input 
+             type="text" 
+             value={reply} 
+            onChange={(e) => setReply(e.target.value)} 
+            placeholder="Ajouter un commentaire..."
+             />
           </label>
-          
-          <button onClick={handleReplySubmit}>Poster</button>
-          
-          {replies_content.map((rep, index) => (
-            <div key={index}>
-              <p>Réponse de {replies_auth[index]} à {replies_to[index]}</p>
-              <p>Message : {rep}</p>
-              <input type="text" value={autresReplies[index]} onChange={(e) => handleInputChange(e, index)}></input>
-              <button onClick={() => {
-               
-                handleReplySubmit(index);
-              }}>Répondre</button>
-              <p>------------------</p>
-            </div>
-          ))}
-
-        
+      </div>
+          <button onClick={handleReplySubmit}>Ajouter un commentaire</button>
+         
+          {replies && replies.length > 0 && (
+          <button onClick={handleReply}>
+            {replies.length > 1 ? `${replies.length} commentaires` : `${replies.length} commentaire`}
+          </button>
+        )}
+      {showReply ? (
+        <div className="reply-wall">
+          {replies.map(reply => (           
+              <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages}/>
+        ))}
         </div>
       ) : null}
     </div>

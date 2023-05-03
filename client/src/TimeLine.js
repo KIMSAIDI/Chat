@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import ListeMessages from './ListeMessages';
-import './css/TimeLine.css';
+import ListeMessages from './ListeMessages';import './css/TimeLine.css';
 
 
 import axios from 'axios';
@@ -11,7 +10,8 @@ function TimeLine(props){
     //états
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-   
+    const [recherche, setRecherche] = useState('');
+    const [displayForm, setDisplayForm] = useState(false);
     
 
     useEffect(() => {
@@ -19,6 +19,7 @@ function TimeLine(props){
         .then(res => setMessages(res.data))
         .catch(err => console.log(err));
     }, []);
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,33 +41,74 @@ function TimeLine(props){
       };
     
 
-     return (
-        <div>
-          
-          <br></br>
-          <p className="p">Timeline de l'utilisateur : {props.user.login}</p>
+    
+      const handleRecherche = () => {
+        axios.get(`api/messagebyLogin/`, {
+            params: {
+                login: recherche
+            }
+        })
+        .then(res => {
+          console.log(res.data);
+          setMessages(res.data);    
+        })
+        .catch(err => console.log(err))
+      }
+
+      const handleDisplayForm = () => {
+        setDisplayForm(!displayForm);
+      }
+    
+      return (
+        <div className='TimeLine'>
+      
+          {/* Titre Accueil */}
+          <div id="timeline-title">
+            <h1>Accueil</h1>
+          </div>
+      
+          {/* bouton PageProfile*/}
           <nav className="PageProfile" id = "nav">
             {props.boutton_page()} 
-            {/* { <button onClick={() => props.boutton_page()}>pageprofil</button> */}
-
           </nav>
-          <form onSubmit={handleSubmit}>            
-            <label className="nouveau-message">
-              Nouveau message:
-              <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
-            </label>
-            <button type="submit">Poster</button>
-          </form>
-
-          
-          
-          <div id = "page">
-            
-        { <ListeMessages messages={messages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser= {props.setUser} /> }
-           
-            
+      
+          {/* bouton afficher/masquer formulaire */}
+          <button onClick={handleDisplayForm}>Nouveau message</button>
+      
+          {/* formulaire poster un new message */}
+          {displayForm && (
+            <div className="blur-bg">
+              <div className="new-message-box">
+                <button className="close-btn" onClick={handleDisplayForm}>
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+                <form onSubmit={handleSubmit}>
+                  <label className="nouveau-message">
+                      <textarea 
+                        value={newMessage} 
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        placeholder="Quoi de neuf ?"
+                      />
+                       <button type="submit" className="submit-button">
+                        Poster
+                       </button>
+                   </label>
+                </form>
+              </div>
+             </div>
+        )}
+      
+          {/* filtre */}
+          <div className='barre-recherche'>
+            <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
+            <boutton type="submit" onClick={handleRecherche} >Recherche</boutton>
           </div>
-        
+      
+          {/* mur de messages */}
+          <div id="page">
+            <ListeMessages messages={messages} setMessages={setMessages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser={props.setUser} />
+          </div>
+      
         </div>
       );
 }

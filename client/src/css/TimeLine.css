@@ -1,14 +1,19 @@
 /* css pour une timeline d'un réseau social */
 /* css for a timeline of a social network */
+/*
+body {
+  background-color: #232121;
+}
+
+
 .p{
-    
     font-size: 20px;
     font-weight: bold;
-    color: #000000;
     margin: 0px;
     padding: 0px;
     text-align: center;
     margin-bottom: 10px;
+    color: white;
 }
 
 .PageProfile {
@@ -17,6 +22,377 @@
     margin-bottom: 5px
   }
   
+
+
+  .nouveau-message{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins',sans-serif;
+  }
+
+  .nouveau-message input {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 70%;
+    font-family: 'Poppins',sans-serif;
+    background-color: #908f8f;
+    color: white;
+  }
+  
+.nouveau-message button {
+  margin: 5px;
+  font-family: 'Poppins',sans-serif;
+}
+
+
+.barre-recherche input {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 40%;
+    font-family: 'Poppins',sans-serif;
+    background-color: #908f8f;
+    color: white;
+    text-align : center;
+    font-family: 'Poppins',sans-serif;
+    margin: 15px;
+}
+
+.barre-recherche {
+  margin: 25px;
+  text-align: center;
+  color : white;
+  font-family: 'Poppins',sans-serif;
+}
+
+.barre-recherche boutton {
+  cursor : pointer;
+  margin: 5px;
+  font-family: 'Poppins',sans-serif;
+  background-color: rgb(194, 50, 120);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+*/
+
+/*
+
+body {
+  background-color: #232121;
+}
+
+.p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.PageProfile {
+  text-align: center;
+  padding: 1.875rem;
+  margin-bottom: 0.313rem;
+}
+
+.nouveau-message {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0.625rem;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0px -0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.nouveau-message input {
+  border: 0.063rem solid #ccc;
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+  width: 70%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #908f8f;
+  color: white;
+}
+
+.nouveau-message button {
+  margin: 0.313rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.barre-recherche input {
+  border: 0.063rem solid #ccc;
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+  width: 40%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #908f8f;
+  color: white;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  margin: 1.875rem;
+}
+
+.barre-recherche {
+  margin: 2.5rem;
+  text-align: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.barre-recherche button {
+  cursor: pointer;
+  margin: 0.313rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(194, 50, 120);
+  color: white;
+  padding: 0.625rem;
+  border-radius: 0.313rem;
+  border: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .p {
+    font-size: 1.5rem;
+  }
+  
+  .nouveau-message input {
+    width: 90%;
+  }
+  
+  .barre-recherche input {
+    width: 60%;
+  }
+  
+  .barre-recherche {
+    margin: 1.25rem;
+  }
+  
+  .barre-recherche button {
+    padding: 0.5rem;
+  }
+}
+
+*/
+body {
+  background-color: #232121;
+
+}
+
+#timeline-title h1 {
+  color: white;
+  margin: 0;
+  padding: 10px 0 0 10px;
+  text-align: left;
+}
+
+.PageProfile {
+  text-align: center;
+  padding: 1.875rem;
+  margin-bottom: 0.313rem;
+}
+/*
+.nouveau-message {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0.625rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px -0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  z-index: 1;
+}
+*/
+
+.nouveau-message input{
+  border: 0.063rem solid #ccc;
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  color: black;
+  margin-bottom: 0.625rem;
+}
+
+.nouveau-message button {
+  margin: 0.313rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(194, 50, 120);
+  color: white;
+  padding: 0.625rem;
+  border-radius: 0.313rem;
+  border: none;
+}
+
+.barre-recherche input {
+  border: 0.063rem solid #ccc;
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+  width: 70%;
+  max-width: 400px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #908f8f;
+  color: white;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  margin: 1.875rem;
+}
+
+.barre-recherche {
+  margin: 2.5%;
+  text-align: center;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.barre-recherche button {
+  cursor: pointer;
+  margin: 0.313rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(194, 50, 120);
+  color: white;
+  padding: 0.625rem;
+  border-radius: 0.313rem;
+  border: none;
+}
+
+@media only screen and (max-width: 768px) {
   .nouveau-message {
-    margin-top: 10px; /* ou la valeur que vous souhaitez */
+  width: 100%;
+  padding: 0.313rem;
+  }
+  
+  .nouveau-message input {
+  width: 80%;
+  margin-bottom: 0.313rem;
+  }
+  
+  .barre-recherche input {
+  width: 60%;
+  margin: 0.313rem;
+  }
+  
+  .barre-recherche {
+  margin: 0;
+  }
+  }
+
+  .new-message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: grey;
+    border-radius: 10px;
+    width: 90vw;
+    max-width: 600px;
+    height: 40%;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.7; /* définir une opacité supérieure à 0 */
+  } 
+  .close-btn ion-icon {
+    font-size: 40px;
+    color: black; 
+   
+  }
+
+  .close-btn:hover {
+    background-color: #ffffff; /* ajouter une couleur de fond semi-transparente au survol */
+    opacity: 1; /* définir une opacité de 1 au survol */
+  }
+  
+  .close-btn:active {
+    cursor: pointer;
+  }
+  
+  
+  .new-message-box textarea {
+    background-color: black;
+    height: 110px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    padding: 10px;
+    flex-grow: 1;
+    width: 98%;
+    margin-right: 400px;
+  }
+  
+  .new-message-box textarea:focus {
+    outline: none;
+  }
+  
+  .new-message-box textarea::placeholder {
+    color: white;
+    opacity: 50%;
+  }
+
+  .blur-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .submit-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0069d9;
+  }
+
+  .submit-button:active {
+    background-color: #005cbf;
   }
