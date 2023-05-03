@@ -1,195 +1,8 @@
-/* css pour une timeline d'un réseau social */
-/* css for a timeline of a social network */
-/*
-body {
-  background-color: #232121;
-}
 
-
-.p{
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0px;
-    padding: 0px;
-    text-align: center;
-    margin-bottom: 10px;
-    color: white;
-}
-
-.PageProfile {
-    text-align: center;
-    padding: 30px;
-    margin-bottom: 5px
-  }
-  
-
-
-  .nouveau-message{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Poppins',sans-serif;
-  }
-
-  .nouveau-message input {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    width: 70%;
-    font-family: 'Poppins',sans-serif;
-    background-color: #908f8f;
-    color: white;
-  }
-  
-.nouveau-message button {
-  margin: 5px;
-  font-family: 'Poppins',sans-serif;
-}
-
-
-.barre-recherche input {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    width: 40%;
-    font-family: 'Poppins',sans-serif;
-    background-color: #908f8f;
-    color: white;
-    text-align : center;
-    font-family: 'Poppins',sans-serif;
-    margin: 15px;
-}
-
-.barre-recherche {
-  margin: 25px;
-  text-align: center;
-  color : white;
-  font-family: 'Poppins',sans-serif;
-}
-
-.barre-recherche boutton {
-  cursor : pointer;
-  margin: 5px;
-  font-family: 'Poppins',sans-serif;
-  background-color: rgb(194, 50, 120);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-}
-
-*/
-
-/*
-
-body {
-  background-color: #232121;
-}
-
-.p {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.PageProfile {
-  text-align: center;
-  padding: 1.875rem;
-  margin-bottom: 0.313rem;
-}
-
-.nouveau-message {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 0.625rem;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0px -0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-  font-family: 'Poppins', sans-serif;
-}
-
-.nouveau-message input {
-  border: 0.063rem solid #ccc;
-  border-radius: 0.625rem;
-  padding: 0.625rem;
-  width: 70%;
-  font-family: 'Poppins', sans-serif;
-  background-color: #908f8f;
-  color: white;
-}
-
-.nouveau-message button {
-  margin: 0.313rem;
-  font-family: 'Poppins', sans-serif;
-}
-
-.barre-recherche input {
-  border: 0.063rem solid #ccc;
-  border-radius: 0.625rem;
-  padding: 0.625rem;
-  width: 40%;
-  font-family: 'Poppins', sans-serif;
-  background-color: #908f8f;
-  color: white;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  margin: 1.875rem;
-}
-
-.barre-recherche {
-  margin: 2.5rem;
-  text-align: center;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-}
-
-.barre-recherche button {
-  cursor: pointer;
-  margin: 0.313rem;
-  font-family: 'Poppins', sans-serif;
-  background-color: rgb(194, 50, 120);
-  color: white;
-  padding: 0.625rem;
-  border-radius: 0.313rem;
-  border: none;
-}
-
-@media only screen and (max-width: 768px) {
-  .p {
-    font-size: 1.5rem;
-  }
-  
-  .nouveau-message input {
-    width: 90%;
-  }
-  
-  .barre-recherche input {
-    width: 60%;
-  }
-  
-  .barre-recherche {
-    margin: 1.25rem;
-  }
-  
-  .barre-recherche button {
-    padding: 0.5rem;
-  }
-}
-
-*/
 body {
   background-color: #151728;
-
 }
+
 
 #timeline-title h1 {
   color: white;
@@ -203,21 +16,7 @@ body {
   padding: 1.875rem;
   margin-bottom: 0.313rem;
 }
-/*
-.nouveau-message {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 0.625rem;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0px -0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-  font-family: 'Poppins', sans-serif;
-  background-color: white;
-  z-index: 1;
-}
-*/
+
 
 .nouveau-message input{
   border: 0.063rem solid #ccc;
@@ -263,6 +62,7 @@ body {
 
 .barre-recherche button {
   cursor: pointer;
+
   margin: 0.313rem;
   font-family: 'Poppins', sans-serif;
   background-color: rgb(194, 50, 120);
@@ -270,7 +70,7 @@ body {
   padding: 0.625rem;
   border-radius: 0.313rem;
   border: none;
-}
+} 
 
 @media only screen and (max-width: 768px) {
   .nouveau-message {

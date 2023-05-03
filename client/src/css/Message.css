@@ -80,12 +80,19 @@ color: white;
 
 
 button {
-background-color: rgb(194, 50, 120);
-color: white;
-padding: 10px;
-border-radius: 5px;
-border: none;
-cursor: pointer;
+  background-color: #151728;
+  font-family: Poppins;
+  font-size: 16px;
+  color: white;
+  border: 3px solid #5c5e6e;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 190px;
+  padding: 5px;
+}
+
+button:hover {
+  font-weight: bolder;
 }
 
 .boutons-like-dislike {

@@ -91,30 +91,43 @@ const Profile = (props) => {
     }
     return (
         <div className='pageprofile'>
-            
-            <div className='container'>        
+             <nav className="nav">
+                    {props.boutton_page()}
+            </nav> 
+            {/* tête de page profil */}
+            <div className='container'>  
+                  {/* barre selection  */}
                 <div className='informations-bar'>
                     <ul>
-                            
                         <li className={selectedTab === 'Actualités' ? 'active' : ''} onClick={handleClickActu}>Actualités</li>
                         <li className={selectedTab === 'Bio' ? 'active' : ''} onClick={handleClickBio}>Bio</li>
-                        <li className={selectedTab === 'Amis' ? 'active' : ''} onClick={handleClickAmis}>Amis</li>
+                        <li className={selectedTab === 'Amis' ? 'active' : ''} onClick={handleClickAmis}>Amis</li> 
+                        {/* boutton pour revenir a la timeline */}
+                        
+                        
                         
                     </ul>
-
+                    <br />
+                    
+                    
+                    {/* photo profil et nom de l'utilisateur */}
                     <div className='profile'>
                         <img src="https://institutcommotions.com/wp-content/uploads/2018/05/blank-profile-picture-973460_960_720-1.png" alt="Photo de profil" /> 
                         <p className='name'>{props.user.login}</p>
                     </div>
-
-                        
+   
                 </div>
             </div>
-                
+
+           
+                {/* contenu des selection */}
             <div className="content">
-                <nav id = "nav">
-                    {props.boutton_page()}
-                </nav> 
+
+                
+                
+                
+                <div style={{ marginBottom: "100px" }}></div>
+                {/* listes des messages */}
                 {selectedTab === 'Actualités' && (<div className="ListeDeNosMessages">
                     <div>
                         <nav id="page">
@@ -124,7 +137,8 @@ const Profile = (props) => {
                         </nav>
                     </div>
                 </div>)}
-                    
+
+                {/* Biographie */}
                 {selectedTab === 'Bio' && (
                 <div>
                     <h2>Biographie de {props.user.login} </h2>
@@ -136,6 +150,7 @@ const Profile = (props) => {
                 </div>
                 )}
                 
+                {/* liste des amis */}
                 {selectedTab === 'Amis' && (
                     <div className="delete">
                     {props.isMyProfile ? (

@@ -127,8 +127,9 @@ const Message = (props) =>{
       </div>
 
       <div className=' Content'>
-      <p>Message : {content}</p>
-      <p>Date : {new Date(createdAt).toLocaleString()}</p>
+        {props.message.replyTo ? <h3>Reply to : {props.message.replyTo}</h3> : null}
+        <p>Message : {content}</p>
+        <p>Date : {new Date(createdAt).toLocaleString()}</p>
       </div>
       
       <div className="boutons-like-dislike">
