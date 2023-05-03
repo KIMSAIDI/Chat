@@ -23,6 +23,12 @@ routerUsers.patch('/user/:username/delete', apiUsers.deleteFriend);
 // Route pour avoir la liste d'amis d'un utilisateur
 routerUsers.get('/user/getFriends', apiUsers.getFriends);
 
+// Route pour changer sa bio 
+routerUsers.post('/user/bio/', apiUsers.changeBio);
+
+// Route pour avoir la bio de quequ'un
+routerUsers.get('/user/getBio/', apiUsers.getBio);
+
 module.exports = {routerUsers };
 
 

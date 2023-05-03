@@ -56,6 +56,8 @@ const Message = (props) =>{
       
       // Mise à jour de l'utilisateur avec ses nouveaux amis
       props.setUser(response.data.user);
+      
+      
   
     } catch (error) {
       if (error.response && error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {
@@ -66,9 +68,10 @@ const Message = (props) =>{
       } else {
         console.log("Erreur d'ajout d'ami")
         console.error(error);
-      }
-      
+      } 
     }
+    
+    
   };
   
   const handleDeleteMessage = async () => {

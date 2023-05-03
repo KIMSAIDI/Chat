@@ -128,5 +128,38 @@ async function getFriends(req, res, next) {
   }
 }
 
+async function changeBio(req, res, next) {
+  const {bio, login} = req.body;
+  try {
+    const user = await User.findOne({login: login});
+    
+    if (!user) {
+      return res.status(404).json({message : 'Utilisateur non trouvé'});
+    }
+    user.bio = bio;
+    const saveUser = await user.save();
+    res.status(201).send({
+      message: 'Bio modifiée avec succès.',
+      user: saveUser
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    }
+  }
 
-module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends};
+async function getBio(req, res, next) {
+  console.log("on est dans getBio")
+  const login = req.query.login;
+  try {
+    const user = await User.findOne({login: login});
+    if (!user) {
+      return res.status(404).json({message : 'Utilisateur non trouvé'});
+    }
+    console.log(user.bio)
+    res.json(user.bio);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio};

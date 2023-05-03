@@ -41,7 +41,7 @@
     border: 3px solid #151728;
 }
 
-ul {
+.container ul {
     position: relative;
     width: 100%;
     display: flex;
@@ -50,7 +50,7 @@ ul {
     margin: 0;
 }
 
-li {
+.container li {
     list-style: none;
     cursor: pointer;
     color : #5c5e6e;
@@ -58,9 +58,9 @@ li {
     padding: 1.5em 1em;
 }
 
-li:hover, active {
+.container li:hover, active {
     color : white;
-    border-bottom: 3px solid #1488fa;
+    border-bottom: 3px solid #a50da5e6;
 }
 
 .name {
@@ -73,4 +73,43 @@ li:hover, active {
     position: relative;
     color : white;
     bottom: 10px;
+}
+
+.content li {
+    font-family: Poppins;
+    margin-left: 1em;
+    color: #5c5e6e;
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+    display: flex;
+    align-items: center;
+}
+
+.delete button {
+    background-color: #151728;
+    font-family: Poppins;
+    color: white;
+    border: 1px solid #5c5e6e;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+
+
+.bio {
+    margin: 0 auto;
+    width: 70%;
+    height: 100px;
+    border: 1px solid #5c5e6e;
+    border-radius: 5px;
+    padding: 1em;
+    color : white;
+    font-family: Poppins;
+    background-color: #5c5e6e;
+    font-size: 1.1em;
+    resize: none;
+    
+    
 }
