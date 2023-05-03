@@ -149,7 +149,7 @@ width: 150px; /* ou une autre valeur de votre choix */
   border-bottom: 2px solid black;
   font-size: 16px;
   padding: 5px;
-  width: 200%;
+  width: 100%;
   border-radius: 10px;
   margin-right: 100;
 
@@ -164,4 +164,110 @@ width: 150px; /* ou une autre valeur de votre choix */
 .comment-input input::placeholder {
   color: white;
   opacity: 0.6;
+}
+
+
+
+.bouton-comment {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.bouton-comment button {
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.bouton-comment button:focus {
+  outline: none;
+}
+
+.bouton-comment ion-icon {
+  font-size: 16px;
+}
+
+.bouton-comment span {
+  margin-left: 10px;
+}
+
+.bouton-comment button:hover {
+  background-color: gray;
+}
+
+.boutons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+  
+.bouton-addcomment {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.bouton-addcomment button {
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.bouton-addcomment button:focus {
+  outline: none;
+}
+
+.bouton-addcomment ion-icon {
+  font-size: 16px;
+}
+
+.bouton-addcomment span {
+  margin-left: 10px;
+}
+
+.bouton-addcomment button:hover {
+  background-color: rgb(144, 5, 5);
+}
+.comment-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.comment-input button {
+  margin-left: 10px;
+}
+
+.submit-comment {
+  margin-left: 10px;
+  width: 80px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit-comment:hover {
+  background-color: gray;
 }

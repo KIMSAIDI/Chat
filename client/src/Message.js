@@ -11,6 +11,7 @@ const Message = (props) =>{
   const [showReply, setShowReply] = useState(false);
   const [replies, setReplies] = useState(props.replies); // définir l'état local pour stocker les réponses
   const [reply, setReply] = useState(""); // définir l'état local pour stocker la réponse à poster
+  const [showReplyForm, setShowReplyForm] = useState(false);
 
   const handleLike = async () => {
     try {
@@ -111,23 +112,32 @@ const Message = (props) =>{
     });
   }
 
+  function handleShowReplyForm() {
+    setShowReplyForm(true);
+  }
+
+
   return (
     <div className='Message'>
-
+      {/* Login cliquable et bouton ajouter en amis */}
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
         <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>
       </div>
 
+    {/* Bouton delete si c'est mon profile */}
       <div className='Delete'>
         { props.isMyProfile && props.isMyProfile ? ( <button onClick={handleDeleteMessage}>Delete</button> ) : ( <div></div> ) }
       </div>
 
-      <div className=' Content'>
+    {/* Contenu du message */}
+      <div className =' Content '>
       <p>Message : {content}</p>
       <p>Date : {new Date(createdAt).toLocaleString()}</p>
       </div>
-      
+    {/* Boutons container */}
+    
+    <div className = 'boutons-container'>
       <div className="boutons-like-dislike">
 
           <div className="Like">
@@ -144,24 +154,43 @@ const Message = (props) =>{
               <span>{dislikeCount} </span>
           </div>
       </div>
-      
+
+      <div className="bouton-comment">
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <button onClick={handleReply}>
+            <ion-icon name="chatbubble-outline"></ion-icon>
+          </button>
+          <span style={{ marginLeft: "auto" }}>{replies ? replies.length : 0}</span>
+        </div>
+      </div>
+
+      <div className='bouton-addcomment'>
+        <button onClick={() => setShowReplyForm(!showReplyForm)}>
+          <ion-icon name="arrow-undo-outline"></ion-icon>
+         </button>
+</div>
+  </div>
+
+    
+
+  {showReplyForm && (
       <div className="comment-input">
           <label>
-          <input 
-             type="text" 
-             value={reply} 
-            onChange={(e) => setReply(e.target.value)} 
-            placeholder="Ajouter un commentaire..."
-             />
-          </label>
-      </div>
-          <button onClick={handleReplySubmit}>Ajouter un commentaire</button>
+         <input 
+        type="text" 
+        value={reply} 
+        onChange={(e) => setReply(e.target.value)} 
+        placeholder="Ajouter un commentaire..."
+      />
+    </label>
+     <button className="submit-comment" onClick={handleReplySubmit}>
+      Envoyer
+    </button>
+  </div>
+  )}
+
          
-          {replies && replies.length > 0 && (
-          <button onClick={handleReply}>
-            {replies.length > 1 ? `${replies.length} commentaires` : `${replies.length} commentaire`}
-          </button>
-        )}
+     
       {showReply ? (
         <div className="reply-wall">
           {replies.map(reply => (           
