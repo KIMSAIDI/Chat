@@ -119,7 +119,7 @@ const Message = (props) =>{
 
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
-        <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>
+        {props.userLogin === author || props.isMyProfile ? null : <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
       </div>
 
       <div className='Delete'>
