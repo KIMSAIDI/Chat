@@ -57,6 +57,8 @@ const Message = (props) =>{
       
       // Mise à jour de l'utilisateur avec ses nouveaux amis
       props.setUser(response.data.user);
+      
+      
   
     } catch (error) {
       if (error.response && error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {
@@ -67,9 +69,10 @@ const Message = (props) =>{
       } else {
         console.log("Erreur d'ajout d'ami")
         console.error(error);
-      }
-      
+      } 
     }
+    
+    
   };
   
   const handleDeleteMessage = async () => {
@@ -122,18 +125,18 @@ const Message = (props) =>{
       {/* Login cliquable et bouton ajouter en amis */}
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
-        <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>
+        {props.userLogin === author || props.isMyProfile ? null : <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
       </div>
 
     {/* Bouton delete si c'est mon profile */}
       <div className='Delete'>
         { props.isMyProfile && props.isMyProfile ? ( <button onClick={handleDeleteMessage}>Delete</button> ) : ( <div></div> ) }
       </div>
-
-    {/* Contenu du message */}
-      <div className =' Content '>
-      <p>Message : {content}</p>
-      <p>Date : {new Date(createdAt).toLocaleString()}</p>
+        {/* Contenu du message */}
+      <div className=' Content'>
+        {props.message.replyTo ? <h3>Reply to : {props.message.replyTo}</h3> : null}
+        <p>Message : {content}</p>
+        <p>Date : {new Date(createdAt).toLocaleString()}</p>
       </div>
     {/* Boutons container */}
     
