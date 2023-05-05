@@ -75,73 +75,61 @@ const Reply = (props) => {
  
 
   return (
-
     <div>
-
-      <p>Réponse de {props.reply.author} à {props.reply.replyTo}</p>
-
-      <p>Message : {props.reply.content}</p>
-
-      <p>Date : {new Date(props.reply.createdAt).toLocaleString()}</p>
-
-      <button onClick={handleShowReplyForm}>Répondre</button>
-
-      {filteredMessages.length > 0 && (
-
-        <button onClick={() => setShowReplies(!showReplies)}>
-
-          {showReplies ? (
-
-            <div>
-
-              <ion-icon name="caret-up-outline"></ion-icon>
-
-              <span onClick={() => setShowReplies(true)}>{filteredMessages.length} réponses</span>
-
-            </div>
-
-          ) : (
-
-            <div>
-
-              <ion-icon name="caret-down-outline"></ion-icon>
-
-              <span onClick={() => setShowReplies(true)}>{filteredMessages.length} réponses</span>
-
-            </div>
-
-          )}
-
-        </button>
-
-      )}
-
-      {showReplyForm &&
-
-        <div>
-
-          <label>
-
-            <input type="text" value={replyContent} onChange={(e) => setReplyContent(e.target.value)}></input>
-
-          </label>
-
-          <button onClick={handleReplySubmit}>Envoyer</button>
-
+      <p> {props.reply.author} </p>
+      <p> {props.reply.content}</p>
+      <div className="reply-info">
+        <p style={{opacity: 0.5, fontSize: "0.8rem", textAlign: "right"}}>
+          {new Date(props.reply.createdAt).toLocaleString()}
+        </p>
+        <button onClick={handleShowReplyForm}>Répondre</button>
+        {filteredMessages.length > 0 && (
+          <button onClick={() => setShowReplies(!showReplies)}>
+            {showReplies ? (
+              <div>
+                <ion-icon name="caret-up-outline"></ion-icon>
+                <span onClick={() => setShowReplies(true)}>
+                  {filteredMessages.length} réponses
+                </span>
+              </div>
+            ) : (
+              <div>
+                <ion-icon name="caret-down-outline"></ion-icon>
+                <span onClick={() => setShowReplies(true)}>
+                  {filteredMessages.length} réponses
+                </span>
+              </div>
+            )}
+          </button>
+        )}
+        {showReplyForm && (
+          <div>
+            <label>
+              <input
+                type="text"
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
+              />
+            </label>
+            <button onClick={handleReplySubmit}>Envoyer</button>
+          </div>
+        )}
+      </div>
+      {showReplies && (
+        <div className="reply-wall">
+          {filteredMessages.map(subReply => (
+            <Reply
+              key={subReply._id}
+              reply={subReply}
+              userLogin={props.userLogin}
+              messages={messages}
+              setMessages={setMessages}
+            />
+          ))}
         </div>
-
-      }
-
-      {showReplies && filteredMessages.map(subReply => (
-
-        <Reply key={subReply._id} reply={subReply} userLogin={props.userLogin} messages={messages} setMessages={setMessages} />
-
-      ))}
-
+      )}
     </div>
-
   );
-
  
 
 };

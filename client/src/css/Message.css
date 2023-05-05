@@ -40,6 +40,7 @@ text-align : center;
 }
 
 .Message {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,27 +58,28 @@ text-align : center;
   max-width: 600px; /* limite la largeur maximale du message */
   margin: 0 auto; /* centre le message horizontalement */
 }
-
-.titre-et-bouton{
-text-align: left;
+.Message + .Message {
+  margin-top: 10px;
 }
 
-.titre-et-bouton p,
-.titre-et-bouton button {
-display: inline-block;
-vertical-align: middle;
-margin-left: 10px; 
-
+.titre-et-bouton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-start;
 }
 
-.message-content{
-text-align: center;
-margin-top: 10px;
-font-size: 20px;
-color: white;
-
+.bouton-ajout-ami {
+  font-size: 12px;
+  width: 50px;
+  padding: 2px;
+  cursor: pointer;
 }
 
+.bouton-ajout-ami:hover {
+  border: 1px solid white;
+  color: white;
+}
 
 button {
   background-color: #151728;
@@ -90,6 +92,36 @@ button {
   width: 190px;
   padding: 5px;
 }
+
+
+.titre-et-bouton p,
+.titre-et-bouton button {
+display: inline-block;
+vertical-align: middle;
+margin-left: 10px; 
+}
+
+.Date {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-right: 10px;
+}
+
+.message-content{
+text-align: center;
+margin-top: 10px;
+font-size: 20px;
+color: white;
+
+}
+
+
+
+
+
 
 button:hover {
   font-weight: bolder;
@@ -383,4 +415,10 @@ width: 150px; /* ou une autre valeur de votre choix */
 
 .submit-button:active {
   background-color: #005cbf;
+}
+
+
+.reply-box{
+  margin-right: 300px;
+  
 }

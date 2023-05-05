@@ -12,7 +12,17 @@ function TimeLine(props){
     const [newMessage, setNewMessage] = useState('');
     const [recherche, setRecherche] = useState('');
     const [displayForm, setDisplayForm] = useState(false);
+    const [selectedTab, setSelectedTab] = useState('Accueil');
     
+    const handleClickAcceuil = () => {
+      setSelectedTab('Accueil');
+     
+  }
+
+  const handleClickStat = () => {
+      setSelectedTab('Stats');
+     
+  }
 
     useEffect(() => {
       axios.get('/api/messageBD')
@@ -60,23 +70,34 @@ function TimeLine(props){
       }
     
       return (
-        <div className='TimeLine'>
-          
+        <div className='TimeLine'> 
+
           <div className='time-line-head'>
             {/* Titre Accueil */}
-            <div id="timeline-title">
+            <div className="timeline-title">
               <h1>Accueil</h1>
             </div>
-        
-            {/* bouton PageProfile*/}
-            <nav className="PageProfile" id = "nav">
-              {props.boutton_page()} 
-            </nav>
 
+            <div className='informations-bar'>
+                    <ul>
+                        <li className={selectedTab === 'Actualités' ? 'active' : ''} onClick={handleClickAcceuil}>Accueil</li>
+                        <li className={selectedTab === 'Bio' ? 'active' : ''} onClick={handleClickStat}>Zone Statistique</li>  
+                    </ul>
+            </div>
+
+          </div>
+
+           {/* bouton PageProfile*/}
+           <nav className="PageProfile" id = "nav">
+              {props.boutton_page()} 
+           </nav>
             
+          {selectedTab === 'Accueil' && (
+
+          <div>
         
-            {/* bouton afficher/masquer formulaire */}
-            <button onClick={handleDisplayForm}>Nouveau message</button>
+          {/* bouton afficher/masquer formulaire */}
+          <button onClick={handleDisplayForm}>Nouveau message</button>
             
           {/* formulaire poster un new message */}
           {displayForm && (
@@ -101,25 +122,35 @@ function TimeLine(props){
              </div>
         )}
         </div>
+        )};
       
           {/* filtre */}
+
           <div className='barre-recherche'>
             <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
-            <boutton type="submit" onClick={handleRecherche} >Recherche</boutton>
+            <button type="submit" onClick={handleRecherche} >Recherche</button>
           </div>
-      
+
           {/* mur de messages */}
           <div id="page">
             <ListeMessages messages={messages} setMessages={setMessages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser={props.setUser} />
           </div>
-            
-          {/* zone satistique */}
-          <div className="statistique">
-            <h2> Zone de Statistiques</h2>
-          </div>
+        
+        
+
+          {selectedTab === 'Stats' && (
+            <div>
+               {/* zone satistique */}
+              <div className="statistique">
+                <h2> Zone de Statistiques</h2>
+              </div>
+
+            </div>
+          )}
 
         </div>
       );
+          
 }
 
 export default TimeLine;

@@ -125,7 +125,7 @@ const Message = (props) =>{
       {/* Login cliquable et bouton ajouter en amis */}
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
-        {props.userLogin === author || props.isMyProfile ? null : <button onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
+        {props.userLogin === author || props.isMyProfile ? null : <button className='bouton-ajout-ami' onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
       </div>
 
     {/* Bouton delete si c'est mon profile */}
@@ -135,9 +135,15 @@ const Message = (props) =>{
         {/* Contenu du message */}
       <div className=' Content'>
         {props.message.replyTo ? <h3>Reply to : {props.message.replyTo}</h3> : null}
-        <p>Message : {content}</p>
-        <p>Date : {new Date(createdAt).toLocaleString()}</p>
+
+        <p> {content}</p>
       </div>
+
+    {/* Date */}
+    <div className='Date'>
+      <p>{new Date(createdAt).toLocaleString()}</p>
+    </div>
+    
     {/* Boutons container */}
     
     <div className = 'boutons-container'>
@@ -195,7 +201,7 @@ const Message = (props) =>{
          
      
       {showReply ? (
-        <div className="reply-wall">
+        <div className="reply-box">
           {replies.map(reply => (           
               <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages}/>
         ))}
