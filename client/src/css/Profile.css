@@ -61,7 +61,7 @@
 
 .container li:hover, active {
     color : white;
-    border-bottom: 3px solid #a50da5e6;
+    border-bottom: 3px solid rgb(51, 51, 110);
 }
 
 .name {
