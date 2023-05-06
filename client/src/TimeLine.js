@@ -16,7 +16,6 @@ function TimeLine(props){
     
     const handleClickAcceuil = () => {
       setSelectedTab('Accueil');
-     
   }
 
   const handleClickStat = () => {
@@ -51,7 +50,6 @@ function TimeLine(props){
       };
     
 
-    
       const handleRecherche = () => {
         axios.get(`api/messagebyLogin/`, {
             params: {
@@ -64,7 +62,8 @@ function TimeLine(props){
         })
         .catch(err => console.log(err))
       }
-
+      
+  
       const handleDisplayForm = () => {
         setDisplayForm(!displayForm);
       }

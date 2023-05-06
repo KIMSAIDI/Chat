@@ -73,37 +73,43 @@ const Reply = (props) => {
   const filteredMessages = messages.filter(message => message.replyTo === props.reply._id);
 
  
-
   return (
     <div>
-      <p> {props.reply.author} </p>
-      <p> {props.reply.content}</p>
-      <div className="reply-info">
-        <p style={{opacity: 0.5, fontSize: "0.8rem", textAlign: "right"}}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <p onClick={() => props.handleUserClick(props.reply.author)} className="user-link">{props.reply.author}</p>
+        <p style={{opacity: 0.5, fontSize: "0.8rem", textAlign: "right", marginLeft: "auto"}}>
           {new Date(props.reply.createdAt).toLocaleString()}
         </p>
-        <button onClick={handleShowReplyForm}>Répondre</button>
-        {filteredMessages.length > 0 && (
-          <button onClick={() => setShowReplies(!showReplies)}>
-            {showReplies ? (
-              <div>
-                <ion-icon name="caret-up-outline"></ion-icon>
-                <span onClick={() => setShowReplies(true)}>
-                  {filteredMessages.length} réponses
-                </span>
-              </div>
-            ) : (
-              <div>
-                <ion-icon name="caret-down-outline"></ion-icon>
-                <span onClick={() => setShowReplies(true)}>
-                  {filteredMessages.length} réponses
-                </span>
-              </div>
-            )}
-          </button>
-        )}
+      </div>
+      <p>{props.reply.content}</p>
+      <div className="reply-info">
+      <div style={{display: 'flex', alignItems: 'center'}}>
+
+  <button className='button-replytoreply' onClick={handleShowReplyForm}>Répondre</button>
+  {filteredMessages.length > 0 && (
+    <button className='show-replies-button' style={{marginLeft: '10px'}} onClick={() => setShowReplies(!showReplies)}>
+      {showReplies ? (
+        <div>
+          <ion-icon name="caret-up-outline"></ion-icon>
+          <span onClick={() => setShowReplies(true)}>
+            {filteredMessages.length} {filteredMessages.length > 1 ? "réponses" : "réponse"}
+          </span>
+        </div>
+      ) : (
+        <div>
+          <ion-icon name="caret-down-outline"></ion-icon>
+          <span onClick={() => setShowReplies(true)}>
+            {filteredMessages.length} {filteredMessages.length > 1 ? "réponses" : "réponse"}
+          </span>
+        </div>
+      )}
+    </button>
+  )}
+  
+        </div>
+
         {showReplyForm && (
-          <div>
+          <div className="comment-input">
             <label>
               <input
                 type="text"
@@ -111,10 +117,12 @@ const Reply = (props) => {
                 onChange={(e) => setReplyContent(e.target.value)}
               />
             </label>
-            <button onClick={handleReplySubmit}>Envoyer</button>
+            <button className= "submit-comment" onClick={handleReplySubmit}>Envoyer</button>
           </div>
         )}
+
       </div>
+      
       {showReplies && (
         <div className="reply-wall">
           {filteredMessages.map(subReply => (
@@ -130,8 +138,7 @@ const Reply = (props) => {
       )}
     </div>
   );
- 
-
+  
 };
 
  

@@ -180,8 +180,7 @@ const Message = (props) =>{
 </div>
   </div>
 
-    
-
+  
   {showReplyForm && (
       <div className="comment-input">
           <label>
@@ -197,15 +196,15 @@ const Message = (props) =>{
     </button>
   </div>
   )}
-
-         
-     
+  
       {showReply ? (
+        <div className="reply-container">
         <div className="reply-box">
           {replies.map(reply => (           
-              <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages}/>
-        ))}
+              <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages} handleUserClick = {props.handleUserClick}/>
+          ))}
         </div>
+      </div>
       ) : null}
     </div>
   );

@@ -285,30 +285,41 @@ width: 150px; /* ou une autre valeur de votre choix */
 .bouton-addcomment button:hover {
   background-color: rgb(144, 5, 5);
 }
+
+
 .comment-input {
-  position: relative;
   display: flex;
   align-items: center;
 }
+.comment-input input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-right: 220px;
+}
 
-.comment-input button {
-  margin-left: 10px;
+.comment-input{
+  background-color: transparent;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+  margin: 0;
 }
 
 .submit-comment {
-  margin-left: 10px;
-  width: 80px;
-  height: 30px;
-  border: none;
-  border-radius: 10px;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
+  background-color: transparent;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px; /* réduire la valeur de padding horizontale */
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 30px;
 }
 
 .submit-comment:hover {
-  background-color: gray;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
 
@@ -420,5 +431,56 @@ width: 150px; /* ou une autre valeur de votre choix */
 
 .reply-box{
   margin-right: 300px;
+  padding: 10px; /* Ajoute un espace entre le bord et le contenu */
   
+}
+.user-link {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.user-link:hover {
+  text-decoration: underline;
+}
+
+.reply-info button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.reply-container {
+  width: 100%;
+  overflow: auto;
+}
+
+
+
+.button-replytoreply {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-replytoreply:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.show-replies-button {
+  font-size: 0.8rem;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #0077ff;
+  border: none;
+}
+
+.show-replies-button:hover {
+  background-color: rgba(0, 119, 255, 0.2);
+  cursor: pointer;
 }
