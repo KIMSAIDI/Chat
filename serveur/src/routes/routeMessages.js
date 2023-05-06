@@ -21,5 +21,6 @@ routerMessages.delete('/message/:messageId/deleteMessage', apiMessage.deleteMess
 
 routerMessages.post('/message/reply', apiMessage.replyMessage);
 
+routerMessages.get('/message/getAllMessages', apiMessage.getAllMessages);
 
 module.exports = { routerMessages };

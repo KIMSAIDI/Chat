@@ -55,7 +55,7 @@ text-align : center;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: white;
-  max-width: 600px; /* limite la largeur maximale du message */
+  max-width: 700px; /* limite la largeur maximale du message */
   margin: 0 auto; /* centre le message horizontalement */
 }
 .Message + .Message {

@@ -11,8 +11,11 @@
 
 
 .logout {
+    position: relative; 
+    z-index: 9999;
     float: right;
     padding: 30px;
+   
   }
 
 

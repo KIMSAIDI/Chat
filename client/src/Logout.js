@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from "axios";
-
+import './css/Logout.css';
 function Logout(props) {
   const handleLogout = (user) => { 
     axios
@@ -15,9 +15,10 @@ function Logout(props) {
   };
 
   return (
-    <div>
+    <div className='logout'>
       <button type="submit" onClick={() => handleLogout(props.user)}>
-        deconnexion
+       
+        <ion-icon name="log-out-outline"></ion-icon>
       </button>
     </div>
   );

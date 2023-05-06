@@ -3,6 +3,8 @@
     margin: 0;
 }
 
+/* https://i.pinimg.com/originals/f5/28/b8/f528b8aba5444331781f6746174c963a.jpg */
+
 .container {
     position: relative;
     margin : auto;
@@ -104,7 +106,8 @@
 
 .nav  {
     position : absolute;
-    padding: 1.5em 1em;
+    align-items: center;
+    padding: 3em 1em;
     left : 0;    
 }
 

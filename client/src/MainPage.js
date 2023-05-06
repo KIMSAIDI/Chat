@@ -6,6 +6,8 @@ import Profile from './Profile';
 import Login from './Login';
 import axios from 'axios';
 
+import './css/MainPage.css';
+
 axios.defaults.baseURL = "http://localhost:3000";
 
 
@@ -75,7 +77,7 @@ function MainPage(props){
        //Bouton pou switch entre la TL et les pages de profils
      const boutton_page = () => {  
       return (
-        <div>
+        <div className='boutton-pp-timeline'>
           {page === "PageProfile" ? (
             <button
               onClick={() => {
@@ -95,7 +97,7 @@ function MainPage(props){
                 setIsMyProfile(true);
               }}
             >
-              Ma PageProfile
+              PageProfile<ion-icon name="person-circle-outline"></ion-icon>
             </button>
           )}
         </div>
