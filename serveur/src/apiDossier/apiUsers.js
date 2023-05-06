@@ -162,4 +162,15 @@ async function getBio(req, res, next) {
   }
 }
 
-module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio};
+async function getAllUsers(req, res, next) {
+  try {
+    const users = await User.find();
+    res.json(users.length);
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+
+module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio, getAllUsers};

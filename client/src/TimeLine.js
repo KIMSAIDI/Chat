@@ -13,6 +13,8 @@ function TimeLine(props){
     const [recherche, setRecherche] = useState('');
     const [displayForm, setDisplayForm] = useState(false);
     const [selectedTab, setSelectedTab] = useState('Accueil');
+    const [nbUtilisateurs, setNbUtilisateurs] = useState(0);
+    const [nbMessages, setNbMessages] = useState(0);
     
     const handleClickAcceuil = () => {
       setSelectedTab('Accueil');
@@ -67,15 +69,57 @@ function TimeLine(props){
       const handleDisplayForm = () => {
         setDisplayForm(!displayForm);
       }
+
+      const ReturnNbUtilisateurs = () => {
+        const res = axios.get(`api/user/getAllUsers/`)
+        .then(res => {
+          console.log(res.data);
+          setNbUtilisateurs(res.data);
+        })
+      .catch(err => console.log(err))
+      }
+
+      const ReturnNbMessages = () => {
+        const res = axios.get(`api/message/getAllMessages`)
+        .then(res => {
+          console.log(res.data);
+          setNbMessages(res.data);
+        })
+      .catch(err => console.log(err))
+      }
+
     
       return (
         <div className='TimeLine'> 
 
+        <nav className='nav'>
+          <div className='nav-left'>
+            Mood</div>
+              
+              <div className='nav-center'>
+               {/* filtre */}
+                <div className='barre-recherche'>
+                  <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
+                  <button type="submit" onClick={handleRecherche} >Recherche</button>
+                </div>
+              </div>
+
+         
+          <div className='nav-right'>
+
+             {/* bouton PageProfile*/}
+          <nav className="PageProfile" id = "nav">
+              {props.boutton_page()} 
+           </nav>
+          </div>
+            
+        </nav>
+
           <div className='time-line-head'>
-            {/* Titre Accueil */}
+            {/* Titre Accueil
             <div className="timeline-title">
               <h1>Accueil</h1>
-            </div>
+            </div> */}
 
             <div className='informations-bar'>
                     <ul>
@@ -86,15 +130,12 @@ function TimeLine(props){
 
           </div>
 
-           {/* bouton PageProfile*/}
-           <nav className="PageProfile" id = "nav">
-              {props.boutton_page()} 
-           </nav>
+           
             
           {selectedTab === 'Accueil' && (
 
           <div>
-        
+          <div>
           {/* bouton afficher/masquer formulaire */}
           <button onClick={handleDisplayForm}>Nouveau message</button>
             
@@ -121,27 +162,36 @@ function TimeLine(props){
              </div>
         )}
         </div>
-        )};
+       
       
-          {/* filtre */}
-
-          <div className='barre-recherche'>
-            <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
-            <button type="submit" onClick={handleRecherche} >Recherche</button>
-          </div>
+         
+          
 
           {/* mur de messages */}
           <div id="page">
             <ListeMessages messages={messages} setMessages={setMessages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser={props.setUser} />
           </div>
-        
-        
+          
+          </div>
+         )};
 
           {selectedTab === 'Stats' && (
             <div>
                {/* zone satistique */}
               <div className="statistique">
-                <h2> Zone de Statistiques</h2>
+              
+                
+                <div className='nombre-utilisateurs'>
+                  {ReturnNbUtilisateurs()}
+                  <p>Nombre d'utilisateurs : {nbUtilisateurs}</p>
+                </div>
+              
+                <div className='nombre-messages'>
+                {ReturnNbMessages()}
+                <p>Nombre de messages : {nbMessages}</p>            
+                </div>
+
+
               </div>
 
             </div>

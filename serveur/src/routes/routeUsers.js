@@ -29,6 +29,9 @@ routerUsers.post('/user/bio/', apiUsers.changeBio);
 // Route pour avoir la bio de quequ'un
 routerUsers.get('/user/getBio/', apiUsers.getBio);
 
+// Route pour avoir le nombre de tous les utilisateurs
+routerUsers.get('/user/getAllUsers/', apiUsers.getAllUsers);
+
 module.exports = {routerUsers };
 
 
