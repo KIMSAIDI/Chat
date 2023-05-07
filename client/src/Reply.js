@@ -73,7 +73,6 @@ const Reply = (props) => {
   const filteredMessages = messages.filter(message => message.replyTo === props.reply._id);
 
  
-
   return (
     <div>
       <div style={{display: 'flex', alignItems: 'center'}}>
@@ -139,6 +138,8 @@ const Reply = (props) => {
       )}
   </div>
   );
+ 
+
 };
  
 
