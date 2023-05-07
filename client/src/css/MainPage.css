@@ -1,5 +1,5 @@
 .boutton-pp-timeline button {
-  background-color: black;
+  background-color: #1d4a83;
   border: 1px solid white;
   
   border-radius: 30%;
@@ -24,5 +24,5 @@
 }
 
 .boutton-pp-timeline button:hover {
-  background-color: rgb(51, 51, 110);
+  font-weight: bolder;
 }

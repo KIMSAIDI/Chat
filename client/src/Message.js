@@ -4,6 +4,8 @@ import Reply from './Reply';
 import axios from 'axios';
 import './css/Message.css';
 
+import Swal from 'sweetalert';
+
 const Message = (props) =>{
   const { _id, author, content, createdAt, like, dislike } = props.message;
   const [likeCount, setLikeCount] = useState(like);
@@ -19,7 +21,7 @@ const Message = (props) =>{
       setLikeCount(response.data.like);
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà aimé ce message.') {
-        alert('Vous avez déjà aimé ce message.');
+        Swal('Vous avez déjà aimé ce message.');
       } else {
         console.error(error);
       }
@@ -32,7 +34,7 @@ const Message = (props) =>{
       setDislikeCount(response.data.dislike);
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous avez déjà disliké ce message.') {
-        alert('Vous avez déjà disliké ce message.');
+        Swal('Vous avez déjà disliké ce message.');
       } else {
         console.log("Erreur de dislike")
         console.error(error);
@@ -62,10 +64,10 @@ const Message = (props) =>{
   
     } catch (error) {
       if (error.response && error.response.status === 409 && error.response.data.message === 'Cet utilisateur est déjà votre ami') {
-        alert('Vous avez déjà ajouté cet utilisateur en ami.');
+        Swal('Vous avez déjà ajouté cet utilisateur en ami.');
       }
       if (error.response && error.response.status === 409 && error.response.data.message === 'Vous ne pouvez pas vous ajouter en ami') {
-        alert('Vous ne pouvez pas vous ajouter en ami.');
+        Swal('Vous ne pouvez pas vous ajouter en ami.');
       } else {
         console.log("Erreur d'ajout d'ami")
         console.error(error);
@@ -81,9 +83,9 @@ const Message = (props) =>{
       props.setMessages(props.messages.filter(message => message._id !== _id));
     } catch (error) {
       if (error.response && error.response.status === 400 && error.response.data.error === 'Vous n\'êtes pas autorisé à supprimer ce message.') {
-        alert('Vous n\'êtes pas autorisé à supprimer ce message.');
+        Swal('Vous n\'êtes pas autorisé à supprimer ce message.');
       } if (error.response && error.response.status === 404 && error.response.data.error === 'Le message n\'a pas été trouvé.') {
-        alert('Message déja supprimé.');
+        Swal('Message déja supprimé.');
       } else {
         console.log("Erreur de suppression de message")
         console.error(error);
@@ -125,7 +127,7 @@ const Message = (props) =>{
       {/* Login cliquable et bouton ajouter en amis */}
       <div className="titre-et-bouton">
         <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
-        {props.userLogin === author || props.isMyProfile ? null : <button className='bouton-ajout-ami' onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
+        {props.userLogin === author || (props.isMyProfile ) ? null : <button className='bouton-ajout-ami' onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
       </div>
 
     {/* Bouton delete si c'est mon profile */}
@@ -134,7 +136,7 @@ const Message = (props) =>{
       </div>
         {/* Contenu du message */}
       <div className=' Content'>
-        {props.message.replyTo ? <h3>Reply to : {props.message.replyTo}</h3> : null}
+        {props.message.replyTo ? <h3>Reply to : {props.message.replyTo }</h3> : null}
 
         <p> {content}</p>
       </div>

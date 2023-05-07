@@ -148,14 +148,13 @@ async function changeBio(req, res, next) {
   }
 
 async function getBio(req, res, next) {
-  console.log("on est dans getBio")
-  const login = req.query.login;
+  const login = req.params.username;
   try {
     const user = await User.findOne({login: login});
+    
     if (!user) {
       return res.status(404).json({message : 'Utilisateur non trouvé'});
     }
-    console.log(user.bio)
     res.json(user.bio);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -171,6 +170,154 @@ async function getAllUsers(req, res, next) {
   }
 }
 
+async function changeDate(req, res, next) {
+  
+  const {date, login} = req.body;
+  console.log("date = ", date)
+  try {
+    const user = await User.findOne({login: login});
+    if (!user) {
+      return res.status(404).json({message : 'Utilisateur non trouvé'});
+    }
+   
+    user.date = date;
+    console.log(user.date)
+    const saveUser = await user.save();
+    
+    res.status(201).send({
+      message: 'Date modifiée avec succès.',
+      user: saveUser
+    });
+   
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    }
+  }
+
+  async function getDate(req, res, next) {
+    const login = req.params.username;
+    try {
+      const user = await User.findOne({login: login});
+      if (!user) {
+        return res.status(404).json({message : 'Utilisateur non trouvé'});
+      }
+      res.json(user.date);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
 
-module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio, getAllUsers};
+
+  async function getLastUser(req, res, next) {
+
+    try {
+      const users = await User.find();
+      if (!users) {
+        return res.status(404).json({message : 'Utilisateur non trouvé'});
+      }
+      res.json(users[users.length-1]);
+     
+    } catch (error) {
+      next(error);
+    }
+  }
+
+async function ville_user(req, res, next) {
+  const {ville, login} = req.body;
+  try {
+    const user = await User.findOne({login: login});
+    if (!user) {
+      return res.status(404).json({message : 'Utilisateur non trouvé'});
+    }
+    user.ville = ville;
+    const saveUser = await user.save();
+    res.status(201).send({
+      message: 'Ville modifiée avec succès.',
+      user: saveUser
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    }
+  }
+
+  async function status_user(req, res, next) {
+    const {status, login} = req.body;
+    try {
+      const user = await User.findOne({login: login});
+      if (!user) {
+        return res.status(404).json({message : 'Utilisateur non trouvé'});
+      }
+      user.status = status;
+      const saveUser = await user.save();
+      res.status(201).send({
+        message: 'Status modifié avec succès.',
+        user: saveUser
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+      }
+    }
+
+    async function genre_user(req, res, next) {
+      const {genre, login} = req.body;
+      try {
+        const user = await User.findOne({login: login});
+        if (!user) {
+          return res.status(404).json({message : 'Utilisateur non trouvé'});
+        }
+        user.genre = genre;
+        const saveUser = await user.save();
+        res.status(201).send({
+          message: 'Genre modifié avec succès.',
+          user: saveUser
+        });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+        }
+      }
+
+  async function getVille(req, res, next) {
+ 
+    const login = req.params.username;
+    try {
+     const user = await User.findOne({login: login});
+        if (!user) {
+          return res.status(404).json({message : 'Utilisateur non trouvé'});
+        }
+        res.json(user.ville);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+  
+  async function getGenre(req, res, next) {
+    const login = req.params.username;
+    try {
+      const user = await User.findOne({login: login});
+      if (!user) {
+        return res.status(404).json({message : 'Utilisateur non trouvé'});
+      }
+      res.json(user.genre);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async function getStatus(req, res, next) {
+    const login = req.params.username;
+    try {
+      const user = await User.findOne({login: login});
+      if (!user) {
+        return res.status(404).json({message : 'Utilisateur non trouvé'});
+      }
+      res.json(user.status);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+    
+
+
+module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio, getAllUsers, changeDate, getLastUser, ville_user, status_user, genre_user, getVille, getGenre, getStatus, getDate};

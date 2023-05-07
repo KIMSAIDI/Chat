@@ -15,7 +15,7 @@ const ListeMessages = (props) => {
             userLogin={props.userLogin}
             handleUserClick={props.handleUserClick}
             setUser={props.setUser}
-            replies={props.messages.filter((reply) => reply.replyTo === message._id)}
+            replies={props.messages.filter((reply) => reply.replyTo === message.author)}
             messages = {props.messages}
             setMessages = {props.setMessages}
 

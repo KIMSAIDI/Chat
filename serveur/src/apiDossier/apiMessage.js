@@ -180,4 +180,21 @@ async function dislikeMessage(req, res, next) {
     }
   }
 
-module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage, replyMessage, getAllMessages};
+  async function getPopularTweet(req, res, next) {
+    console.log('getPopularTweet');
+    try {
+      const msg = await Message.find().sort({ like: -1 }).limit(1);
+      res.json(msg);
+    
+    }
+    catch (error) {
+      next(error);
+    }
+
+  }
+  
+  
+  
+
+
+module.exports = {createMessage,getBD, likeMessage,dislikeMessage, getBDbyLogin, deleteMessage, replyMessage, getAllMessages, getPopularTweet};
