@@ -1,14 +1,4 @@
 
-/*
-.login {
-    float: left;
-    width: 50%;
-    height: 100%;
-    padding: 30px;
-    
-  }
-*/
-
 
 .logout {
     position: relative; 
@@ -18,73 +8,6 @@
    
   }
 
-
-
-/* Styles pour la page d'inscription */
-
-/* Centrer le contenu */
-/*
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-*/
-
-/* Formulaire */
-
-/*
-form {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 180px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 400px;
-  padding: 40px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-*/
-
-/* Titre */
-/*
-h1 {
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-}
-*/
-
-/* Champ de saisie */
-/*
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #ccc;
-}
-/*
-
-/* Bouton d'inscription */
-/*
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-*/
 /* Message d'erreur */
 .error-message {
   color: red;

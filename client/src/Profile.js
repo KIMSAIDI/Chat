@@ -132,14 +132,13 @@ const Profile = (props) => {
             login: props.user.login,
           });
           console.log(res.data);
-          setDateNaissance('');
+         
+          Swal('Votre date de naissance a bien été modifiée')
         } catch (error) {
           console.log(error);
         }
       };
       
-      
-
     const afficheDate = async () => {
         try {
             const res = await axios.get(`/api/user/${props.user.login}/getDate/`)
@@ -160,7 +159,7 @@ const Profile = (props) => {
             })
             console.log(res.data)
           
-            setVille('');   
+              
             Swal('Votre ville a bien été modifiée') 
         }
         catch(error){
@@ -209,7 +208,7 @@ const Profile = (props) => {
                 login : props.user.login
             })
             console.log(res.data)
-            setStatus('');
+           
             Swal('Votre status a bien été modifié')
 
         }
@@ -225,7 +224,7 @@ const Profile = (props) => {
                 login : props.user.login
             })
             console.log(res.data)
-            setGenre(''); 
+           
             Swal('Votre genre a bien été modifié')   
         }
         catch(error){
@@ -276,7 +275,17 @@ const Profile = (props) => {
                     <div>
                         <nav id="page">
                             {props.message.map((message) => (
-                               <Message key={message._id} message={message} userLogin={props.userLogin} handleUserClick = {props.handleUserClick} setUser = {props.setUser} isMyProfile = {props.isMyProfile} /> 
+                               <Message
+                               key={message._id} 
+                               message={message} 
+                               userLogin={props.userLogin} 
+                               handleUserClick = {props.handleUserClick} 
+                               setUser = {props.setUser} 
+                                
+                               isMyProfile = {props.isMyProfile} 
+                               
+                                />
+                            
                         ))}
                         </nav>
                     </div>
@@ -285,7 +294,7 @@ const Profile = (props) => {
                 {/* Biographie */}
                 {selectedTab === 'Bio' && (
                 <div className='Bio'>
-                    <h2>Biographie de {props.user.login} </h2>
+                    <h2>Informations sur {props.user.login} </h2>
                         
                         {/* modifier la bio */}
                         {props.isMyProfile ? (
@@ -294,7 +303,7 @@ const Profile = (props) => {
                             {/* biographie */}
                             <div className="bio-input">
                             <textarea className="bio" onChange={(e) => setBio(e.target.value)} placeholder="Racontez-nous qui vous êtes" />
-                            <button onClick={handleBio}>Valider</button>
+                            <button type='submit' onClick={handleBio}>Valider</button>
                             </div>
                                 <p className="biographie">Biographie de l'utilisateur : {Biographie_utilisateur}</p>
                         
@@ -313,8 +322,10 @@ const Profile = (props) => {
                                 />
                                 <button type="submit">Soumettre</button>    
                             </form>
+                            
                             </div>
-                            {dateNaissance}
+
+                            <div className='info_utilisateur'>{dateNaissance}</div>
                        
                     
                         
@@ -327,14 +338,13 @@ const Profile = (props) => {
                             id="ville"
                             value={ville}
                             onChange={handleChangeVille}
+                            
                         />
                         <button type="submit">Soumettre</button>
                         </form>
-                        
-
                         </div>
-
-                        <div>{ville}</div>
+                        <div className='info_utilisateur'>{ville}</div>
+                      
 
                         <div className="status">
                             <form onSubmit={handleStatus}>
@@ -345,15 +355,16 @@ const Profile = (props) => {
                                 <option value="en-couple">En couple</option>
                                 <option value="marié">Marié</option>
                                 <option value="concubinage">Concubinage</option>
-                                <option value="mineur">Mineure</option>
+                                <option value="Mineure">Mineure</option>
                                 <option value="recherche-amour">En recherche de l'amour</option>
                                 </select>
                                 <button type="submit">Soumettre</button>
                             </form>
                             
                             </div>
+                            <div className='info_utilisateur'>{status}</div>
                             
-                            {status}
+                           
 
 
                         {/* genre */}
@@ -368,19 +379,32 @@ const Profile = (props) => {
                                 </select>
                                 <button type="submit">Soumettre</button>
                             </form>
-                            {genre}
+                           
                             </div>
+                            <div className='info_utilisateur'>{genre}</div>
                           
 
                         </div>
                         ) : (
                         <div className='bio-container'>
-                            <p>Biographie de l'utilisateur : {Biographie_utilisateur}</p>
+                            
                        
-                                <p>{dateNaissance}</p>
-                                {ville}
-                                {status}
-                                {genre}
+                                
+                                <div className='info_autre_utilisateur'>
+                                Biographie : {Biographie_utilisateur.length === 0 ? <p>Non renseigné</p> : Biographie_utilisateur}
+                                <br/>
+                                <br/>   
+                                Ville : {ville.length === 0 ? <p>Non renseigné</p> : ville}
+                                <br/>
+                                <br/>
+                                Status: {status.length === 0 ? <p>Non renseigné</p> : status}
+                                <br/>
+                                <br/>
+                                Date de Naissance : {dateNaissance.length === 0 ? <p>Non renseigné</p> : dateNaissance}
+                                <br/>
+                                <br/>
+                                Genre: {genre.length === 0 ? <p>Non renseigné</p> : genre}
+                                </div>
                         </div>
 
                         )}

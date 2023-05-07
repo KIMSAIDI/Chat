@@ -14,7 +14,8 @@ const Signup = (props) => {
     const [pass2, setPass2] = useState("");
     const [passOk, setPassOk] = useState(false);
     const [error, setError] = useState("");
-    const [showSigninForm, setShowSigninForm] = useState(true);
+    const [showSigninForm, setShowSigninForm] = useState(false);
+
     const [avatarUrl,setAvatarUrl] = useState("");
 
       const handleFocus = (e) => {
@@ -78,7 +79,10 @@ const Signup = (props) => {
 
     function handleSigninClick() {
       setShowSigninForm(true);
+   
     }
+
+  
 
     function handleCloseSigninClick() {
       setShowSigninForm(false);
@@ -90,8 +94,7 @@ const Signup = (props) => {
         <a className="logo">MOOD</a>
         <nav className="navbar">
         
-          <a>Home</a>
-          <a>About</a>
+          
           <a onClick={handleSigninClick}>Signin</a>
           <a onClick={handleLogin}>Login</a>
         </nav>
@@ -150,7 +153,8 @@ const Signup = (props) => {
               </div>
 
               <div>
-                <a href="https://getavataaars.com/" target="_blank" rel="noopener noreferrer">Avatar</a>
+                <p>Lien pour crée son avatar : 
+                <a href="https://getavataaars.com/" target="_blank" rel="noopener noreferrer"><a className="avatar-lien"> Avatar-lien </a></a></p>
               </div>
 
 
@@ -167,6 +171,8 @@ const Signup = (props) => {
               </div>
             </div>
               )}
+
+              
           </div>
         );      
 };

@@ -60,7 +60,7 @@ routerUsers.get('/user/:username/getGenre/', apiUsers.getGenre);
 // Route pour avoir le status de quelqu'un
 routerUsers.get('/user/:username/getStatus/', apiUsers.getStatus);
 
-
+routerUsers.get('/user/:username/getUrl/', apiUsers.getUrl)
 
 
 module.exports = {routerUsers };

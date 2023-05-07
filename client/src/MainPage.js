@@ -20,7 +20,7 @@ function MainPage(props){
     const [selectedUser, setSelectedUser] = useState(null);
     const [isMyProfile, setIsMyProfile] = useState(false);
     const [messages_by_login, setMessages_by_login] = useState([]);
-
+   
     
     //comportement 
 
@@ -105,7 +105,6 @@ function MainPage(props){
       };
     
 
-      // ??
       
       useEffect(() => {
         const isConnected = localStorage.getItem("isConnected");
@@ -152,6 +151,10 @@ function MainPage(props){
         majmessages_by_login();
       }
     }, [messages_by_login]);
+
+
+
+    
        
     return (
       <div>
@@ -171,6 +174,7 @@ function MainPage(props){
                   setFriendsList={setFriendsList}
                   message = {messages_by_login}
                   setMessage = {setMessages_by_login}
+                 
                 />
               )}
               {page === "TimeLine" && user && (
@@ -181,7 +185,7 @@ function MainPage(props){
                   setPage={setPage}
                   setSelectedUser={setSelectedUser}
                   boutton_page={boutton_page}
-                  
+                 
                 />
               )}
             </>

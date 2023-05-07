@@ -14,7 +14,7 @@ const Message = (props) =>{
   const [replies, setReplies] = useState(props.replies); // définir l'état local pour stocker les réponses
   const [reply, setReply] = useState(""); // définir l'état local pour stocker la réponse à poster
   const [showReplyForm, setShowReplyForm] = useState(false);
-
+  
   const handleLike = async () => {
     try {
       const response = await axios.patch(`/api/message/${_id}/like`, { login: props.userLogin });
@@ -56,6 +56,7 @@ const Message = (props) =>{
       });
     
       console.log(response.data)
+      Swal('Vous avez ajouté cet utilisateur en ami.');
       
       // Mise à jour de l'utilisateur avec ses nouveaux amis
       props.setUser(response.data.user);
@@ -126,7 +127,10 @@ const Message = (props) =>{
     <div className='Message'>
       {/* Login cliquable et bouton ajouter en amis */}
       <div className="titre-et-bouton">
-        <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
+        
+       {props.authorUser?.avatarUrl &&    <img src={props.authorUser.avatarUrl} alt={props.authorUser.login} /> }
+     
+        <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}  </span></h3>
         {props.userLogin === author || (props.isMyProfile ) ? null : <button className='bouton-ajout-ami' onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
       </div>
 
@@ -136,8 +140,7 @@ const Message = (props) =>{
       </div>
         {/* Contenu du message */}
       <div className=' Content'>
-        {props.message.replyTo ? <h3>Reply to : {props.message.replyTo }</h3> : null}
-
+        
         <p> {content}</p>
       </div>
 
@@ -182,32 +185,31 @@ const Message = (props) =>{
 </div>
   </div>
 
-    
-
+  
   {showReplyForm && (
       <div className="comment-input">
-          <label>
-         <input 
-        type="text" 
-        value={reply} 
-        onChange={(e) => setReply(e.target.value)} 
-        placeholder="Ajouter un commentaire..."
-      />
-    </label>
-     <button className="submit-comment" onClick={handleReplySubmit}>
-      Envoyer
-    </button>
-  </div>
-  )}
-
-         
-     
+            <label>
+          <input 
+          type="text" 
+          value={reply} 
+          onChange={(e) => setReply(e.target.value)} 
+          placeholder="Ajouter un commentaire..."
+        />
+      </label>
+      <button className="submit-comment" onClick={handleReplySubmit}>
+        Envoyer
+      </button>
+    </div>
+      )}
+  
       {showReply ? (
+        <div className="reply-container">
         <div className="reply-box">
           {replies.map(reply => (           
-              <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages}/>
-        ))}
+              <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages} handleUserClick = {props.handleUserClick}/>
+          ))}
         </div>
+      </div>
       ) : null}
     </div>
   );

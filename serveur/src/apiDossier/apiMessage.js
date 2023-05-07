@@ -29,32 +29,6 @@ async function createMessage(req, res, next) {
   }
 }
 
-//crée une reponse a un message
-/*
-async function replyMessage(req, res, next) {
-  const { content, author, replyTo } = req.body;
-  if (!content || !author || !replyTo) {
-    return res.status(400).json({ message: 'Le format du message est incorrect.' });
-  }
-  const message = new Message({
-    content,
-    author,
-    createdAt: new Date(),
-    like: 0,
-    dislike: 0,
-    likedBy: [],
-    dislikeBy: [],
-    replyTo,
-    replies: []
-  });
-  try {
-    const savedMessage = await message.save();
-    console.log(`Nouvelle réponse de: ${savedMessage.author}`);
-    res.json({message})
-  } catch (error) {
-    res.status(400).json({ error: 'Une erreur s\'est produite.' });
-  }
-}*/
 
 async function replyMessage(req, res, next) {
   const { content, author, replyTo } = req.body;

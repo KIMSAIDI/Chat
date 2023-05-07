@@ -16,7 +16,6 @@ function TimeLine(props){
     const [nbUtilisateurs, setNbUtilisateurs] = useState(0);
     const [nbMessages, setNbMessages] = useState(0);
     const [lastUser, setLastUser] = useState('');
-    const [nbLikePopularTweet, setNbLikePopularTweet] = useState(0);
     
     const handleClickAcceuil = () => {
       setSelectedTab('Accueil');
@@ -45,7 +44,6 @@ function TimeLine(props){
           .then(res => {
             setMessages([...messages, res.data]);
             setNewMessage('');
-            // Mettre à jour la liste des messages immédiatement après l'envoi d'un nouveau message
             axios.get('/api/messageBD')
               .then(res => setMessages(res.data))
               .catch(err => console.log(err));
@@ -96,7 +94,6 @@ function TimeLine(props){
           const res = await axios.get(`api/user/getLastUser`)
          
           setLastUser(res.data.login);
-          console.log("rep = ", lastUser);
         } catch (err) {
           console.log(err);
         }
@@ -107,23 +104,6 @@ function TimeLine(props){
         getLastUser();
       }, []);
 
-      
-
-      const getNbLikePopularTweet = async () => {
-        try {
-          const res = await axios.get('api/message/getPopularTweet');
-          const nbLike = res.data[0].like;
-          console.log("nbLike = ", nbLike);
-          setNbLikePopularTweet(nbLike);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      
-      // // Utilisez useEffect pour appeler getNbLikePopularTweet au montage du composant
-      // useEffect(() => {
-      //   getNbLikePopularTweet();
-      // }, []);
       
       const suppRecherche = () => {
         axios.get('/api/messageBD')
@@ -143,7 +123,7 @@ function TimeLine(props){
                {/* filtre */}
                 <div className='barre-recherche'>
                   <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
-                  <button type="submit" onClick={handleRecherche} >Recherche</button>
+                  <button  type="submit" onClick={handleRecherche} >Recherche</button>
                   <button type="submit" onClick={suppRecherche} >Retour</button>
                 </div>
               </div>
@@ -204,22 +184,20 @@ function TimeLine(props){
 
         <div className='Actu'>
           <h2>Actualités</h2>
-            {/* {getLastUser()} */}
-            
             <p><ion-icon name="person-outline"></ion-icon> Le dernier nouvel arrivant sur notre plateforme est : {lastUser} !</p>
 
         </div>
 
         </div>
 
-       
-      
-         
-          
-
           {/* mur de messages */}
           <div id="page">
-            <ListeMessages messages={messages} setMessages={setMessages} userLogin={props.user.login} handleUserClick={props.handleUserClick} setUser={props.setUser} />
+            <ListeMessages 
+            messages={messages} 
+            setMessages={setMessages} 
+            userLogin={props.user.login} 
+            handleUserClick={props.handleUserClick} 
+            setUser={props.setUser} />
           </div>
           
           </div>
@@ -240,12 +218,6 @@ function TimeLine(props){
                 {ReturnNbMessages()}
                 <p>Nombre de messages : {nbMessages}</p>            
                 </div>
-
-                {/* <div className='tweet-popular'>
-                  {getNbLikePopularTweet()}
-                <p> Le tweet ayant récupérer le plus de like à obtenu {nbLikePopularTweet} like</p>
-                </div> */}
-
 
               </div>
 

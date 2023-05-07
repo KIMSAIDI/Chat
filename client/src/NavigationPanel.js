@@ -6,9 +6,6 @@ import './css/NavigationPanel.css';
 
 function NavigationPanel(props){
 
-   
-    
-
     return(
         <div className="navigation_pan"> 
             <nav className="logout">

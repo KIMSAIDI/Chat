@@ -42,7 +42,8 @@ const userSchema = new mongoose.Schema({
   },
   avatarUrl: {
     type: String,
-    default :'https://avataaars.io/?avatarStyle=Transparent&topType=WinterHat3&accessoriesType=Wayfarers&hatColor=PastelYellow&facialHairType=MoustacheMagnum&facialHairColor=BrownDark&clotheType=ShirtVNeck&clotheColor=Blue01&eyeType=Wink&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Brown'
+    default :'https://avataaars.io/?avatarStyle=Transparent&topType=WinterHat3&accessoriesType=Wayfarers&hatColor=PastelYellow&facialHairType=MoustacheMagnum&facialHairColor=BrownDark&clotheType=ShirtVNeck&clotheColor=Blue01&eyeType=Wink&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Brown',
+    required: true
   }
 
   

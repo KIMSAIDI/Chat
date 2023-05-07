@@ -8,6 +8,7 @@ async function createUsers(req, res, next) {
     return res.status(409).send({ error: 'Ce login est déjà utilisé.' });
   }
   const user = new User(req.body);
+
   try {
     const saveUser = await user.save();
     console.log(`Nouvel utilisateur créé : ${saveUser.login}`);
@@ -317,7 +318,20 @@ async function ville_user(req, res, next) {
     }
   }
 
+  async function getUrl(req, res, next) {
+    const login = req.params.username;
+    try {
+      const user = await User.findOne({login: login});
+      if (!user) {
+        return res.status(404).json({message : 'Utilisateur non trouvé'});
+      }
+      res.json(user.url);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
     
 
 
-module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio, getAllUsers, changeDate, getLastUser, ville_user, status_user, genre_user, getVille, getGenre, getStatus, getDate};
+module.exports = {createUsers, login ,logout, getUser, addFriend, deleteFriend, getFriends, changeBio, getBio, getAllUsers, changeDate, getLastUser, ville_user, status_user, genre_user, getVille, getGenre, getStatus, getDate, getUrl};
