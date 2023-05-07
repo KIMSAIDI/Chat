@@ -1,8 +1,49 @@
-
 body {
-  background-color: #151728;
+  /* background-color: hsl(230, 18%, 93%); */
+  background-image: url('g.gif');
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  animation: planetAnimation 20s infinite linear; 
 }
 
+
+@keyframes planetAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+.boutton-nv-msg button {
+  position: fixed;
+  background-color: #1d4a83;
+  border: 1px solid white;
+  border-radius: 100%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 280px;
+  bottom: 20px; /* Position depuis le bas de la fenêtre */
+  left: 20px; /* Position depuis le côté gauche de la fenêtre */
+  padding: 29px;
+}
+
+
+.boutton-nv-msg button:focus {
+  outline: none;
+}
+
+.boutton-nv-msg ion-icon {
+  font-size: 23px;
+}
 
 #timeline-title h1 {
   color: white;
@@ -75,16 +116,14 @@ body {
 }
 .informations-bar {
   position: absolute;
-  
   bottom: 0;
   width: 100%;
   height: 65px;
-  background-color: #151728;
+  
 }
 
 .time-line-head ul {
   position: relative;
-  
   width: 100%;
   display: flex;
   padding-left: 50px;
@@ -96,25 +135,54 @@ body {
 .time-line-head  li {
   list-style: none;
   cursor: pointer;
-  color : #5c5e6e;
+  color: black;
   font-size: 1.1em;
   padding: 1.5em 1em;
 }
 
 
 .time-line-head li:hover, active {
-  color : white;
-  border-bottom: 3px solid rgb(51, 51, 110);
+  
+  border-bottom: 3px solid #2867B2;
 }
   
 .statistique {
   
-  color: white;
+  color: black;
   font-family: 'Poppins', sans-serif;
   padding: 20px;
   border-radius: 5px;
  
 }
+
+.Actu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 64%; /* Position verticale depuis le haut de la fenêtre */
+  right: 20px; /* Position horizontale depuis le côté droit de la fenêtre */
+  transform: translateY(-50%); /* Centre verticalement le bloc */
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 69%;
+  width: 30%;
+}
+
+.Actu h2 {
+  position: relative;
+  float : top;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+.Actu p {
+  font-family: 'Poppins', sans-serif;
+  
+  font-size: 18px;
+}
+
 
 .nombre-utilisateurs,
 .nombre-messages {
@@ -130,12 +198,14 @@ body {
 
 .nav {
   display : flex;
-  posotion: relative;
+  position: relative;
   align-items: center;
   justify-content: space-between ;
-  background-image: url('Space.jpeg');
+  /* background-image: url('Space.jpeg'); */
   padding: 5px, 5px;
   width: 100%;
+  background-color: #2867B2;
+  
 }
 .nav-left {
   color: white;
@@ -153,13 +223,14 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  color: white;
-  font-family: 'Poppins', sans-serif;
  
 }
 
 .barre-recherche input {
   width: 170%;
+  background-color: white;
+  color: black;
+  font-family: 'Poppins', sans-serif;
 }
 
 .barre-recherche button {
@@ -167,7 +238,7 @@ body {
   margin: 0.313rem;
   margin-left: 0.5rem;
   font-family: 'Poppins', sans-serif;
-  background-color: rgb(51, 51, 110);
+  background-color: #1d4a83;
  
   color: white;
   padding: 0.625rem;
@@ -180,6 +251,8 @@ body {
   right: 160px;
 
 }
+
+
 
 
 @media only screen and (max-width: 768px) {

@@ -15,6 +15,8 @@ function TimeLine(props){
     const [selectedTab, setSelectedTab] = useState('Accueil');
     const [nbUtilisateurs, setNbUtilisateurs] = useState(0);
     const [nbMessages, setNbMessages] = useState(0);
+    const [lastUser, setLastUser] = useState('');
+    const [nbLikePopularTweet, setNbLikePopularTweet] = useState(0);
     
     const handleClickAcceuil = () => {
       setSelectedTab('Accueil');
@@ -32,7 +34,7 @@ function TimeLine(props){
         .catch(err => console.log(err));
     }, []);
     
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -89,8 +91,48 @@ function TimeLine(props){
       .catch(err => console.log(err))
       }
 
-    
+      const getLastUser = async () => {
+        try {
+          const res = await axios.get(`api/user/getLastUser`)
+         
+          setLastUser(res.data.login);
+          console.log("rep = ", lastUser);
+        } catch (err) {
+          console.log(err);
+        }
+
+      }
+      
+      useEffect(() => {
+        getLastUser();
+      }, []);
+
+      
+
+      const getNbLikePopularTweet = async () => {
+        try {
+          const res = await axios.get('api/message/getPopularTweet');
+          const nbLike = res.data[0].like;
+          console.log("nbLike = ", nbLike);
+          setNbLikePopularTweet(nbLike);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      
+      // // Utilisez useEffect pour appeler getNbLikePopularTweet au montage du composant
+      // useEffect(() => {
+      //   getNbLikePopularTweet();
+      // }, []);
+      
+      const suppRecherche = () => {
+        axios.get('/api/messageBD')
+        .then(res => setMessages(res.data))
+        .catch(err => console.log(err));
+      }
+
       return (
+
         <div className='TimeLine'> 
 
         <nav className='nav'>
@@ -102,6 +144,7 @@ function TimeLine(props){
                 <div className='barre-recherche'>
                   <input type="text" value={recherche} onChange={(e) => setRecherche(e.target.value)} />
                   <button type="submit" onClick={handleRecherche} >Recherche</button>
+                  <button type="submit" onClick={suppRecherche} >Retour</button>
                 </div>
               </div>
 
@@ -117,15 +160,10 @@ function TimeLine(props){
         </nav>
 
           <div className='time-line-head'>
-            {/* Titre Accueil
-            <div className="timeline-title">
-              <h1>Accueil</h1>
-            </div> */}
-
             <div className='informations-bar'>
                     <ul>
-                        <li className={selectedTab === 'Actualités' ? 'active' : ''} onClick={handleClickAcceuil}>Accueil</li>
-                        <li className={selectedTab === 'Bio' ? 'active' : ''} onClick={handleClickStat}>Zone Statistique</li>  
+                        <li className={selectedTab === 'Accueil' ? 'active' : ''} onClick={handleClickAcceuil}>Accueil</li>
+                        <li className={selectedTab === 'Stats' ? 'active' : ''} onClick={handleClickStat}>Zone Statistique</li>  
                     </ul>
             </div>
 
@@ -134,12 +172,13 @@ function TimeLine(props){
            
             
           {selectedTab === 'Accueil' && (
+          <div>
+          <div>
 
-          <div>
-          <div>
+          <div className='boutton-nv-msg'>
           {/* bouton afficher/masquer formulaire */}
-          <button onClick={handleDisplayForm}>Nouveau message</button>
-            
+          <button onClick={handleDisplayForm}>Nouveau Message<ion-icon name="create-outline"></ion-icon></button>
+          </div> 
           {/* formulaire poster un new message */}
           {displayForm && (
             <div className="blur-bg">
@@ -162,7 +201,17 @@ function TimeLine(props){
               </div>
              </div>
         )}
+
+        <div className='Actu'>
+          <h2>Actualités</h2>
+            {/* {getLastUser()} */}
+            
+            <p><ion-icon name="person-outline"></ion-icon> Le dernier nouvel arrivant sur notre plateforme est : {lastUser} !</p>
+
         </div>
+
+        </div>
+
        
       
          
@@ -191,6 +240,11 @@ function TimeLine(props){
                 {ReturnNbMessages()}
                 <p>Nombre de messages : {nbMessages}</p>            
                 </div>
+
+                {/* <div className='tweet-popular'>
+                  {getNbLikePopularTweet()}
+                <p> Le tweet ayant récupérer le plus de like à obtenu {nbLikePopularTweet} like</p>
+                </div> */}
 
 
               </div>

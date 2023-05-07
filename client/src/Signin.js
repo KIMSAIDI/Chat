@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from 'sweetalert';
+
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -12,7 +14,8 @@ const Signup = (props) => {
     const [pass2, setPass2] = useState("");
     const [passOk, setPassOk] = useState(false);
     const [error, setError] = useState("");
-    const [showSigninForm, setShowSigninForm] = useState(false);
+    const [showSigninForm, setShowSigninForm] = useState(true);
+    const [avatarUrl,setAvatarUrl] = useState("");
 
       const handleFocus = (e) => {
         e.target.previousElementSibling.classList.add('active');
@@ -27,34 +30,38 @@ const Signup = (props) => {
     }
 
     
-    const handleSubmit = (e) => {  
-        e.preventDefault();
-        if (pass1===pass2) {
-            setPassOk(true);
-            axios.post('/api/user/',{
-                login: login,
-                password: pass1,
-                lastname: lastname,
-                firstname: firstname
-            }) 
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                if (error.response && error.response.status === 409) {
-                  setError("Ce login est déjà utilisé.");
-                } else {
-                  console.log(error);
-                  setError("Une erreur s'est produite.");
-                }
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (pass1===pass2) {
+          setPassOk(true);
+          axios.post('/api/user/',{
+              login: login,
+              password: pass1,
+              lastname: lastname,
+              firstname: firstname,
+              avatarUrl : avatarUrl
+          }) 
+          .then((response) => {
+              console.log(response);
+              Swal({
+                title: "Inscription réussie !",
               });
-        } else {
-            setPassOk(false)
-            setError("Les mots de passe ne correspondent pas");
-            setPass1("");
-            setPass2("");
-        }
-    };
+          })
+          .catch((error) => {
+              if (error.response && error.response.status === 409) {
+                setError("Ce login est déjà utilisé.");
+              } else {
+                console.log(error);
+                setError("Une erreur s'est produite.");
+              }
+            });
+      } else {
+          setPassOk(false)
+          setError("Les mots de passe ne correspondent pas");
+          setPass1("");
+          setPass2("");
+      }
+  };
 
     const handleReset = () => {
         setLogin("");
@@ -80,11 +87,13 @@ const Signup = (props) => {
   return (
     <div className="accueil">
       <div className="header">
-        <a className="logo">Logo</a>
+        <a className="logo">MOOD</a>
         <nav className="navbar">
+        
           <a>Home</a>
           <a>About</a>
           <a onClick={handleSigninClick}>Signin</a>
+          <a onClick={handleLogin}>Login</a>
         </nav>
       </div>
 
@@ -126,10 +135,29 @@ const Signup = (props) => {
                 <label className={firstname ? 'filled' : ''}> Prénom </label> 
               </div>
 
+
+              <div className="input-box">
+                <span className="icon"><ion-icon name="body-outline"></ion-icon></span>
+                <input 
+                  type="text" 
+                  value={avatarUrl} 
+                  onChange={(e) => setAvatarUrl(e.target.value)} 
+                  name="avatarUrl" 
+                  onFocus={handleFocus} 
+                  onBlur={handleBlur} 
+                placeholder="Entrez l'URL de votre Avatar" 
+                />
+              </div>
+
+              <div>
+                <a href="https://getavataaars.com/" target="_blank" rel="noopener noreferrer">Avatar</a>
+              </div>
+
+
               <button type="submit" onClick={handleSubmit}>Inscription</button>
              
               <div className='error'>
-                <span> {error && <div className="error">{error}</div>}   <ion-icon name="alert-circle-outline"></ion-icon>  </span>  
+                <span> {error && <div className="error">{error}</div>} </span>  
               
               </div>
               <div className="login-link">

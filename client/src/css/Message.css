@@ -7,29 +7,6 @@
   text-decoration: underline;
   cursor: pointer;
 }
-/*
-.Message {
-display: flex;
-flex-direction: column;
-justify-content: center;
-width: 100%;
-height: auto;
-padding: 20px;
-border: 1px solid #ccc;
-border-radius: 10px;
-margin-bottom: 20px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-max-width: 1700px;
-font-family: 'Poppins',sans-serif;
-font-size: 19px;
-margin-left: 150px;
-color : white;
-text-align : center;
-}
-*/
-
-
-
 
 /* centre le conteneur horizontalement et verticalement */
 .container {
@@ -41,6 +18,7 @@ text-align : center;
 
 .Message {
   position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,13 +26,14 @@ text-align : center;
   width: 80%; /* la largeur maximale est définie à 80% de la largeur de la vue */
   height: auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
+  border: 1px solid black;
   border-radius: 10px;
   margin-bottom: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  color: white;
+  color: black;
   max-width: 700px; /* limite la largeur maximale du message */
   margin: 0 auto; /* centre le message horizontalement */
 }
@@ -79,6 +58,7 @@ text-align : center;
 .bouton-ajout-ami:hover {
   border: 1px solid white;
   color: white;
+ 
 }
 
 button {
@@ -421,4 +401,16 @@ width: 150px; /* ou une autre valeur de votre choix */
 .reply-box{
   margin-right: 300px;
   
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
 }

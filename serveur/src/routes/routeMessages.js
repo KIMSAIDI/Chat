@@ -23,4 +23,6 @@ routerMessages.post('/message/reply', apiMessage.replyMessage);
 
 routerMessages.get('/message/getAllMessages', apiMessage.getAllMessages);
 
+routerMessages.get('/message/getPopularTweet', apiMessage.getPopularTweet);
+
 module.exports = { routerMessages };

@@ -1,70 +1,3 @@
-
-//CE fichier contient les fonctions qui permettent de gerer les utilisateurs grace a la base de donnees mongoDB
-/*
-const { db } = require('../../db');
-const {connectDb} = require('../../db');
-const {getCollection} = require('../../db')
-class Users {
-    constructor(db) {
-      this.db = db;
-    }
-    async create(login, password, lastname, firstname) {
-      const user = {
-        login: login,
-        password: password,
-        lastname: lastname,
-        firstname: firstname
-      };
-      try{
-        const collection = db.collection('users');
-        const result = await collection.insertOne(user);
-        return result.insertedId;
-      } catch (err) {
-        console.error(`Failed to create user: ${err}`);
-        throw err;
-      }
-    }
-  
-    async get(userid) {
-      try {
-        const user = await this.collection('users').findOne({ _id: new ObjectId(userid) });
-        return user;
-      } catch (err) {
-        console.error(`Failed to get user with id ${userid}: ${err}`);
-        throw err;
-      }
-    }
-
-    async exists(login) {
-      try {
-        const user = await this.collection('users').findOne({ login: login });
-        return user !== null;
-      } catch (err) {
-        console.error(`Failed to check if user ${login} exists: ${err}`);
-        throw err;
-      }
-    }
-  
-    async checkpassword(login, password) {
-      try {
-        const user = await this.collection('users').findOne({ login: login });
-        if (user === null) {
-          return null;
-        }
-        if (user.password === password) {
-          return user._id;
-        }
-        return null;
-      } catch (err) {
-        console.error(`Failed to check password for user ${login}: ${err}`);
-        throw err;
-      }
-    }
-  }
-  exports.default = Users;
-*/
-
-
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
@@ -92,8 +25,26 @@ const userSchema = new mongoose.Schema({
     default : []
   },
   bio : {
-    type : String
+    type : String,
+  },
+  date : {
+    type : Date,
+    
+  },
+  ville : {
+    type : String,
+  },
+  genre : {
+    type : String,
+  },
+  status : {
+    type : String,
+  },
+  avatarUrl: {
+    type: String,
+    default :'https://avataaars.io/?avatarStyle=Transparent&topType=WinterHat3&accessoriesType=Wayfarers&hatColor=PastelYellow&facialHairType=MoustacheMagnum&facialHairColor=BrownDark&clotheType=ShirtVNeck&clotheColor=Blue01&eyeType=Wink&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Brown'
   }
+
   
 })
 
