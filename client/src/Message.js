@@ -127,94 +127,88 @@ const Message = (props) =>{
     <div className='Message'>
       {/* Login cliquable et bouton ajouter en amis */}
       <div className="titre-et-bouton">
-        
-       {props.authorUser?.avatarUrl &&    <img src={props.authorUser.avatarUrl} alt={props.authorUser.login} /> }
-     
-        <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}  </span></h3>
-        {props.userLogin === author || (props.isMyProfile ) ? null : <button className='bouton-ajout-ami' onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
+        {props.authorUser?.avatarUrl && <img src={props.authorUser.avatarUrl} alt={props.authorUser.login} />}
+        <h3><span className="texte-cliquable" onClick={handleProfileClick}>{author}</span></h3>
+        {props.userLogin === author || props.isMyProfile ? null : <button className='bouton-ajout-ami' onClick={handleAjoutAmis}><ion-icon name="person-add-outline"></ion-icon></button>}
       </div>
-
-    {/* Bouton delete si c'est mon profile */}
-      <div className='Delete'>
-        { props.isMyProfile && props.isMyProfile ? ( <button onClick={handleDeleteMessage}>Delete</button> ) : ( <div></div> ) }
-      </div>
-        {/* Contenu du message */}
-      <div className=' Content'>
-        
-        <p> {content}</p>
-      </div>
-
-    {/* Date */}
-    <div className='Date'>
-      <p>{new Date(createdAt).toLocaleString()}</p>
-    </div>
-    
-    {/* Boutons container */}
-    
-    <div className = 'boutons-container'>
-      <div className="boutons-like-dislike">
-
-          <div className="Like">
-              <button onClick={handleLike}>
-                <ion-icon name="heart-outline"></ion-icon>
-              </button>
-              <span>{likeCount} </span>
-          </div>
-
-          <div className="Dislike">
-              <button onClick={handleDislike}>
-                <ion-icon name="heart-dislike-outline"></ion-icon>
-              </button>
-              <span>{dislikeCount} </span>
-          </div>
-      </div>
-
-      <div className="bouton-comment">
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <button onClick={handleReply}>
-            <ion-icon name="chatbubble-outline"></ion-icon>
-          </button>
-          <span style={{ marginLeft: "auto" }}>{replies ? replies.length : 0}</span>
+  
+      {/* Bouton delete si c'est mon profile */}
+      {props.isMyProfile && (
+        <div className='Delete'>
+          <button onClick={handleDeleteMessage}>Delete</button>
         </div>
-      </div>
-
-      <div className='bouton-addcomment'>
-        <button onClick={() => setShowReplyForm(!showReplyForm)}>
-          <ion-icon name="arrow-undo-outline"></ion-icon>
-         </button>
-</div>
-  </div>
-
-    
-
-  {showReplyForm && (
-      <div className="comment-input">
-            <label>
-          <input 
-          type="text" 
-          value={reply} 
-          onChange={(e) => setReply(e.target.value)} 
-          placeholder="Ajouter un commentaire..."
-        />
-      </label>
-      <button className="submit-comment" onClick={handleReplySubmit}>
-        Envoyer
-      </button>
-    </div>
       )}
   
-      {showReply ? (
-        <div className="reply-container">
-        <div className="reply-box">
-          {replies.map(reply => (           
-              <Reply key={reply._id} reply={reply} userLogin = {props.userLogin} messages = {props.messages} setMessages = {props.setMessages} handleUserClick = {props.handleUserClick}/>
-          ))}
+      {/* Contenu du message */}
+      <div className='Content'>
+        <p>{content}</p>
+      </div>
+  
+      {/* Date */}
+      <div className='Date'>
+        <p>{new Date(createdAt).toLocaleString()}</p>
+      </div>
+  
+      {/* Boutons container */}
+      <div className='boutons-container'>
+        <div className="boutons-like-dislike">
+          <div className="Like">
+            <button onClick={handleLike}>
+              <ion-icon name="heart-outline"></ion-icon>
+            </button>
+            <span>{likeCount}</span>
+          </div>
+          <div className="Dislike">
+            <button onClick={handleDislike}>
+              <ion-icon name="heart-dislike-outline"></ion-icon>
+            </button>
+            <span>{dislikeCount}</span>
+          </div>
+        </div>
+  
+        <div className="bouton-comment">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <button onClick={handleReply}>
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </button>
+            <span style={{ marginLeft: "auto" }}>{replies ? replies.length : 0}</span>
+          </div>
+        </div>
+  
+        <div className='bouton-addcomment'>
+          <button onClick={() => setShowReplyForm(!showReplyForm)}>
+            <ion-icon name="arrow-undo-outline"></ion-icon>
+          </button>
         </div>
       </div>
-      </div>
-      ) : null}
+  
+      {showReplyForm && (
+        <div className="comment-input">
+          <label>
+            <input
+              type="text"
+              value={reply}
+              onChange={(e) => setReply(e.target.value)}
+              placeholder="Ajouter un commentaire..."
+            />
+          </label>
+          <button className="submit-comment" onClick={handleReplySubmit}>
+            Envoyer
+          </button>
+        </div>
+      )}
+  
+      {showReply && (
+        <div className="reply-container">
+          <div className="reply-box">
+            {replies.map(reply => (
+              <Reply key={reply._id} reply={reply} userLogin={props.userLogin} messages={props.messages} setMessages={props.setMessages} handleUserClick={props.handleUserClick} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
-  );
+  );  
 };
 
 export default Message;

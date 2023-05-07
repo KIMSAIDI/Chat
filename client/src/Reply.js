@@ -123,6 +123,7 @@ const Reply = (props) => {
 
       </div>
       
+      
       {showReplies && (
         <div className="reply-wall">
           {filteredMessages.map(subReply => (
