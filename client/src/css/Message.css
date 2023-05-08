@@ -1,8 +1,554 @@
 .texte-cliquable{
-    cursor: pointer;
+  cursor: pointer;
+  margin-left: 10px;
+  
 }
 
 .texte-cliquable:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* centre le conteneur horizontalement et verticalement */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Message {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%; /* la largeur maximale est définie à 80% de la largeur de la vue */
+  height: auto;
+  padding: 20px;
+  /* border: 1px solid #ccc; */
+  border: 1px solid #1d4a83;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 4px #1d4a83;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: #1d4a83;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  
+  max-width: 700px; /* limite la largeur maximale du message */
+  margin: 0 auto; /* centre le message horizontalement */
+}
+.Message + .Message {
+  margin-top: 10px;
+}
+
+.titre-et-bouton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-start;
+}
+
+.bouton-ajout-ami {
+  font-size: 12px;
+  width: 50px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.bouton-ajout-ami:hover {
+  border: 1px solid white;
+  color: white;
+ 
+}
+
+button {
+  background-color: #1d4a83;
+  font-family: Poppins;
+  font-size: 16px;
+  color: white;
+  border: 3px solid #5c5e6e;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 190px;
+  padding: 5px;
+}
+
+
+.titre-et-bouton p,
+.titre-et-bouton button {
+display: inline-block;
+vertical-align: middle;
+margin-left: 10px; 
+}
+
+.Date {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-right: 10px;
+}
+
+.message-content{
+text-align: center;
+margin-top: 10px;
+font-size: 20px;
+color: white;
+
+}
+
+button:hover {
+  font-weight: bolder;
+}
+
+.boutons-like-dislike {
+  z-index: 0;
+  display: flex;
+  align-items: center;
+}
+
+.boutons-like-dislike div {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.boutons-like-dislike button {
+  background-color: #1d4a83;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+.boutons-like-dislike button:focus {
+  outline: none;
+}
+.boutons-like-dislike ion-icon {
+  font-size: 16px;
+}
+
+.boutons-like-dislike div.Like button:hover {
+  background-color: blue;
+}
+
+.boutons-like-dislike div.Dislike button:hover {
+  background-color: red;
+}
+.boutons-like-dislike div span {
+  margin-left: 10px;
+}
+.show-reply {
+text-align: center;
+}
+.show-reply button {
+width: 150px; /* ou une autre valeur de votre choix */
+}
+
+/* .comment-input {
+  color : #1d4a83;
+  position: relative;
+  margin-top: 10px;
+} */
+/* 
+.comment-input input {
+  background-color: white;
+  color: #1d4a83;
+  border: none;
+  border-bottom: 2px solid #1d4a83;
+  font-size: 16px;
+  padding: 5px;
+  width: 100%;
+  border-radius: 10px;
+  margin-right: 100;
+
+}
+
+.comment-input input:focus {
+  outline: none;
+  border-color: white;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.comment-input input::placeholder {
+  color: white;
+  opacity: 0.6;
+} */
+
+
+
+.bouton-comment {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.bouton-comment button {
+  background-color: #1d4a83;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.bouton-comment button:focus {
+  outline: none;
+}
+
+.bouton-comment ion-icon {
+  font-size: 16px;
+}
+
+.bouton-comment span {
+  margin-left: 10px;
+}
+
+.bouton-comment button:hover {
+  background-color: gray;
+}
+
+.boutons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+  
+.bouton-addcomment {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.bouton-addcomment button {
+  background-color: #1d4a83;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.bouton-addcomment button:focus {
+  outline: none;
+}
+
+.bouton-addcomment ion-icon {
+  font-size: 16px;
+}
+
+.bouton-addcomment span {
+  margin-left: 10px;
+}
+
+.bouton-addcomment button:hover {
+  background-color: rgb(144, 5, 5);
+}
+
+
+
+
+.submit-comment {
+  margin-left: 10px;
+  width: 80px;
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: #1d4a83;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit-comment:hover {
+  background-color: gray;
+}
+
+
+.new-message-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(76, 162, 199);
+  border-radius: 10px;
+  width: 90vw;
+  max-width: 600px;
+  height: 40%;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.7; /* définir une opacité supérieure à 0 */
+} 
+.close-btn ion-icon {
+  font-size: 40px;
+  color: black; 
+ 
+}
+
+.close-btn:hover {
+  background-color: #ffffff; /* ajouter une couleur de fond semi-transparente au survol */
+  opacity: 1; /* définir une opacité de 1 au survol */
+}
+
+.close-btn:active {
+  cursor: pointer;
+}
+
+
+.new-message-box textarea {
+  background-color: #ccc;
+  height: 110px;
+  color: #1d4a83;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  padding: 10px;
+  flex-grow: 1;
+  width: 98%;
+  margin-right: 400px;
+}
+
+.new-message-box textarea:focus {
+  outline: none;
+}
+
+.new-message-box textarea::placeholder {
+  color: white;
+  opacity: 50%;
+}
+
+.blur-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.submit-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0069d9;
+}
+
+.submit-button:active {
+  background-color: #005cbf;
+}
+
+
+
+.alert {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+.titre-et-bouton img {
+  width : 100px;
+  height : 100px;
+  border-radius: 50%;
+  
+  border: 3px solid #1d4a83;
+
+
+}
+
+
+
+
+
+
+.reply-box{
+  margin-right: 300px;
+  padding: 10px; /* Ajoute un espace entre le bord et le contenu */
+}
+.comment-input {
+  position: relative;
+  margin-top: 10px;
+}
+
+.comment-input input {
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: 2px solid black;
+  font-size: 16px;
+  padding: 5px;
+  width: 100%;
+  border-radius: 10px;
+  margin-right: 100;
+
+}
+
+.comment-input input:focus {
+  outline: none;
+  border-color: white;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.comment-input input::placeholder {
+  color: white;
+  opacity: 0.6;
+}
+
+
+.reply-box{
+  margin-right: 300px;
+  padding: 10px; /* Ajoute un espace entre le bord et le contenu */
+}
+.comment-input {
+  position: relative;
+  margin-top: 10px;
+}
+
+.comment-input input {
+  background-color: white;
+  color: #1d4a83;
+  border: none;
+  border-bottom: 2px solid black;
+  font-size: 16px;
+  padding: 5px;
+  width: 100%;
+  border-radius: 10px;
+  margin-right: 100;
+
+}
+
+.comment-input input:focus {
+  outline: none;
+  border-color: white;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.comment-input input::placeholder {
+  color: white;
+  opacity: 0.6;
+}
+
+.reply-container {
+  width: 100%;
+  overflow: auto;
+}
+
+
+
+.button-replytoreply {
+  background-color: #2661ae;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-replytoreply:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.show-replies-button {
+  font-size: 0.8rem;
+  border-radius: 20px;
+  background-color: #b0c6e3;
+  color: #0077ff;
+  border: none;
+}
+
+.show-replies-button:hover {
+  background-color: rgba(0, 119, 255, 0.2);
+  cursor: pointer;
+}
+
+.submit-comment {
+  background-color: #2661ae;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 5px 10px; /* réduire la valeur de padding horizontale */
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 30px;
+}
+
+.submit-comment:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.comment-input input,
+.comment-input button {
+  display: inline-block;
+  vertical-align: middle; /* Facultatif : aligne verticalement les éléments */
+}
+.comment-input {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 10px; /* Espacement entre les colonnes, ajustez selon vos besoins */
+  align-items: center; /* Facultatif : aligne verticalement les éléments */
+}
+
+
+.user-link {
+  cursor: pointer;
+}

@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const messageSchema = new mongoose.Schema({
   content: {
@@ -20,7 +21,24 @@ const messageSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  likedBy: {
+    type: [String],
+    default: [],
+  },
+  dislikeBy: {
+    type: [String],
+    default: [],
+  },
+  replyTo: {
+    type: String,
+    default: null,
+  },
+  replies: {
+    type: [String],
+    default: [],
+  }
 });
+
 
 const Message = mongoose.model('Message', messageSchema);
 module.exports = Message;

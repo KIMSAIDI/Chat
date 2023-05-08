@@ -1,13 +1,16 @@
-.navigation_pan{
-    background-color: #6d65e0;
-    border: 1px solid #1d1212;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    /* changer la police*/
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding: 19px;
-}
 
+
+.logout {
+    position: relative; 
+    z-index: 9999;
+    float: right;
+    padding: 30px;
+   
+  }
+
+/* Message d'erreur */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.8rem;
+}

@@ -1,0 +1,28 @@
+.logout button {
+  background-color: #1d4a83;
+  border: 1px solid white;
+  
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  margin-top: 19px;
+  align-items: center;
+}
+
+.logout button:focus {
+  outline: none;
+}
+
+.logout ion-icon {
+  font-size: 23px;
+}
+
+.logout button:hover {
+  background-color: red;
+}
